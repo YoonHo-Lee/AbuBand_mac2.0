@@ -6,7 +6,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/sickreport_date"
+        android:id="@+id/sickList_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2015.11.02"
@@ -17,17 +17,17 @@
         android:layout_marginRight="20dp" />
 
     <TextView
-        android:id="@+id/sickreport_temp"
+        android:id="@+id/sickList_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="45.8"
         android:textSize="30sp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/sickreport_date"
-        android:layout_toEndOf="@+id/sickreport_date" />
+        android:layout_toRightOf="@+id/sickList_date"
+        android:layout_toEndOf="@+id/sickList_date" />
 
     <TextView
-        android:id="@+id/sickreport_title"
+        android:id="@+id/sickList_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="메르스"

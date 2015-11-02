@@ -25,4 +25,6 @@
     <string name="settinfSickReportBackUp">아픔일지 백업</string>
     <string name="settingMenual">사용방법</string>
     <string name="settingHelp">도움말</string>
+
+    <string name="sickReportAdd_disease">병명</string>
 </resources>

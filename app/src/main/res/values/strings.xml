@@ -126,5 +126,6 @@
     <string name="settingHelp">Help</string>
 
     <!-- -->
+    <string name="sickReportAdd_disease">Disease</string>
 
 </resources>

@@ -20,9 +20,9 @@ public class SickReportItemView extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.view_sick_report_item, this);
-        sickDate = (TextView)findViewById(R.id.sickreport_date);
-        sickTemp = (TextView)findViewById(R.id.sickreport_temp);
-        sickTitle = (TextView)findViewById(R.id.sickreport_title);
+        sickDate = (TextView)findViewById(R.id.sickList_date);
+        sickTemp = (TextView)findViewById(R.id.sickList_temp);
+        sickTitle = (TextView)findViewById(R.id.sickList_title);
     }
 
     public void setItemData(SickReportItemData data) {
