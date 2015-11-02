@@ -34,8 +34,8 @@ public class SickReportAddActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
-        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
+//        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
+//        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
 
         sickAdd_date.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKDATE));
         sickAdd_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP)+"");
