@@ -4,12 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/sample_icon"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".IntroActivity"
-            android:theme="@style/no_title">
+        <activity
+            android:name=".IntroActivity"
+            android:theme="@style/no_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,6 +35,8 @@
         <activity android:name=".Band.BandAddActivity" >
         </activity>
         <activity android:name=".Baby.BabyAddActivity" >
+        </activity>
+        <activity android:name=".SickReport.SickReportAddActivity" >
         </activity>
     </application>
 

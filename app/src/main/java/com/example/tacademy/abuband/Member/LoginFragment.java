@@ -22,8 +22,6 @@ public class LoginFragment extends Fragment {
 
     CheckBox sampleCheckFlag;
 
-    public static final String TAG_SAMPLE_CHECK_FLAG = "flag";
-
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -41,14 +39,9 @@ public class LoginFragment extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MenualFragment mf = new MenualFragment();
-                Bundle bundle = new Bundle();
-//                bundle.putBoolean(TAG_SAMPLE_CHECK_FLAG, sampleCheckFlag.isChecked());
-                bundle.putString(TAG_SAMPLE_CHECK_FLAG, "android");
-                mf.setArguments(bundle);
-
                 Intent intent = new Intent(v.getContext(), MenualActivity.class);
                 startActivity(intent);
+                getActivity().finish();
 
             }
         });
@@ -62,8 +55,6 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
-        sampleCheckFlag = (CheckBox) rootView.findViewById(R.id.check_sampleFlag);
 
         return rootView;
     }

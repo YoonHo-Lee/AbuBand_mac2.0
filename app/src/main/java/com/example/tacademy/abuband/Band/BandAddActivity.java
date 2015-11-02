@@ -43,6 +43,7 @@ public class BandAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BandAddActivity.this, BabyAddActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

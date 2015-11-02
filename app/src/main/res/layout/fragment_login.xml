@@ -66,14 +66,5 @@
         android:text="@string/memberAdd"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sampleFlag"
-        android:id="@+id/check_sampleFlag"
-        android:layout_below="@+id/btn_login"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="true" />
 </RelativeLayout>
 

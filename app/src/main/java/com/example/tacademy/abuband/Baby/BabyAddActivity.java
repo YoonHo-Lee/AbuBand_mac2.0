@@ -22,6 +22,7 @@ public class BabyAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

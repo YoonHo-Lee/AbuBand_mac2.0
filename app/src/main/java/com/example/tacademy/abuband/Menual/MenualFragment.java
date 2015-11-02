@@ -47,14 +47,10 @@ public class MenualFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), BandAddActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
-        Bundle getSampleFlag = getArguments();
-//        boolean flagIschecked = getSampleFlag.getBoolean(LoginFragment.TAG_SAMPLE_CHECK_FLAG);
-        String flagIschecked = getSampleFlag.getString(LoginFragment.TAG_SAMPLE_CHECK_FLAG, "nono");
-
-        Toast.makeText(rootView.getContext(), "체크" + flagIschecked , Toast.LENGTH_SHORT).show();
 
         //마지막페이지의 버튼만 보이게 하기
         if(getArguments().getInt(ARG_SECTION_NUMBER) == 3)   {
