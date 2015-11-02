@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navi_temperature"
+            android:icon="@drawable/sample_temp"
+            android:title="@string/naviTemperature" />
+        <item
+            android:id="@+id/navi_sickreport"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/naviSickReport" />
+        <item
+            android:id="@+id/navi_alarm"
+            android:icon="@android:drawable/ic_popup_reminder"
+            android:title="@string/naviAlarm" />
+        <item
+            android:id="@+id/navi_babyadd"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="@string/naviBabyAdd" />
+        <item
+            android:id="@+id/navi_setting"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/naviSetting" />
+    </group>
+
+
+
+</menu>

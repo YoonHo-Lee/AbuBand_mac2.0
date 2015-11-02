@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">아부밴드</string>
+    <string name="Login_btn">로그인</string>
+    <string name="memberAdd">아이디가 없으신가요?</string>
+    <string name="bandSerialSend_btn">전송</string>
+    <string name="bandSerialAdd_btn">등록</string>
+    <string name="babyAdd_btn">등록</string>
+
+    <!-- 네비게이션 드로워 메뉴 부분 -->
+    <string name="naviTemperature">체온측정</string>
+    <string name="naviSickReport">아픔일지</string>
+    <string name="naviAlarm">알람</string>
+    <string name="naviBabyAdd">아이등록</string>
+    <string name="naviSetting">설정</string>
+
+    <string name="memberadd_btn">등록</string>
+
+    <!-- 설정 부분 -->
+    <string name="settingAppVersion">버전</string>
+    <string name="settingAccount">계정관리</string>
+    <string name="settingBandChange">밴드 관리</string>
+    <string name="settingTerms">이용약관</string>
+    <string name="settingTempUnit">온도 단위</string>
+    <string name="settinfSickReportBackUp">아픔일지 백업</string>
+    <string name="settingMenual">사용방법</string>
+    <string name="settingHelp">도움말</string>
+</resources>
