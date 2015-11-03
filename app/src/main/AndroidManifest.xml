@@ -38,6 +38,12 @@
         </activity>
         <activity android:name=".SickReport.SickReportAddActivity" >
         </activity>
+        <activity android:name=".SickReport.SickReportActivity" >
+        </activity>
+        <activity android:name=".Alarm.AlarmAddActivity" >
+        </activity>
+        <activity android:name=".Setting.TermsActivity" >
+        </activity>
     </application>
 
 </manifest>

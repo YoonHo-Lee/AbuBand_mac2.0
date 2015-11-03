@@ -17,6 +17,10 @@ public class SickReportAddActivity extends AppCompatActivity {
 
     똘미가 요일 안한대서, 내가 해야할듯...ㅠㅠ
 
+    업페이지 버튼
+
+    저장하기 버튼 만들기
+
   ================================================= */
 
     EditText edit_sickTitle, edit_sickMemo;
@@ -34,12 +38,14 @@ public class SickReportAddActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+
+
 //        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
 //        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
-
-        sickAdd_date.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKDATE));
-        sickAdd_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP)+"");
-        edit_sickTitle.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
+//
+//        sickAdd_date.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKDATE));
+//        sickAdd_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP)+"");
+//        edit_sickTitle.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
 
     }
 }

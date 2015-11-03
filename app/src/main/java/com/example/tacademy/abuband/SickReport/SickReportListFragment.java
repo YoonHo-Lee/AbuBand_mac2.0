@@ -53,7 +53,7 @@ public class SickReportListFragment extends Fragment {
                 Object object = sickListView.getItemAtPosition(position);
                 SickReportItemData data = (SickReportItemData)object;
 //                Toast.makeText(view.getContext(),"병명 : " + data.sickTitle, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(), SickReportAddActivity.class);
+                Intent intent = new Intent(view.getContext(), SickReportActivity.class);
                 intent.putExtra(TAG_SICKDATE, data.sickDate);
                 intent.putExtra(TAG_SICKMAXTEMP, data.sickMaxTemp);
                 intent.putExtra(TAG_SICKTITLE, data.sickTitle);

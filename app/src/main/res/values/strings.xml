@@ -128,4 +128,8 @@
     <!-- -->
     <string name="sickReportAdd_disease">Disease</string>
 
+    <!-- 약관 -->
+    <string name="setting_terms">Terms</string>
+    <string name="setting_policy">Policy</string>
+
 </resources>

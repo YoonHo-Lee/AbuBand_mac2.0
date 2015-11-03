@@ -27,4 +27,12 @@
     <string name="settingHelp">도움말</string>
 
     <string name="sickReportAdd_disease">병명</string>
+
+    <!-- 약관 -->
+    <string name="setting_terms">아이를 부탁해(A-Boo) 사용 약관</string>
+    <string name="setting_policy"> 아이를 부탁해 개인정보보호정책</string>
+
+
+
+
 </resources>

@@ -1,11 +1,13 @@
 package com.example.tacademy.abuband;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.mainContainer, fr);
         fragmentTransaction.commit();
+
     }
 
     @Override
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity
             fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
 
 
         } else if (id == R.id.navi_sickreport) {
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity
             fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
 
         } else if (id == R.id.navi_alarm) {
 
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity
             fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
 
         } else if (id == R.id.navi_babyadd) {
 
@@ -130,18 +133,37 @@ public class MainActivity extends AppCompatActivity
             fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
 
         } else if (id == R.id.navi_setting) {
 
             fr = new SettingFragment();
             fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr).commit();
+            fragmentTransaction.replace(R.id.mainContainer, fr).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /*@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Toast.makeText(this, "빽키!!!", Toast.LENGTH_SHORT).show();
+
+*//*            fr = new TemperatureFragment();
+            fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.mainContainer, fr);
+            fragmentTransaction.commit();*//*
+
+
+            return false;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }*/
 }

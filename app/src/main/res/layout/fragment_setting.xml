@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context="com.example.tacademy.abuband.Setting.SettingFragment">
+    tools:context="com.example.tacademy.abuband.Setting.SettingFragment"
+    android:paddingTop="20dp">
 
 
     <Button
@@ -52,14 +53,14 @@
         android:textSize="20sp"
         android:text="@string/settingTempUnit" />
 
-    <Button
+<!--    <Button
         android:id="@+id/btn_Setting_sickReportBackUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="left"
         android:textSize="20sp"
-        android:text="@string/settinfSickReportBackUp" />
+        android:text="@string/settinfSickReportBackUp" />-->
 
     <Button
         android:id="@+id/btn_Setting_menual"

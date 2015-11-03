@@ -11,7 +11,7 @@
     tools:context="com.example.tacademy.abuband.SickReport.SickReportAddActivity">
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/sick_scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="right">
@@ -27,7 +27,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sickAdd_date"
+                    android:id="@+id/sickreport_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -35,7 +35,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/sickAdd_dayOfWeek"
+                    android:id="@+id/sickreport_dayOfWeek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -43,7 +43,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/sickAdd_maxTemp"
+                    android:id="@+id/sickreport_maxTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -51,7 +51,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/sickAdd_babyName"
+                    android:id="@+id/sickreport_babyName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -62,7 +62,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/sample_imageView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:src="@drawable/sample_graph" />
@@ -73,26 +73,36 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/sick_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sickReportAdd_disease"
                     android:layout_marginRight="10dp" />
 
-                <EditText
-                    android:id="@+id/edit_sickTitle"
+                <TextView
+                    android:id="@+id/text_sickTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true" />
+                    android:text="메르스(Title)"
+                    android:singleLine="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edit_sickMemo"
+            <TextView
+                android:id="@+id/text_sickMemo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="내용을 입력하세요..." />
+                android:text="메르스에 걸렸습니다."
+                android:textSize="20sp"/>
 
         </LinearLayout>
     </ScrollView>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_gravity="right" />
 
 </LinearLayout>
