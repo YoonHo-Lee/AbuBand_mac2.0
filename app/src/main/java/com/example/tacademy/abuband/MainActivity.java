@@ -1,13 +1,11 @@
 package com.example.tacademy.abuband;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,8 +25,11 @@ import com.example.tacademy.abuband.SickReport.SickReportListFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Fragment fr;
-    FragmentManager fm;
+    private static final String TAG_TEMP = "temp";
+    private static final String TAG_SICKREPORT = "sickreport";
+    private static final String TAG_ALARM = "alarm";
+    private static final String TAG_BABYADD = "babyadd";
+    private static final String TAG_SETTING = "setting";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fr = new TemperatureFragment();
-        fm = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.mainContainer, fr);
-        fragmentTransaction.commit();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, new TemperatureFragment(), TAG_TEMP).commit();
+        }
 
     }
 
@@ -101,46 +101,43 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.navi_temperature) {
-            Toast.makeText(this,"온도",Toast.LENGTH_SHORT).show();
-
-            fr = new TemperatureFragment();
-            fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.addToBackStack(null).commit();
-
+            emptyBackStack();
 
         } else if (id == R.id.navi_sickreport) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_SICKREPORT);
 
-            fr = new SickReportListFragment();
-            fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.addToBackStack(null).commit();
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new SickReportListFragment(), TAG_SICKREPORT).addToBackStack(null).commit();
+            }
 
         } else if (id == R.id.navi_alarm) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
 
-            fr = new AlarmListFragment();
-            fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.addToBackStack(null).commit();
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new AlarmListFragment(), TAG_ALARM).addToBackStack(null).commit();
+            }
 
         } else if (id == R.id.navi_babyadd) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BABYADD);
 
-            fr = new BabyListFragment();
-            fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.addToBackStack(null).commit();
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new BabyListFragment(), TAG_BABYADD).addToBackStack(null).commit();
+            }
+
 
         } else if (id == R.id.navi_setting) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_SETTING);
 
-            fr = new SettingFragment();
-            fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr).addToBackStack(null).commit();
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new SettingFragment(), TAG_SETTING).addToBackStack(null).commit();
+            }
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -148,22 +145,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    /*@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Toast.makeText(this, "빽키!!!", Toast.LENGTH_SHORT).show();
-
-*//*            fr = new TemperatureFragment();
-            fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.mainContainer, fr);
-            fragmentTransaction.commit();*//*
-
-
-            return false;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }*/
+    private void emptyBackStack() {
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
 }
