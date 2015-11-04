@@ -44,8 +44,6 @@
         </activity>
         <activity android:name=".Setting.TermsActivity" >
         </activity>
-        <activity android:name=".Alarm.AlarmActivity" >
-        </activity>
     </application>
 
 </manifest>

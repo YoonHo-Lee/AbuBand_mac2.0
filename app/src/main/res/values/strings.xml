@@ -132,4 +132,8 @@
     <string name="setting_terms">Terms</string>
     <string name="setting_policy">Policy</string>
 
+
+    <string name="btn_ok">ok</string>
+    <string name="btn_cancle">cancle</string>
+
 </resources>

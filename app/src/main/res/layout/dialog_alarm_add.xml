@@ -13,21 +13,23 @@
         android:layout_marginBottom="20dp">
 
         <NumberPicker
-            android:id="@+id/numberPickerY"
+            android:id="@+id/numberPickerTemp1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
-        <NumberPicker
-            android:id="@+id/numberPickerM"
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_height="90dp"
+            android:text="."
+            android:textSize="30sp"
+            android:id="@+id/textView"
+            android:layout_gravity="bottom" />
 
         <NumberPicker
-            android:id="@+id/numberPickerD"
+            android:id="@+id/numberPickerTemp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -35,16 +37,16 @@
     </LinearLayout>
 
     Button
-        android:id="@+id/btn_birth_cancle"
+        android:id="@+id/btn_alarmAdd_cancle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/btn_cancle"
         android:layout_below="@+id/linearLayout"
         android:layout_alignLeft="@+id/linearLayout"
         android:layout_alignStart="@+id/linearLayout" />
 
     <Button
-        android:id="@+id/btn_birth_ok"
+        android:id="@+id/btn_alarmAdd_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_ok"

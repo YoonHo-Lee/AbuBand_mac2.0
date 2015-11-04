@@ -95,19 +95,12 @@ public class BabyAddActivity extends AppCompatActivity {
         npD.setMinValue(1);
         npD.setWrapSelectorWheel(false);
 
-        Button btn_ok, btn_cancle;
+        Button btn_ok;
         btn_ok = (Button) d.findViewById(R.id.btn_birth_ok);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 babyBirth.setText(String.valueOf(npY.getValue())+ " / " + String.valueOf(npM.getValue()) + " / " + String.valueOf(npD.getValue()));
-                d.dismiss();
-            }
-        });
-        btn_cancle = (Button) d.findViewById(R.id.btn_birth_cancle);
-        btn_cancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 d.dismiss();
             }
         });

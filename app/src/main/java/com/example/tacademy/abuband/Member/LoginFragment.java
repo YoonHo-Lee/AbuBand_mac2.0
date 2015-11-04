@@ -32,6 +32,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
         //로그인 버튼

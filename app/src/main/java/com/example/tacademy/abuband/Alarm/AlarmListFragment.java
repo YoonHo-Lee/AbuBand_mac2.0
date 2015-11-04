@@ -1,6 +1,7 @@
 package com.example.tacademy.abuband.Alarm;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.example.tacademy.abuband.R;
@@ -20,6 +23,7 @@ public class AlarmListFragment extends Fragment {
 
     ListView alarmListView;
     AlarmAdapter alarmAdapter;
+    View rootView;
 
     public static final String TAG_ALARMTEMP = "alarmTemp";
 
@@ -34,7 +38,7 @@ public class AlarmListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_alram_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_alram_list, container, false);
 
         alarmListView = (ListView) rootView.findViewById(R.id.list_alarm);
         alarmAdapter = new AlarmAdapter();
@@ -52,6 +56,14 @@ public class AlarmListFragment extends Fragment {
 
         initData();
 
+        Button btn = (Button) rootView.findViewById(R.id.btn_alarmAdd);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alarmAddDialog();
+            }
+        });
+
         return rootView;
     }
 
@@ -65,6 +77,39 @@ public class AlarmListFragment extends Fragment {
             temp = temp + 0.7f * i;
             alarmAdapter.add(d);
         }
+    }
+
+    public void alarmAddDialog()    {
+        final Dialog d = new Dialog(rootView.getContext());
+        d.setTitle("온도알람 등록");
+        d.setContentView(R.layout.dialog_alarm_add);
+
+        final NumberPicker npT1, npT2;
+
+        npT1 = (NumberPicker) d.findViewById(R.id.numberPickerTemp1);
+        npT1.setMaxValue(45);
+        npT1.setMinValue(20);
+        npT1.setValue(36);
+
+        npT2 = (NumberPicker) d.findViewById(R.id.numberPickerTemp2);
+        npT2.setMaxValue(9);
+        npT2.setMinValue(0);
+        npT2.setValue(5);
+
+        Button btn_ok, btn_cancle;
+        btn_ok = (Button) d.findViewById(R.id.btn_alarmAdd_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(rootView.getContext(), npT1.getValue() + "." + npT2.getValue() + "도 알람이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                d.dismiss();
+            }
+        });
+
+
+        d.show();
+
+
     }
 
 
