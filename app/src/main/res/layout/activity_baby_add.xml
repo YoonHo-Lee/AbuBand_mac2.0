@@ -41,7 +41,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/babyNameTIL"
         android:layout_centerVertical="true">
+
+        <EditText
+            android:id="@+id/edit_babyBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="생년월일"
+            android:textSize="20sp" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -51,39 +63,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/babyBirthTIL"
         android:layout_centerVertical="true">
+
+        <EditText
+            android:id="@+id/edit_babyGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="성별"
+            android:textSize="20sp" />
 
     </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/edit_bandSerial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/edit_babyGender"
-        android:gravity="center"
-        android:hint="성별"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/edit_babyGender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/babyNameTIL"
-        android:focusable="false"
-        android:gravity="center"
-        android:hint="생년월일"
-        android:textSize="20sp" />
 
     <Button
+        android:id="@+id/btn_babyAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/babyAdd_btn"
-        android:id="@+id/btn_babyAdd"
-        android:layout_below="@+id/edit_bandSerial"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/babyGenderTIL"
+        android:layout_centerHorizontal="true"
+        android:text="@string/babyAdd_btn" />
 
 </RelativeLayout>

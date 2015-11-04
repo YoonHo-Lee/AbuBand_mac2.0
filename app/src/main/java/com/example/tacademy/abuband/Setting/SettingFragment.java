@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.tacademy.abuband.MainActivity;
 import com.example.tacademy.abuband.Menual.MenualActivity;
@@ -81,8 +82,26 @@ public class SettingFragment extends Fragment {
 
         btn = (Button) rootView.findViewById(R.id.btn_Setting_tempUnit);
         btn.setOnClickListener(new View.OnClickListener() {
+            int selectPosition;
             @Override
             public void onClick(View v) {
+                selectPosition = 0;
+                final String[] tempUnit = {"섭씨℃", "화씨℉"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
+                builder.setTitle("성별");
+                builder.setSingleChoiceItems(tempUnit, selectPosition, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectPosition = which;
+                    }
+                });
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(rootView.getContext(), tempUnit[selectPosition] + "로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.create().show();
 
             }
         });
