@@ -76,6 +76,8 @@ public class BabyAddActivity extends AppCompatActivity {
         final Dialog d = new Dialog(BabyAddActivity.this);
         d.setTitle("생년월일");
         d.setContentView(R.layout.dialog_baby_add_birth);
+//                아마도 가로세로 크기 지정???????????????????????????????????
+//        d.getWindow().setLayout(디멘으로 값지정);
 
         final NumberPicker npY, npM, npD;
 

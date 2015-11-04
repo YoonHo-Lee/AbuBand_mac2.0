@@ -24,6 +24,7 @@ public class AlarmListFragment extends Fragment {
     ListView alarmListView;
     AlarmAdapter alarmAdapter;
     View rootView;
+    String selectTemp;
 
     public static final String TAG_ALARMTEMP = "alarmTemp";
 
@@ -50,6 +51,8 @@ public class AlarmListFragment extends Fragment {
                 Object object = alarmListView.getItemAtPosition(position);
                 AlarmItemData data = (AlarmItemData) object;
                 Toast.makeText(view.getContext(), data.alarm_temp + "도", Toast.LENGTH_SHORT).show();
+                selectTemp = data.alarm_temp+"";
+                alarmUpdateDialog();
 
             }
         });
@@ -69,7 +72,7 @@ public class AlarmListFragment extends Fragment {
 
     //데이터 입력!!!!!!
     private void initData() {
-        float temp = 50.0f;
+        float temp = 20.0f;
 
         for(int i = 0; i<10; i++)   {
             AlarmItemData d = new AlarmItemData();
@@ -96,12 +99,50 @@ public class AlarmListFragment extends Fragment {
         npT2.setMinValue(0);
         npT2.setValue(5);
 
-        Button btn_ok, btn_cancle;
+        Button btn_ok;
         btn_ok = (Button) d.findViewById(R.id.btn_alarmAdd_ok);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(rootView.getContext(), npT1.getValue() + "." + npT2.getValue() + "도 알람이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                d.dismiss();
+            }
+        });
+
+
+        d.show();
+
+
+    }
+
+    String selectTemp1, selectTemp2;
+    public void alarmUpdateDialog()    {
+        final Dialog d = new Dialog(rootView.getContext());
+        d.setTitle("온도알람 수정");
+        d.setContentView(R.layout.dialog_alarm_add);
+
+        final NumberPicker npT1, npT2;
+
+        selectTemp1 = selectTemp.substring(0,2);
+        selectTemp2 = selectTemp.substring(3,4);
+
+        npT1 = (NumberPicker) d.findViewById(R.id.numberPickerTemp1);
+        npT1.setMaxValue(45);
+        npT1.setMinValue(20);
+        npT1.setValue(Integer.parseInt(selectTemp1));
+
+        npT2 = (NumberPicker) d.findViewById(R.id.numberPickerTemp2);
+        npT2.setMaxValue(9);
+        npT2.setMinValue(0);
+        npT2.setValue(Integer.parseInt(selectTemp2));
+
+        Button btn_ok;
+        btn_ok = (Button) d.findViewById(R.id.btn_alarmAdd_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(rootView.getContext(), npT1.getValue() + "." + npT2.getValue() + "도 알람이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(rootView.getContext(), selectTemp1 + " / " + selectTemp2, Toast.LENGTH_SHORT ).show();
                 d.dismiss();
             }
         });
