@@ -1,6 +1,7 @@
 package com.example.tacademy.abuband.SickReport;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -30,13 +31,15 @@ public class SickReportAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick_report_add);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         sickAdd_date = (TextView) findViewById(R.id.sickAdd_date);
         sickAdd_maxTemp = (TextView) findViewById(R.id.sickAdd_maxTemp);
         edit_sickTitle = (EditText) findViewById(R.id.edit_sickTitle);
 
 
-        Intent intent = getIntent();
+//        Intent intent = getIntent();
 
 
 
@@ -47,5 +50,11 @@ public class SickReportAddActivity extends AppCompatActivity {
 //        sickAdd_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP)+"");
 //        edit_sickTitle.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

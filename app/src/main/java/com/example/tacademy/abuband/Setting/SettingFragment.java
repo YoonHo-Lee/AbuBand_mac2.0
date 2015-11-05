@@ -88,7 +88,7 @@ public class SettingFragment extends Fragment {
                 selectPosition = 0;
                 final String[] tempUnit = {"섭씨℃", "화씨℉"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(rootView.getContext());
-                builder.setTitle("성별");
+                builder.setTitle("온도 단위");
                 builder.setSingleChoiceItems(tempUnit, selectPosition, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -130,7 +130,17 @@ public class SettingFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("도움말")
+                        .setMessage("고객센터 : 고객센터가 아직 없습니다.")
+                        .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
@@ -141,9 +151,6 @@ public class SettingFragment extends Fragment {
         return rootView;
     }
 
-    public void myOnKeyDown(int key_code){
-        //do whatever you want here
-    }
 
 
 }
