@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.dacer.androidcharts.LineView;
 
@@ -31,7 +32,7 @@ public class TemperatureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //루트뷰 선언
-        View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
         //그래프 선언
         final LineView lineView = (LineView)rootView.findViewById(R.id.graph_mainTemp);
 
@@ -57,6 +58,8 @@ public class TemperatureFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 randomSet(lineView);
+                ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+                mProgressBar.setProgress((int)(Math.random()*1000 % 61));
 
             }
         });
