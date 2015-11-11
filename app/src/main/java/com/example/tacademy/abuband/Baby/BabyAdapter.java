@@ -13,6 +13,12 @@ import java.util.List;
 public class BabyAdapter extends BaseAdapter {
     List<BabyItemData> babyItems = new ArrayList<BabyItemData>();
 
+    String email;
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public int getCount() {
         return babyItems.size();
@@ -43,6 +49,11 @@ public class BabyAdapter extends BaseAdapter {
 
     public void add(BabyItemData item) {
         babyItems.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        babyItems.clear();
         notifyDataSetChanged();
     }
 }

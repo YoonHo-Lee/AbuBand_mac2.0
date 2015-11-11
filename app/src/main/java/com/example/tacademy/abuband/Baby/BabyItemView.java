@@ -6,6 +6,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tacademy.abuband.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 
 /**
@@ -18,29 +21,52 @@ public class BabyItemView extends RelativeLayout {
     }
 
 
-    BabyItemData mData;
-
     ImageView babyList_iconView;
     TextView babyList_nameView, babyList_birthView, babyList_genderView;
 
+    DisplayImageOptions options;
+
     private void init() {
-        inflate(getContext(), R.layout.view_baby_item, this);
+//        inflate(getContext(), R.layout.view_baby_item, this);
         babyList_iconView = (ImageView) findViewById(R.id.babyList_icon);
         babyList_nameView = (TextView) findViewById(R.id.babyList_name);
         babyList_birthView = (TextView) findViewById(R.id.babyList_birth);
         babyList_genderView = (TextView) findViewById(R.id.babyList_gender);
 
+        inflate(getContext(), R.layout.view_baby_item, this);
+        babyList_iconView = (ImageView)findViewById(R.id.babyList_icon);
+        babyList_nameView = (TextView)findViewById(R.id.babyList_name);
+        babyList_birthView = (TextView)findViewById(R.id.babyList_birth);
+        babyList_genderView = (TextView)findViewById(R.id.babyList_gender);
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_stub)
+                .showImageForEmptyUri(R.drawable.ic_empty)
+                .showImageOnFail(R.drawable.ic_error)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .considerExifParams(true)
+                .displayer(new RoundedBitmapDisplayer(50))
+                .build();
+
     }
 
     public void setItemData(BabyItemData data)  {
-        mData = data;
 
-        if (data.babyList_icon != null) {
-            //서버랑 연동시 이미지로더를 이용해서 이미지 불러오기
-//            babyList_iconView.setImageDrawable();
+        babyList_nameView.setText(data.name);
+        babyList_birthView.setText(data.birth+"");
+
+        String textGender = "null";
+        switch (data.gender)    {
+            case 0:
+                textGender = "남아";
+                break;
+            case 1:
+                textGender = "여아";
+                break;
         }
-        babyList_nameView.setText(data.babyList_Name);
-        babyList_birthView.setText(data.babyList_birth);
-        babyList_genderView.setText(data.babyList_gender);
+        babyList_genderView.setText(textGender);
+
+
+        ImageLoader.getInstance().displayImage(data.image, babyList_iconView, options);
     }
 }

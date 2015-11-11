@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AbuBand.iml" filepath="$PROJECT_DIR$/AbuBand.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidCharts/AndroidCharts.iml" filepath="$PROJECT_DIR$/AndroidCharts/AndroidCharts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ImageLoader/ImageLoader.iml" filepath="$PROJECT_DIR$/ImageLoader/ImageLoader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Async/Async.iml" filepath="$PROJECT_DIR$/Async/Async.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UniversalImageLoader/UniversalImageLoader.iml" filepath="$PROJECT_DIR$/UniversalImageLoader/UniversalImageLoader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

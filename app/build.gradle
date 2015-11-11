@@ -11,6 +11,9 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    useLibrary 'org.apache.http.legacy'
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +27,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
-    compile project(':ImageLoader')
     compile project(':AndroidCharts')
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile project(':Async')
+    compile project(':UniversalImageLoader')
 }

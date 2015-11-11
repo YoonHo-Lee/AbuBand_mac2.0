@@ -1,1 +1,1 @@
-include ':app', ':ImageLoader', ':AndroidCharts'
+include ':app', ':AndroidCharts', ':Async', ':UniversalImageLoader'

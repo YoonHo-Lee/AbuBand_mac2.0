@@ -68,6 +68,8 @@ public class TemperatureFragment extends Fragment {
         return rootView;
     }
 
+
+
     //그래프 수치 랜덤셋팅
     private void randomSet(LineView lineView){
         ArrayList<Integer> dataList = new ArrayList<Integer>();

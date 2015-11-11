@@ -5,9 +5,16 @@ package com.example.tacademy.abuband.Baby;
  */
 public class BabyItemData {
 
-    public String babyList_icon;
-    public String babyList_Name;
-    public String babyList_birth;
-    public String babyList_gender;
+//    public String babyList_icon;
+//    public String babyList_Name;
+//    public String babyList_birth;
+//    public String babyList_gender;
+
+    String _id;
+    String id;
+    int gender;
+    int birth;
+    String name;
+    String image;
 
 }

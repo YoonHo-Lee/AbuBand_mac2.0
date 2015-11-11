@@ -10,7 +10,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AndroidCharts" />
-            <option value="$PROJECT_DIR$/ImageLoader" />
+            <option value="$PROJECT_DIR$/Async" />
+            <option value="$PROJECT_DIR$/UniversalImageLoader" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

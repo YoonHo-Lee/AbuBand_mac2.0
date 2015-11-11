@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tacademy.abuband.MainActivity;
 import com.example.tacademy.abuband.Menual.MenualActivity;
 import com.example.tacademy.abuband.R;
 
@@ -20,6 +19,8 @@ import com.example.tacademy.abuband.R;
  * A simple {@link Fragment} subclass.
  */
 public class SettingFragment extends Fragment {
+
+    public static final String MENUAL_FLAG ="flag";
 
 
     public SettingFragment() {
@@ -116,11 +117,14 @@ public class SettingFragment extends Fragment {
         });*/
 
 
+
+
         btn = (Button) rootView.findViewById(R.id.btn_Setting_menual);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MenualActivity.class);
+                intent.putExtra(MENUAL_FLAG, 777);
                 startActivity(intent);
             }
         });

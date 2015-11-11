@@ -27,6 +27,7 @@ public class BabyAddActivity extends AppCompatActivity {
         babyBirth = (EditText) findViewById(R.id.edit_babyBirth);
         babyGender = (EditText) findViewById(R.id.edit_babyGender);
 
+        /***************** 생년월일 설정 *******************/
         babyBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +35,7 @@ public class BabyAddActivity extends AppCompatActivity {
             }
         });
 
+        /***************** 성별 설정 *******************/
         babyGender.setOnClickListener(new View.OnClickListener() {
             int selectPosition;
             @Override
@@ -59,6 +61,7 @@ public class BabyAddActivity extends AppCompatActivity {
         });
 
 
+        /***************** 아이 추가 *******************/
         Button btn = (Button) findViewById(R.id.btn_babyAdd);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +73,7 @@ public class BabyAddActivity extends AppCompatActivity {
         });
     }
 
+    /***************** 생년월일 다이얼로그 *******************/
     /*커스텀 다이얼로그 불러오기*/
     /*년도 최대값을 올해로 설정하게, 캘린더로 현재 연도 가져오기.*/
     public void birthDialog()   {

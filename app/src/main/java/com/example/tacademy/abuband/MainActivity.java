@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
+        setMainTitle("체온측정");
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,12 +104,14 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.navi_temperature) {
+            setMainTitle("체온측정");
             emptyBackStack();
 
         } else if (id == R.id.navi_sickreport) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_SICKREPORT);
 
             if (old == null) {
+                setMainTitle("아픔일지");
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new SickReportListFragment(), TAG_SICKREPORT).addToBackStack(null).commit();
             }
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
 
             if (old == null) {
+                setMainTitle("알람");
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new AlarmListFragment(), TAG_ALARM).addToBackStack(null).commit();
             }
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BABYADD);
 
             if (old == null) {
+                setMainTitle("아이등록");
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new BabyListFragment(), TAG_BABYADD).addToBackStack(null).commit();
             }
@@ -134,6 +139,7 @@ public class MainActivity extends AppCompatActivity
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_SETTING);
 
             if (old == null) {
+                setMainTitle("설정");
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new SettingFragment(), TAG_SETTING).addToBackStack(null).commit();
             }
@@ -149,4 +155,10 @@ public class MainActivity extends AppCompatActivity
     private void emptyBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
+
+    public void setMainTitle(String title)  {
+        setTitle(title);
+    }
+
+
 }
