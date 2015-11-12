@@ -6,17 +6,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.example.tacademy.abuband.MainActivity;
+import com.example.tacademy.abuband.NetworkManager;
 import com.example.tacademy.abuband.R;
 
 public class BabyAddActivity extends AppCompatActivity {
 
     EditText babyName, babyBirth, babyGender;
+    BabyAdapter babyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +70,35 @@ public class BabyAddActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                addBaby(babyName.toString(), babyBirth.toString(), babyGender.toString());
+
                 Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    /***************** 아이추가 네트워크 불러오기 *******************/
+    private void addBaby(final String name, final String birth, final String gender) {
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(birth) && !TextUtils.isEmpty(gender) ) {
+            NetworkManager.getInstance().setNetworkBabyAdd(BabyAddActivity.this, name, birth, gender , new NetworkManager.OnResultListener<AbuBabies>() {
+
+                @Override
+                public void onSuccess(AbuBabies result) {
+                    Toast.makeText(BabyAddActivity.this, name + birth + gender +"등록", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFail(int code) {
+                    Toast.makeText(BabyAddActivity.this, "error : " + code, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(BabyAddActivity.this, "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /***************** 생년월일 다이얼로그 *******************/

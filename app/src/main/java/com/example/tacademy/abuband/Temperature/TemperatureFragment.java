@@ -1,4 +1,4 @@
-package com.example.tacademy.abuband;
+package com.example.tacademy.abuband.Temperature;
 
 
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.dacer.androidcharts.LineView;
+import com.example.tacademy.abuband.R;
 
 import java.util.ArrayList;
 

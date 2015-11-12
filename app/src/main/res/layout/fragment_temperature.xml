@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="com.example.tacademy.abuband.TemperatureFragment">
+    tools:context="com.example.tacademy.abuband.Temperature.TemperatureFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

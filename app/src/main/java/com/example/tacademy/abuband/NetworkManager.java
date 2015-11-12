@@ -78,9 +78,36 @@ public class NetworkManager {
 
     public void getNetworkMovie(Context context, String email, final OnResultListener<AbuBabies> listener) {
         final RequestParams params = new RequestParams();
-        params.put("id", "test02");
+        params.put("email", "test02@naver.com");
 
         client.post(context, BABY_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                Log.i("abuband", responseString);
+
+                AbuBabies babies = gson.fromJson(responseString, AbuBabies.class);
+                listener.onSuccess(babies);
+            }
+
+        });
+    }
+
+    public void setNetworkBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<AbuBabies> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("email", "test02@naver.com");
+        params.put("gender", gender);
+        params.put("birth", birth);
+        params.put("name", name);
+//        params.put("image", "test02");
+
+        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);

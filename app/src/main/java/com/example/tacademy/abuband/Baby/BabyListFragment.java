@@ -44,6 +44,7 @@ public class BabyListFragment extends Fragment {
         babyAdapter = new BabyAdapter();
         babyListView.setAdapter(babyAdapter);
 
+        /***************** 로그인시 sharedpreferences로 저장한 이메일주소 넣어주기 *******************/
         searchBabies("test02");
 
 
