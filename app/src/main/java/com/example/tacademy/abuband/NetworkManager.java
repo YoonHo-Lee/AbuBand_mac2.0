@@ -2,8 +2,10 @@ package com.example.tacademy.abuband;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.tacademy.abuband.Baby.AbuBabies;
+import com.example.tacademy.abuband.Temperature.AbuTemps;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -74,8 +76,14 @@ public class NetworkManager {
     }
 
 
+    /************* U R L ****************/
     private static final String BABY_URL = "http://54.65.97.166/babies";
+    private static final String TEMPERATURE_URL = "http://54.65.97.166/getTemperature";
+    /************* End of U R L ****************/
 
+
+    /**************** BABIES PARTS **********************/
+    // Get Babies
     public void getBabies(Context context, String email, final OnResultListener<AbuBabies> listener) {
         final RequestParams params = new RequestParams();
         params.put("email", "test02@naver.com");
@@ -97,34 +105,73 @@ public class NetworkManager {
             }
 
         });
+
     }
+    //End of Get Babies
 
-    public void setNetworkBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<AbuBabies> listener) {
+    //  Set Babies
+//    public void setNetworkBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<AbuBabies> listener) {
+//        final RequestParams params = new RequestParams();
+//        params.put("email", "test02@naver.com");
+//        params.put("gender", gender);
+//        params.put("birth", birth);
+//        params.put("name", name);
+////        params.put("image", "test02");
+//
+//        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                listener.onFail(statusCode);
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//
+//                Log.i("abuband", responseString);
+//
+//                AbuBabies babies = gson.fromJson(responseString, AbuBabies.class);
+//                listener.onSuccess(babies);
+//            }
+//
+//        });
+//    }
+    //end of Set Babies
+    /****************END OF BABIES PARTS **********************/
+
+
+
+
+
+    /*********************** TEMPERATURE PARTS  *********************************/
+    //Get Temperature
+    public void getTemperature(final Context context, String serial, final OnResultListener<AbuTemps> listener) {
         final RequestParams params = new RequestParams();
-        params.put("email", "test02@naver.com");
-        params.put("gender", gender);
-        params.put("birth", birth);
-        params.put("name", name);
-//        params.put("image", "test02");
+        params.put("serial", "LEEKR203NR5");
 
-        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
+
+        client.post(context, TEMPERATURE_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.e("qazwsx", "FAAAAAAAAAAAAAAAAAAAAAAAAAIL");
                 listener.onFail(statusCode);
-
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.e("qazwsx", responseString);
+//                Toast.makeText(context, responseString, Toast.LENGTH_SHORT).show();
 
-                Log.i("abuband", responseString);
-
-                AbuBabies babies = gson.fromJson(responseString, AbuBabies.class);
-                listener.onSuccess(babies);
+                AbuTemps abuTemps = gson.fromJson(responseString, AbuTemps.class);
+                listener.onSuccess(abuTemps);
             }
-
         });
     }
+
+
+
+    /*********************** End of TEMPERATURE PARTS  *********************************/
+
 
 
 

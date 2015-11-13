@@ -11,7 +11,7 @@ public class BabyItemData {
 //    public String babyList_gender;
 
     String _id;
-    String id;
+    String email;
     int gender;
     int birth;
     String name;

@@ -524,7 +524,7 @@ public class LineView extends View {
     class Dot{
         int x;
         int y;
-        int data;
+        float data;
         int targetX;
         int targetY;
         int linenumber;
@@ -542,10 +542,10 @@ public class LineView extends View {
             return point;
         }
 
-        Dot setTargetData(int targetX,int targetY,Integer data,int linenumber){
+        Dot setTargetData(int targetX,int targetY,float data,int linenumber){
             this.targetX = targetX;
             this.targetY = targetY;
-            this.data = data;
+            this.data = (data / 10f) + 35f;
             this.linenumber = linenumber;
             return this;
         }
