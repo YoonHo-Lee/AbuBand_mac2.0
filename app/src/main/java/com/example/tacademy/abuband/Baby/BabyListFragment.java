@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.tacademy.abuband.Alarm.AlarmItemData;
 import com.example.tacademy.abuband.NetworkManager;
 import com.example.tacademy.abuband.R;
 
@@ -45,8 +44,9 @@ public class BabyListFragment extends Fragment {
         babyListView.setAdapter(babyAdapter);
 
         /***************** 로그인시 sharedpreferences로 저장한 이메일주소 넣어주기 *******************/
+        //네트워크
         searchBabies("test02");
-
+//        initData();
 
         babyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,8 +56,6 @@ public class BabyListFragment extends Fragment {
                 Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        initData();
 
         Button btn = (Button) rootView.findViewById(R.id.btn_babyListAdd);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -71,14 +69,16 @@ public class BabyListFragment extends Fragment {
         return rootView;
     }
 
+
+    /******************** 네 트 워 크 ********************/
     private void searchBabies(String email) {
         if (!TextUtils.isEmpty(email)) {
-            NetworkManager.getInstance().getNetworkMovie(getContext(), email, new NetworkManager.OnResultListener<AbuBabies>() {
+            NetworkManager.getInstance().getBabies(getContext(), email, new NetworkManager.OnResultListener<AbuBabies>() {
 
                 @Override
                 public void onSuccess(AbuBabies result) {
                     babyAdapter.clear();
-                    for(BabyItemData item : result.result)   {
+                    for (BabyItemData item : result.result) {
                         babyAdapter.add(item);
                     }
                 }
@@ -93,6 +93,7 @@ public class BabyListFragment extends Fragment {
             babyAdapter.setEmail(email);
         }
     }
+    /************* End of Network **************************/
 
 
     @Override

@@ -76,7 +76,7 @@ public class NetworkManager {
 
     private static final String BABY_URL = "http://54.65.97.166/babies";
 
-    public void getNetworkMovie(Context context, String email, final OnResultListener<AbuBabies> listener) {
+    public void getBabies(Context context, String email, final OnResultListener<AbuBabies> listener) {
         final RequestParams params = new RequestParams();
         params.put("email", "test02@naver.com");
 
