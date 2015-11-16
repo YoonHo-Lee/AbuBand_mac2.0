@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.tacademy.abuband.Menual.MenualActivity;
-import com.example.tacademy.abuband.Menual.MenualFragment;
 import com.example.tacademy.abuband.R;
 
 /**
@@ -30,8 +29,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
+        getActivity().setTitle(getString(R.string.title_login));
 
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 

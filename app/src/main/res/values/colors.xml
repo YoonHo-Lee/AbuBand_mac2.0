@@ -5,4 +5,7 @@
     <color name="colorPrimary">#4b5158</color>
     <color name="colorPrimaryDark">#313538</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="base_item_select">#FAE100</color>
+    <color name="base_item_unselect">#FFFFFF</color>
 </resources>

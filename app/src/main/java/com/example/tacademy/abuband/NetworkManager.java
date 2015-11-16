@@ -2,7 +2,6 @@ package com.example.tacademy.abuband;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.tacademy.abuband.Baby.AbuBabies;
 import com.example.tacademy.abuband.Temperature.AbuTemps;
@@ -78,6 +77,8 @@ public class NetworkManager {
 
     /************* U R L ****************/
     private static final String BABY_URL = "http://54.65.97.166/babies";
+    private static final String BABY_SEARCH_URL = "http://54.65.97.166/getBabies";
+
     private static final String TEMPERATURE_URL = "http://54.65.97.166/getTemperature";
     /************* End of U R L ****************/
 
@@ -88,7 +89,7 @@ public class NetworkManager {
         final RequestParams params = new RequestParams();
         params.put("email", "test02@naver.com");
 
-        client.post(context, BABY_URL, params, new TextHttpResponseHandler() {
+        client.post(context, BABY_SEARCH_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
@@ -109,33 +110,40 @@ public class NetworkManager {
     }
     //End of Get Babies
 
-    //  Set Babies
-//    public void setNetworkBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<AbuBabies> listener) {
-//        final RequestParams params = new RequestParams();
-//        params.put("email", "test02@naver.com");
-//        params.put("gender", gender);
-//        params.put("birth", birth);
-//        params.put("name", name);
-////        params.put("image", "test02");
-//
-//        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                listener.onFail(statusCode);
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-//
-//                Log.i("abuband", responseString);
-//
-//                AbuBabies babies = gson.fromJson(responseString, AbuBabies.class);
-//                listener.onSuccess(babies);
-//            }
-//
-//        });
-//    }
+    //  Add Babies
+    public void setNetworkBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<String> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("email", "test02@naver.com");
+        params.put("name", name);
+        params.put("birth", Integer.parseInt(birth));
+        params.put("gender", Integer.parseInt(gender));
+
+/*        params.put("email", "test02@naver.com");
+        params.put("name", "하이");
+        params.put("birth", 20151116);
+        params.put("gender", 0);*/
+//        params.put("image", "test02");
+
+        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                Log.i("qazwsx", responseString);
+
+                /*************이부분 오류 인듯**************/
+//                AbuBabies babies = gson.toJson(responseString, AbuBabies.class);
+                String json = gson.toJson(responseString);
+                listener.onSuccess(json);
+            }
+
+        });
+    }
     //end of Set Babies
     /****************END OF BABIES PARTS **********************/
 

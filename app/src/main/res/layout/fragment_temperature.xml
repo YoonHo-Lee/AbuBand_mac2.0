@@ -42,7 +42,7 @@
                 android:id="@+id/graph_mainTemp"
                 class="com.dacer.androidcharts.LineView"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp" />
+                android:layout_height="150dp"/>
         </HorizontalScrollView>
 
 

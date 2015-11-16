@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">AbuBand</string>
+    <string name="title_alarm">Alarm</string>
+    <string name="title_baby_add">Baby Add</string>
+    <string name="title_band_serial">Serial Check</string>
+    <string name="title_login">Login</string>
+    <string name="title_sign_in">Sign In</string>
+    <string name="title_menual">Menual</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_sick_repork">Sick Report</string>
+    <string name="title_temperature">Temperature</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="Login_btn">Login</string>
-    <string name="title_activity_menual">MenualActivity</string>
+    <string name="title_activity_menual">Menual</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -105,6 +114,8 @@
     <string name="bandSerialSend_btn">Send</string>
     <string name="bandSerialAdd_btn">Add</string>
     <string name="babyAdd_btn">Add</string>
+
+
 
     <!-- 네비게이션 드로워 메뉴 부분 -->
     <string name="naviTemperature">Temperature</string>

@@ -1,14 +1,13 @@
 package com.example.tacademy.abuband.Band;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.tacademy.abuband.Baby.BabyAddActivity;
-import com.example.tacademy.abuband.MainActivity;
 import com.example.tacademy.abuband.R;
 
 public class BandAddActivity extends AppCompatActivity {
@@ -20,6 +19,7 @@ public class BandAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band_add);
+        setTitle(getString(R.string.title_band_serial));
 
         btn_send = (Button) findViewById(R.id.btn_serialSend);
         btn_add = (Button) findViewById(R.id.btn_serialAdd);

@@ -9,4 +9,13 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="base_text_size">20sp</dimen>
+    <dimen name="base_tiem_text_size">25sp</dimen>
+
+    <dimen name="inner_bg_width">250dp</dimen>
+    <dimen name="inner_bg_height">400dp</dimen>
+
+
+    <dimen name="babylist_add_button">80dp</dimen>
 </resources>

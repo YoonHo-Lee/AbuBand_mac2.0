@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">아부밴드</string>
+
+    <string name="title_alarm">알람</string>
+    <string name="title_baby_add">아이등록</string>
+    <string name="title_band_serial">밴드 시리얼</string>
+    <string name="title_login">로그인</string>
+    <string name="title_sign_in">회원가입</string>
+    <string name="title_menual">사용방법</string>
+    <string name="title_setting">설정</string>
+    <string name="title_sick_repork">아픔일지</string>
+    <string name="title_temperature">체온측정</string>
+
+
+
     <string name="Login_btn">로그인</string>
     <string name="memberAdd">아이디가 없으신가요?</string>
     <string name="bandSerialSend_btn">전송</string>

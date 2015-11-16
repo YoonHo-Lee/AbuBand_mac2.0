@@ -26,7 +26,7 @@ public class MemberAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        getActivity().setTitle(getString(R.string.title_sign_in));
 
         final View rootView = inflater.inflate(R.layout.fragment_member_add, container, false);
 

@@ -28,6 +28,15 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        ImageView skip = (ImageView) findViewById(R.id.skipbtn);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

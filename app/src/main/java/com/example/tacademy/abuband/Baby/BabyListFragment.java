@@ -38,10 +38,15 @@ public class BabyListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_baby_list, container, false);
-
         babyListView = (ListView) rootView.findViewById(R.id.list_baby);
         babyAdapter = new BabyAdapter();
+
+        View header = inflater.inflate(R.layout.header_baby_list, null);
+        babyListView.addHeaderView(header);
+        
         babyListView.setAdapter(babyAdapter);
+        
+
 
         /***************** 로그인시 sharedpreferences로 저장한 이메일주소 넣어주기 *******************/
         //네트워크
@@ -57,14 +62,15 @@ public class BabyListFragment extends Fragment {
             }
         });
 
-        Button btn = (Button) rootView.findViewById(R.id.btn_babyListAdd);
-        btn.setOnClickListener(new View.OnClickListener() {
+        final Button babyAddBtn = (Button) rootView.findViewById(R.id.btn_babyListAdd);
+        babyAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), BabyAddActivity.class);
                 startActivity(intent);
             }
         });
+
 
         return rootView;
     }
@@ -101,22 +107,4 @@ public class BabyListFragment extends Fragment {
         super.onDestroy();
         NetworkManager.getInstance().cancelAll(getContext());
     }
-
-
-//    private void initData() {
-//        int birth = 20151105;
-//        String[] sample_gender = {"남아", "여아"};
-//
-//        for(int i = 0; i<10; i++)   {
-//            BabyItemData d = new BabyItemData();
-////            d.babyList_icon =
-//            d.babyList_Name = "안드로 " + i + "호";
-//            d.babyList_birth = birth+"";
-//            birth++;
-//            d.babyList_gender = sample_gender[i%2];
-//            babyAdapter.add(d);
-//        }
-//    }
-
-
 }
