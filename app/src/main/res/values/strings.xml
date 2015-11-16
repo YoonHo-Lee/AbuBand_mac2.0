@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AbuBand</string>
     <string name="title_alarm">Alarm</string>
+    <string name="title_baby_list">Baby List</string>
     <string name="title_baby_add">Baby Add</string>
     <string name="title_band_serial">Serial Check</string>
     <string name="title_login">Login</string>
@@ -121,7 +122,7 @@
     <string name="naviTemperature">Temperature</string>
     <string name="naviSickReport">SickReport</string>
     <string name="naviAlarm">Alarm</string>
-    <string name="naviBabyAdd">BabyAdd</string>
+    <string name="naviBabyList">BabyAdd</string>
     <string name="naviSetting">Setting</string>
 
     <string name="memberadd_btn">Add</string>

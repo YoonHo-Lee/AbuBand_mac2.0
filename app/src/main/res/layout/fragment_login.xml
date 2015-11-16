@@ -30,7 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/login_inner_bg"
+        android:background="@drawable/inner_bg_login"
         android:paddingBottom="30dp"
         android:paddingLeft="5dp"
         android:paddingRight="10dp"

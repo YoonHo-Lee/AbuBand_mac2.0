@@ -3,6 +3,7 @@
     <string name="app_name">아부밴드</string>
 
     <string name="title_alarm">알람</string>
+    <string name="title_baby_list">아이목록</string>
     <string name="title_baby_add">아이등록</string>
     <string name="title_band_serial">밴드 시리얼</string>
     <string name="title_login">로그인</string>
@@ -24,7 +25,7 @@
     <string name="naviTemperature">체온측정</string>
     <string name="naviSickReport">아픔일지</string>
     <string name="naviAlarm">알람</string>
-    <string name="naviBabyAdd">아이등록</string>
+    <string name="naviBabyList">아이목록</string>
     <string name="naviSetting">설정</string>
 
     <string name="memberadd_btn">등록</string>

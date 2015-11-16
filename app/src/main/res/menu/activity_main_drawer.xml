@@ -17,7 +17,7 @@
         <item
             android:id="@+id/navi_babyadd"
             android:icon="@drawable/navi_babyadd"
-            android:title="@string/naviBabyAdd" />
+            android:title="@string/naviBabyList" />
         <item
             android:id="@+id/navi_setting"
             android:icon="@drawable/navi_setting"

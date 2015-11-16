@@ -28,6 +28,7 @@ public class BabyAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baby_add);
+        setTitle(getString(R.string.title_baby_add));
 
         babyName = (EditText) findViewById(R.id.edit_babyName);
         babyBirth = (EditText) findViewById(R.id.edit_babyBirth);

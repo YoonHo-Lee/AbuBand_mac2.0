@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BABYADD);
 
             if (old == null) {
-                setMainTitle(getString(R.string.title_baby_add));
+                setMainTitle(getString(R.string.title_baby_list));
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new BabyListFragment(), TAG_BABYADD).addToBackStack(null).commit();
             }
