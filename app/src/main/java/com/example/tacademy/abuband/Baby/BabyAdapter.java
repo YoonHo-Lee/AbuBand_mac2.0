@@ -10,10 +10,31 @@ import java.util.List;
 /**
  * Created by Tacademy on 2015-11-05.
  */
-public class BabyAdapter extends BaseAdapter  {
+public class BabyAdapter extends BaseAdapter implements BabyItemView.OnImageClickListener {
     List<BabyItemData> babyItems = new ArrayList<BabyItemData>();
 
     String email;
+
+    /**************************************이미지 클릭 리스너*********************************************/
+
+    OnAdapterImageListener mListener;
+
+    public interface OnAdapterImageListener {
+        public void onAdapterImageClick(BabyAdapter adapter, BabyItemView view, BabyItemData data);
+    }
+
+    public void setOnAdapterImageListener(OnAdapterImageListener listener) {
+        mListener = listener;
+    }
+
+    @Override
+    public void onImageClick(BabyItemView view, BabyItemData data) {
+        if (mListener != null) {
+            mListener.onAdapterImageClick(this, view, data);
+        }
+    }
+
+    /**************************************End of 이미지 클릭 리스너*********************************************/
 
     public void setEmail(String email) {
         this.email = email;
@@ -56,4 +77,6 @@ public class BabyAdapter extends BaseAdapter  {
         babyItems.clear();
         notifyDataSetChanged();
     }
+
+
 }

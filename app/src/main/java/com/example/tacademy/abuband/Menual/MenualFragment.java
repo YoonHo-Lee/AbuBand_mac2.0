@@ -43,7 +43,7 @@ public class MenualFragment extends Fragment {
 
 
         Intent i = getActivity().getIntent();
-        final int flag = i.getIntExtra(SettingFragment.MENUAL_FLAG,999);
+        final int flag = i.getIntExtra(SettingFragment.SETTING_FLAG,999);
 
         Button btn = (Button) rootView.findViewById(R.id.btn_menual);
         btn.setOnClickListener(new View.OnClickListener() {

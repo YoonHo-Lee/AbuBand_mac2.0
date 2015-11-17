@@ -27,8 +27,8 @@ public class SickReportItemView extends RelativeLayout {
 
     public void setItemData(SickReportItemData data) {
         mData = data;
-        sickDate.setText(data.sickDate);
-        sickTemp.setText(data.sickMaxTemp+"");
-        sickTitle.setText(data.sickTitle);
+        sickDate.setText(data.date);
+        sickTemp.setText(37.5+"");
+        sickTitle.setText(data.title);
     }
 }

@@ -3,13 +3,12 @@ package com.example.tacademy.abuband.SickReport;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,9 +43,9 @@ public class SickReportActivity extends AppCompatActivity {
 //        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
 //        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
 
-        sick_date.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKDATE));
-        sick_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP) + "");
-        sick_title.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
+//        sick_date.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKDATE));
+//        sick_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP) + "");
+//        sick_title.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
 //        sick_memo.setText();
     }
 

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.tacademy.abuband.Band.BandAddActivity;
 import com.example.tacademy.abuband.Menual.MenualActivity;
 import com.example.tacademy.abuband.R;
 
@@ -20,7 +21,7 @@ import com.example.tacademy.abuband.R;
  */
 public class SettingFragment extends Fragment {
 
-    public static final String MENUAL_FLAG ="flag";
+    public static final String SETTING_FLAG ="flag";
 
 
     public SettingFragment() {
@@ -58,7 +59,9 @@ public class SettingFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(v.getContext(), BandAddActivity.class);
+                intent.putExtra(SETTING_FLAG, 777);
+                startActivity(intent);
             }
         });
 
@@ -124,7 +127,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MenualActivity.class);
-                intent.putExtra(MENUAL_FLAG, 777);
+                intent.putExtra(SETTING_FLAG, 777);
                 startActivity(intent);
             }
         });

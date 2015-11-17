@@ -1,6 +1,7 @@
 package com.example.tacademy.abuband.Baby;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,16 +25,17 @@ public class BabyItemView extends RelativeLayout {
     ImageView babyList_iconView, babyList_Update;
     TextView babyList_nameView, babyList_birthView, babyList_genderView;
     DisplayImageOptions options;
+    BabyItemData mData;
 
     /************************* 이미지 클릭 리스너 *********************************/
-//    public interface OnImageClickListener {
-//        public void onImageClick(BabyItemView view, BandItemData data);
-//    }
-//
-//    OnImageClickListener mListener;
-//    public void setOnImageClickListener(OnImageClickListener listener) {
-//        mListener = listener;
-//    }
+    public interface OnImageClickListener {
+        public void onImageClick(BabyItemView view, BabyItemData data);
+    }
+
+    OnImageClickListener mListener;
+    public void setOnImageClickListener(OnImageClickListener listener) {
+        mListener = listener;
+    }
 
     /************************* End of 이미지 클릭 리스너 *********************************/
 
@@ -60,6 +62,15 @@ public class BabyItemView extends RelativeLayout {
                 .considerExifParams(true)
                 .displayer(new RoundedBitmapDisplayer(50))
                 .build();
+
+        babyList_Update.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onImageClick(BabyItemView.this, mData);
+                }
+            }
+        });
 
     }
 

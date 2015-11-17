@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.tacademy.abuband.Baby.BabyAddActivity;
 import com.example.tacademy.abuband.NetworkManager;
 import com.example.tacademy.abuband.R;
+import com.example.tacademy.abuband.Setting.SettingFragment;
 
 public class BandAddActivity extends AppCompatActivity {
 
@@ -39,23 +40,30 @@ public class BandAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //서버로 밴드의 시리얼을 보내서 확인 받는 과정
                 //아래는 true값 리턴 받았을때를 가정
-                if(!TextUtils.isEmpty(edit_bandSerial.getText().toString())) {
+                if (!TextUtils.isEmpty(edit_bandSerial.getText().toString())) {
                     BandSeralCheck(edit_bandSerial.getText().toString());
-                }else{
+                } else {
                     Toast.makeText(BandAddActivity.this, "시리얼 번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
                 }
-
 
 
             }
         });
 
+        Intent i = getIntent();
+        final int flag = i.getIntExtra(SettingFragment.SETTING_FLAG,999);
+
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BandAddActivity.this, BabyAddActivity.class);
-                startActivity(intent);
-                finish();
+                //flag값 받아서 설정에서 왔을때를 구분
+                if(flag == 777) {   // 설정에서 넘어온 경우
+                    finish();
+                }else   {   // 처음 왔을때는 아이 등록화면으로
+                    Intent intent = new Intent(BandAddActivity.this, BabyAddActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

@@ -53,7 +53,7 @@ public class BabyListFragment extends Fragment {
 
         /***************** 로그인시 sharedpreferences로 저장한 이메일주소 넣어주기 *******************/
         //네트워크
-        searchBabies("test02");
+        searchBabies("test02@naver.com");
 //        initData();
 
         babyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,9 +63,16 @@ public class BabyListFragment extends Fragment {
                 BabyItemData data = (BabyItemData) object;
                 Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
 
+
             }
         });
 
+        babyAdapter.setOnAdapterImageListener(new BabyAdapter.OnAdapterImageListener() {
+            @Override
+            public void onAdapterImageClick(BabyAdapter adapter, BabyItemView view, BabyItemData data) {
+                Toast.makeText(view.getContext(), "눌림 : "+data.name + data.birth, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         final Button babyAddBtn = (Button) rootView.findViewById(R.id.btn_babyListAdd);
         babyAddBtn.setOnClickListener(new View.OnClickListener() {

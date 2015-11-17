@@ -4,6 +4,7 @@ package com.example.tacademy.abuband.SickReport;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.tacademy.abuband.NetworkManager;
 import com.example.tacademy.abuband.R;
 
 /**
@@ -21,15 +23,7 @@ public class SickReportListFragment extends Fragment {
     ListView sickListView;
     SickReportAdapter sickAdapter;
 
-    public static final String TAG_SICKDATE = "sickDate";
 
-    //Calendar로 구해야 할 듯?
-    public static final String TAG_SICKDAYOFWEEK = "sickDayOfWeek";
-    public static final String TAG_SICKMAXTEMP = "sickMaxTemp";
-    public static final String TAG_SICKTITLE = "sickTitle";
-
-    //나중에 불러와서 써야 할 듯
-    public static final String TAG_SICKBABYNAME = "sickBabyName";
 
     public SickReportListFragment() {
         // Required empty public constructor
@@ -52,34 +46,57 @@ public class SickReportListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object object = sickListView.getItemAtPosition(position);
                 SickReportItemData data = (SickReportItemData)object;
-//                Toast.makeText(view.getContext(),"병명 : " + data.sickTitle, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(),"병명 : " + data.title, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), SickReportActivity.class);
-                intent.putExtra(TAG_SICKDATE, data.sickDate);
-                intent.putExtra(TAG_SICKMAXTEMP, data.sickMaxTemp);
-                intent.putExtra(TAG_SICKTITLE, data.sickTitle);
                 startActivity(intent);
             }
         });
 
-        initData();
+
+        searchSickReport("test02@naver.com");
+
+//        initData();
 
 
         return rootView;
     }
 
-    //데이터 입력!!!!!!
-    private void initData() {
-        int date = 20151102;
+    private void searchSickReport(String email) {
+        if (!TextUtils.isEmpty(email)) {
+            NetworkManager.getInstance().getSickReport(getContext(), email, new NetworkManager.OnResultListener<AbuSickReports>() {
 
-        for(int i = 0; i<20; i++)   {
-            SickReportItemData d = new SickReportItemData();
-            d.sickDate = date+"";
-            date++;
-            d.sickMaxTemp = 40.2f+i;
-            d.sickTitle = "메르스" + i;
-            sickAdapter.add(d);
+                @Override
+                public void onSuccess(AbuSickReports result) {
+                    sickAdapter.clear();
+                    for (SickReportItemData item : result.result) {
+                        sickAdapter.add(item);
+                    }
+                }
+
+                @Override
+                public void onFail(int code) {
+                    Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            sickAdapter.clear();
+            sickAdapter.setEmail(email);
         }
     }
+
+    //데이터 입력!!!!!!
+//    private void initData() {
+//        int date = 20151102;
+//
+//        for(int i = 0; i<20; i++)   {
+//            SickReportItemData d = new SickReportItemData();
+//            d.date = date+"";
+//            date++;
+//            d.sickMaxTemp = 40.2f+i;
+//            d.title = "메르스" + i;
+//            sickAdapter.add(d);
+//        }
+//    }
 
 
 }

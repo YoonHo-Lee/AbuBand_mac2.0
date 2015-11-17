@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Tacademy on 2015-11-03.
  */
-public class AlarmAdapter extends BaseAdapter {
+public class AlarmAdapter extends BaseAdapter  {
 
     List<AlarmItemData> alarmItems = new ArrayList<AlarmItemData>();
 

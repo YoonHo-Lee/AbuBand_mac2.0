@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.tacademy.abuband.Baby.AbuBabies;
 import com.example.tacademy.abuband.Band.BandItemData;
+import com.example.tacademy.abuband.SickReport.AbuSickReports;
 import com.example.tacademy.abuband.Temperature.AbuTemps;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -82,6 +83,8 @@ public class NetworkManager {
 
     private static final String BAND_URL = "http://54.65.97.166/users/band";
 
+    private static final String SICKREPORT_SEARCH_URL = "http://54.65.97.166/getRecords";
+
     private static final String TEMPERATURE_URL = "http://54.65.97.166/getTemperature";
     /************* End of U R L ****************/
 
@@ -102,7 +105,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.e("qazwsx", responseString);
+//                Log.e("qazwsx", responseString);
 
                 AbuBabies babies = gson.fromJson(responseString, AbuBabies.class);
                 listener.onSuccess(babies);
@@ -137,7 +140,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.e("qazwsx", responseString);
+//                Log.e("qazwsx", responseString);
 
                 /*************이부분 오류 인듯**************/
 //                AbuBabies babies = gson.toJson(responseString, AbuBabies.class);
@@ -156,7 +159,7 @@ public class NetworkManager {
 // Get Serial
     public void getBandSerial(Context context, String serial, final OnResultListener<BandItemData> listener) {
         final RequestParams params = new RequestParams();
-        Log.e("qazwsx", "serial : " +serial);
+//        Log.e("qazwsx", "serial : " +serial);
         params.put("serial", serial);
 
         client.post(context, BAND_URL, params, new TextHttpResponseHandler() {
@@ -169,7 +172,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.e("qazwsx", responseString);
+//                Log.e("qazwsx", responseString);
 
                 BandItemData bands = gson.fromJson(responseString, BandItemData.class);
                 listener.onSuccess(bands);
@@ -181,6 +184,38 @@ public class NetworkManager {
     //End of Get Serial
 
     /*******************************************END OF BAND PARTS *************************************************/
+
+
+
+    /********************************************SICK REPORT PARTS *************************************************/
+    // Get SickReport
+    public void getSickReport(Context context, String email, final OnResultListener<AbuSickReports> listener) {
+        final RequestParams params = new RequestParams();
+        Log.e("qazwsx", "email : " +email);
+        params.put("email", "test02");
+
+        client.post(context, SICKREPORT_SEARCH_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                Log.e("qazwsx","sickreport success : " + responseString);
+
+                AbuSickReports sickReports = gson.fromJson(responseString, AbuSickReports.class);
+                listener.onSuccess(sickReports);
+            }
+
+        });
+
+    }
+    //End of Get SickReprot
+
+    /*******************************************END OF SICK REPORT PARTS *************************************************/
 
 
 

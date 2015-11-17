@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class SickReportAdapter extends BaseAdapter {
     List<SickReportItemData> sickItems = new ArrayList<>();
+    private String email;
+
     @Override
     public int getCount() {
         return sickItems.size();
@@ -42,5 +44,14 @@ public class SickReportAdapter extends BaseAdapter {
     public void add(SickReportItemData item) {
         sickItems.add(item);
         notifyDataSetChanged();
+    }
+
+    public void clear() {
+        sickItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
