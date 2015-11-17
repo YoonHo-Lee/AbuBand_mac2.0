@@ -49,7 +49,8 @@
 
     <string name="btn_ok">확인</string>
     <string name="btn_cancle">취소</string>
-
+    <string name="alarm_temp">미열알람</string>
+    <string name="alarm_high_temp">고열알람</string>
 
 
 </resources>

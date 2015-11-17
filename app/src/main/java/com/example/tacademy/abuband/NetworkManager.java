@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.tacademy.abuband.Baby.AbuBabies;
+import com.example.tacademy.abuband.Band.BandItemData;
 import com.example.tacademy.abuband.Temperature.AbuTemps;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -79,11 +80,13 @@ public class NetworkManager {
     private static final String BABY_URL = "http://54.65.97.166/babies";
     private static final String BABY_SEARCH_URL = "http://54.65.97.166/getBabies";
 
+    private static final String BAND_URL = "http://54.65.97.166/users/band";
+
     private static final String TEMPERATURE_URL = "http://54.65.97.166/getTemperature";
     /************* End of U R L ****************/
 
 
-    /**************** BABIES PARTS **********************/
+    /******************************************* BABIES PARTS *************************************************/
     // Get Babies
     public void getBabies(Context context, String email, final OnResultListener<AbuBabies> listener) {
         final RequestParams params = new RequestParams();
@@ -99,7 +102,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.i("abuband", responseString);
+                Log.e("qazwsx", responseString);
 
                 AbuBabies babies = gson.fromJson(responseString, AbuBabies.class);
                 listener.onSuccess(babies);
@@ -134,7 +137,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.i("qazwsx", responseString);
+                Log.e("qazwsx", responseString);
 
                 /*************이부분 오류 인듯**************/
 //                AbuBabies babies = gson.toJson(responseString, AbuBabies.class);
@@ -145,13 +148,45 @@ public class NetworkManager {
         });
     }
     //end of Set Babies
-    /****************END OF BABIES PARTS **********************/
+    /*******************************************END OF BABIES PARTS *************************************************/
+
+
+
+    /******************************************* BAND PARTS *************************************************/
+// Get Serial
+    public void getBandSerial(Context context, String serial, final OnResultListener<BandItemData> listener) {
+        final RequestParams params = new RequestParams();
+        Log.e("qazwsx", "serial : " +serial);
+        params.put("serial", serial);
+
+        client.post(context, BAND_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                Log.e("qazwsx", responseString);
+
+                BandItemData bands = gson.fromJson(responseString, BandItemData.class);
+                listener.onSuccess(bands);
+            }
+
+        });
+
+    }
+    //End of Get Serial
+
+    /*******************************************END OF BAND PARTS *************************************************/
 
 
 
 
 
-    /*********************** TEMPERATURE PARTS  *********************************/
+    /************************************************** TEMPERATURE PARTS  ************************************************************/
     //Get Temperature
     public void getTemperature(final Context context, String serial, final OnResultListener<AbuTemps> listener) {
         final RequestParams params = new RequestParams();
@@ -178,7 +213,7 @@ public class NetworkManager {
 
 
 
-    /*********************** End of TEMPERATURE PARTS  *********************************/
+    /************************************************** End of TEMPERATURE PARTS  ************************************************************/
 
 
 

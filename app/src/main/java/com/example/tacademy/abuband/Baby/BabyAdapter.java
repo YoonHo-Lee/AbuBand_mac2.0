@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Tacademy on 2015-11-05.
  */
-public class BabyAdapter extends BaseAdapter {
+public class BabyAdapter extends BaseAdapter  {
     List<BabyItemData> babyItems = new ArrayList<BabyItemData>();
 
     String email;

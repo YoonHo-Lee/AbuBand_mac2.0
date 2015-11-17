@@ -17,18 +17,113 @@
         android:layout_above="@+id/btn_alarmAdd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <Button
         android:id="@+id/btn_alarmAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:textSize="30dp"
+        android:background="@drawable/selector_add_btn"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:text="+"
-        android:textSize="30dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:id="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout3"
+        android:layout_alignLeft="@+id/relativeLayout3"
+        android:layout_alignStart="@+id/relativeLayout3"
+        android:background="@drawable/sick_report_list_bg_r"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/text_alarm_base1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="38.0"
+            android:textSize="30dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ToggleButton
+            android:id="@+id/alarm_toggle_base1"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/text_alarm_base1"
+            android:background="@drawable/selector_alarm_toggle"
+            android:text="New ToggleButton"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm_high_temp"
+            android:id="@+id/textView6"
+            android:textSize="@dimen/base_text_size"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout3"
+        android:background="@drawable/sick_report_list_bg_y"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/text_alarm_base2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="37.5"
+            android:textSize="30dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ToggleButton
+            android:id="@+id/alarm_toggle_base2"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/text_alarm_temp"
+            android:background="@drawable/selector_alarm_toggle"
+            android:text="New ToggleButton"
+            android:textOff=""
+            android:textOn="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm_temp"
+            android:id="@+id/textView5"
+            android:textSize="@dimen/base_text_size"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

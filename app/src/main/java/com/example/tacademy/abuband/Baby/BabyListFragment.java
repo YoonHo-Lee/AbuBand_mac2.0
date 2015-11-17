@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class BabyListFragment extends Fragment {
     ListView babyListView;
     BabyAdapter babyAdapter;
     View rootView;
+    ImageView babyUpdate;
 
     public static final String TAG_BABYLIST_FRAGMENT = "BabyListFragment";
 
@@ -38,6 +40,7 @@ public class BabyListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_baby_list, container, false);
+        babyUpdate = (ImageView) rootView.findViewById(R.id.babyList_update_btn);
         babyListView = (ListView) rootView.findViewById(R.id.list_baby);
         babyAdapter = new BabyAdapter();
 
@@ -59,8 +62,10 @@ public class BabyListFragment extends Fragment {
                 Object object = babyListView.getItemAtPosition(position);
                 BabyItemData data = (BabyItemData) object;
                 Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
+
             }
         });
+
 
         final Button babyAddBtn = (Button) rootView.findViewById(R.id.btn_babyListAdd);
         babyAddBtn.setOnClickListener(new View.OnClickListener() {

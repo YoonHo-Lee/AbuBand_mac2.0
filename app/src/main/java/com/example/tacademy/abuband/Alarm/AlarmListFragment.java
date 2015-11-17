@@ -2,7 +2,6 @@ package com.example.tacademy.abuband.Alarm;
 
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.tacademy.abuband.R;
 
@@ -25,7 +25,7 @@ public class AlarmListFragment extends Fragment {
     AlarmAdapter alarmAdapter;
     View rootView;
     String selectTemp;
-
+    ToggleButton baseToggleButton1, baseToggleButton2, toggleButton;
     public static final String TAG_ALARMTEMP = "alarmTemp";
 
 
@@ -40,6 +40,12 @@ public class AlarmListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_alram_list, container, false);
+
+        toggleButton = (ToggleButton) rootView.findViewById(R.id.alarm_toggle);
+        baseToggleButton1 = (ToggleButton) rootView.findViewById(R.id.alarm_toggle_base1);
+        baseToggleButton2 = (ToggleButton) rootView.findViewById(R.id.alarm_toggle_base2);
+
+
 
         alarmListView = (ListView) rootView.findViewById(R.id.list_alarm);
         alarmAdapter = new AlarmAdapter();

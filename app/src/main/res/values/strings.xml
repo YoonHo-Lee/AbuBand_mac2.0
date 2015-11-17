@@ -147,5 +147,7 @@
 
     <string name="btn_ok">ok</string>
     <string name="btn_cancle">cancle</string>
+    <string name="alarm_temp">Low Fever</string>
+    <string name="alarm_high_temp">High Fever</string>
 
 </resources>

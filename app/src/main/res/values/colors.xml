@@ -8,4 +8,7 @@
 
     <color name="base_item_select">#FAE100</color>
     <color name="base_item_unselect">#FFFFFF</color>
+    
+    <color name="gender_boy">#94D1DF</color>
+    <color name="gender_girl">#DE7A52</color>
 </resources>

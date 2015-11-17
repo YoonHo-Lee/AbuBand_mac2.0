@@ -21,20 +21,33 @@ public class BabyItemView extends RelativeLayout {
     }
 
 
-    ImageView babyList_iconView;
+    ImageView babyList_iconView, babyList_Update;
     TextView babyList_nameView, babyList_birthView, babyList_genderView;
-
     DisplayImageOptions options;
+
+    /************************* 이미지 클릭 리스너 *********************************/
+//    public interface OnImageClickListener {
+//        public void onImageClick(BabyItemView view, BandItemData data);
+//    }
+//
+//    OnImageClickListener mListener;
+//    public void setOnImageClickListener(OnImageClickListener listener) {
+//        mListener = listener;
+//    }
+
+    /************************* End of 이미지 클릭 리스너 *********************************/
 
     private void init() {
 //        inflate(getContext(), R.layout.view_baby_item, this);
-        babyList_iconView = (ImageView) findViewById(R.id.babyList_icon);
-        babyList_nameView = (TextView) findViewById(R.id.babyList_name);
-        babyList_birthView = (TextView) findViewById(R.id.babyList_birth);
-        babyList_genderView = (TextView) findViewById(R.id.babyList_gender);
+//        babyList_iconView = (ImageView) findViewById(R.id.babyList_icon);
+//        babyList_Update = (ImageView) findViewById(R.id.babyList_update_btn);
+//        babyList_nameView = (TextView) findViewById(R.id.babyList_name);
+//        babyList_birthView = (TextView) findViewById(R.id.babyList_birth);
+//        babyList_genderView = (TextView) findViewById(R.id.babyList_gender);
 
         inflate(getContext(), R.layout.view_baby_item, this);
         babyList_iconView = (ImageView)findViewById(R.id.babyList_icon);
+        babyList_Update = (ImageView) findViewById(R.id.babyList_update_btn);
         babyList_nameView = (TextView)findViewById(R.id.babyList_name);
         babyList_birthView = (TextView)findViewById(R.id.babyList_birth);
         babyList_genderView = (TextView)findViewById(R.id.babyList_gender);
@@ -59,12 +72,15 @@ public class BabyItemView extends RelativeLayout {
         switch (data.gender)    {
             case 0:
                 textGender = "남아";
+                babyList_Update.setBackgroundColor(getResources().getColor(R.color.gender_boy));
                 break;
             case 1:
                 textGender = "여아";
+                babyList_Update.setBackgroundColor(getResources().getColor(R.color.gender_girl));
                 break;
         }
         babyList_genderView.setText(textGender);
+
 
 
         ImageLoader.getInstance().displayImage(data.image, babyList_iconView, options);
