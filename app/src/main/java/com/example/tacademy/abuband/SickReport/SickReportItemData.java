@@ -11,4 +11,6 @@ public class SickReportItemData {
     public String date;
     public String title;
     public String memo;
+    public String _id;
+    public String name;
 }

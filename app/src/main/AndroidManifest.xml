@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".Baby.BabyAddActivity" >
         </activity>
+        <activity android:name=".Baby.BabyUpdeleteActivity" >
+        </activity>
         <activity android:name=".SickReport.SickReportAddActivity" >
         </activity>
         <activity android:name=".SickReport.SickReportActivity" >

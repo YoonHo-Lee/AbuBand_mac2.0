@@ -1,6 +1,7 @@
 package com.example.tacademy.abuband.Temperature;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -34,7 +35,7 @@ public class TemperatureFragment extends Fragment {
     ArrayList<String> dateList;
     ArrayList<String> x_axis;
     ArrayList<ArrayList<Integer>> dataLists;
-    TextView textMainMessage;
+    TextView textMainMessage, textMaintempState;
 
     LineView lineView;
 
@@ -51,6 +52,8 @@ public class TemperatureFragment extends Fragment {
         lineView = (LineView)rootView.findViewById(R.id.graph_mainTemp);
 
         textMainMessage = (TextView) rootView.findViewById(R.id.text_mainMessage);
+        textMaintempState = (TextView) rootView.findViewById(R.id.main_tempState);
+
 
         //초기화
         tempList = new ArrayList<Integer>();    //온도 데이터

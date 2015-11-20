@@ -27,6 +27,11 @@ public class BabyListFragment extends Fragment {
     View rootView;
     ImageView babyUpdate;
 
+    public static final String TAG_BABYNAME = "babyName";
+    public static final String TAG_BABYBIRTH = "babyBirth";
+    public static final String TAG_BABYGENDER = "babyGender";
+    public static final String TAG_BABY_FLAG = "baby_flag";
+
     public static final String TAG_BABYLIST_FRAGMENT = "BabyListFragment";
 
 
@@ -56,21 +61,34 @@ public class BabyListFragment extends Fragment {
         searchBabies("test02@naver.com");
 //        initData();
 
+        //아이 선택!!!!!!!!!!
         babyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object object = babyListView.getItemAtPosition(position);
                 BabyItemData data = (BabyItemData) object;
+
                 Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
-
-
             }
         });
 
+
+
+        // 아이 수정 삭제
         babyAdapter.setOnAdapterImageListener(new BabyAdapter.OnAdapterImageListener() {
             @Override
             public void onAdapterImageClick(BabyAdapter adapter, BabyItemView view, BabyItemData data) {
-                Toast.makeText(view.getContext(), "눌림 : "+data.name + data.birth, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), BabyUpdeleteActivity.class);
+                intent.putExtra(TAG_BABYNAME, data.name);
+                intent.putExtra(TAG_BABYBIRTH,data.birth);
+                intent.putExtra(TAG_BABYGENDER,data.gender);
+                intent.putExtra(TAG_BABY_FLAG, 777);
+                startActivity(intent);
+
+
+
+
+                Toast.makeText(view.getContext(), "눌림 : " + data.name + data.birth + data.gender, Toast.LENGTH_SHORT).show();
             }
         });
 

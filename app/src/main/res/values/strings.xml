@@ -3,9 +3,10 @@
     <string name="title_alarm">Alarm</string>
     <string name="title_baby_list">Baby List</string>
     <string name="title_baby_add">Baby Add</string>
+    <string name="title_baby_updelete">Baby Update</string>
     <string name="title_band_serial">Serial Check</string>
     <string name="title_login">Login</string>
-    <string name="title_sign_in">Sign In</string>
+    <string name="title_sign_up">Sign Up</string>
     <string name="title_menual">Menual</string>
     <string name="title_setting">Setting</string>
     <string name="title_sick_repork">Sick Report</string>
@@ -147,6 +148,7 @@
 
     <string name="btn_ok">ok</string>
     <string name="btn_cancle">cancle</string>
+    <string name="btn_update">update</string>
     <string name="alarm_temp">Low Fever</string>
     <string name="alarm_high_temp">High Fever</string>
 

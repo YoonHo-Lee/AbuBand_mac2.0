@@ -3,6 +3,7 @@ package com.example.tacademy.abuband.Baby;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,11 @@ public class BabyAdapter extends BaseAdapter implements BabyItemView.OnImageClic
 
     /**************************************이미지 클릭 리스너*********************************************/
 
-    OnAdapterImageListener mListener;
-
     public interface OnAdapterImageListener {
         public void onAdapterImageClick(BabyAdapter adapter, BabyItemView view, BabyItemData data);
     }
+
+    OnAdapterImageListener mListener;
 
     public void setOnAdapterImageListener(OnAdapterImageListener listener) {
         mListener = listener;
@@ -63,7 +64,7 @@ public class BabyAdapter extends BaseAdapter implements BabyItemView.OnImageClic
         } else {
             babyView = (BabyItemView) convertView;
         }
-//        view.setOnImageClickListener(mImageClickListener);
+        babyView.setOnImageClickListener(this);
         babyView.setItemData(babyItems.get(position));
         return babyView;
     }

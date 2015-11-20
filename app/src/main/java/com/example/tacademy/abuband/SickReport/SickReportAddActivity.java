@@ -25,7 +25,7 @@ public class SickReportAddActivity extends AppCompatActivity {
   ================================================= */
 
     EditText edit_sickTitle, edit_sickMemo;
-    TextView sickAdd_date, sickAdd_maxTemp, sickAdd_title;
+    TextView sickAdd_date, sickAdd_maxTemp, sickAdd_babyName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +36,18 @@ public class SickReportAddActivity extends AppCompatActivity {
 
         sickAdd_date = (TextView) findViewById(R.id.sickAdd_date);
         sickAdd_maxTemp = (TextView) findViewById(R.id.sickAdd_maxTemp);
+        sickAdd_babyName = (TextView) findViewById(R.id.sickAdd_babyName);
         edit_sickTitle = (EditText) findViewById(R.id.edit_sickTitle);
+        edit_sickMemo = (EditText) findViewById(R.id.edit_sickMemo);
 
 
-//        Intent intent = getIntent();
+        Intent intent = getIntent();
 
 
-
-//        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
-//        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
-//
-//        sickAdd_date.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKDATE));
-//        sickAdd_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP)+"");
-//        edit_sickTitle.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
+        sickAdd_date.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_DATE));
+        sickAdd_babyName.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_NAME));
+        edit_sickTitle.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_TITLE));
+        edit_sickMemo.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MEMO));
 
     }
 

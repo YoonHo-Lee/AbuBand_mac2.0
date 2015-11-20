@@ -4,13 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,26 +18,28 @@ import com.example.tacademy.abuband.MainActivity;
 import com.example.tacademy.abuband.NetworkManager;
 import com.example.tacademy.abuband.R;
 
-public class BabyAddActivity extends AppCompatActivity {
+public class BabyUpdeleteActivity extends AppCompatActivity {
 
     EditText babyName, babyBirth, babyGender;
     String babyBirth_num;
     String babyGender_num;
-    BabyAdapter babyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_baby_add);
+        setContentView(R.layout.activity_baby_updelete);
         setTitle(getString(R.string.title_baby_add));
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        babyName = (EditText) findViewById(R.id.edit_babyName);
-        babyBirth = (EditText) findViewById(R.id.edit_babyBirth);
-        babyGender = (EditText) findViewById(R.id.edit_babyGender);
+        babyName = (EditText) findViewById(R.id.edit_babyName2);
+        babyBirth = (EditText) findViewById(R.id.edit_babyBirth2);
+        babyGender = (EditText) findViewById(R.id.edit_babyGender2);
 
 
 
         /***************** 생년월일 설정 *******************/
+        int y,m,d;
         babyBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +55,7 @@ public class BabyAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectPosition = 0;
                 final String[] gender = {"남아", "여아"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(BabyAddActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(BabyUpdeleteActivity.this);
                 builder.setTitle("성별");
                 builder.setSingleChoiceItems(gender, selectPosition, new DialogInterface.OnClickListener() {
                     @Override
@@ -76,8 +75,8 @@ public class BabyAddActivity extends AppCompatActivity {
         });
 
 
-        /***************** 아이 추가 *******************/
-        Button btn = (Button) findViewById(R.id.btn_babyAdd);
+        /***************** 아이 수정 *******************/
+        Button btn = (Button) findViewById(R.id.btn_babyUpdate);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,29 +84,29 @@ public class BabyAddActivity extends AppCompatActivity {
                     //editText의 내용을 네트워크 쪽으로 보내기
                     addBaby(babyName.getText().toString(), babyBirth_num, babyGender_num);
 
-                    Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
+                    Intent intent = new Intent(BabyUpdeleteActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(BabyAddActivity.this, babyName.getText().toString() + babyBirth.getText().toString() + babyGender.getText().toString() + "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BabyUpdeleteActivity.this, babyName.getText().toString() + babyBirth.getText().toString() + babyGender.getText().toString() + "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     /*****************
-     * 아이추가 네트워크 불러오기
+     * 아이수정 네트워크 불러오기
      *******************/
     private void addBaby(final String name, final String birth, final String gender) {
-        NetworkManager.getInstance().setNetworkBabyAdd(BabyAddActivity.this, name, birth, gender, new NetworkManager.OnResultListener<String>() {
+        NetworkManager.getInstance().setNetworkBabyAdd(BabyUpdeleteActivity.this, name, birth, gender, new NetworkManager.OnResultListener<String>() {
             @Override
             public void onSuccess(String result) {
-                Toast.makeText(BabyAddActivity.this, name + birth + gender + "등록", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BabyUpdeleteActivity.this, name + birth + gender + "등록", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFail(int code) {
-                Toast.makeText(BabyAddActivity.this, "error : " + code, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BabyUpdeleteActivity.this, "error : " + code, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -118,7 +117,7 @@ public class BabyAddActivity extends AppCompatActivity {
     /*커스텀 다이얼로그 불러오기*/
     /*년도 최대값을 올해로 설정하게, 캘린더로 현재 연도 가져오기.*/
     public void birthDialog() {
-        final Dialog d = new Dialog(BabyAddActivity.this);
+        final Dialog d = new Dialog(BabyUpdeleteActivity.this);
         d.setTitle("생년월일");
         d.setContentView(R.layout.dialog_baby_add_birth);
 //                아마도 가로세로 크기 지정???????????????????????????????????
@@ -169,5 +168,11 @@ public class BabyAddActivity extends AppCompatActivity {
         });
 
         d.show();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

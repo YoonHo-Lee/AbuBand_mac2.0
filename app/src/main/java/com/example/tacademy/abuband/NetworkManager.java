@@ -78,6 +78,8 @@ public class NetworkManager {
 
 
     /************* U R L ****************/
+    private static final String SIGN_UP_URL = "http://54.65.97.166/users/join";
+
     private static final String BABY_URL = "http://54.65.97.166/babies";
     private static final String BABY_SEARCH_URL = "http://54.65.97.166/getBabies";
 
@@ -88,6 +90,33 @@ public class NetworkManager {
     private static final String TEMPERATURE_URL = "http://54.65.97.166/getTemperature";
     /************* End of U R L ****************/
 
+
+    /******************************************* MEMBER PARTS *************************************************/
+    //  Sign Up
+    public void setSignUp(Context context, String email, String pw, final OnResultListener<String> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("email", email);
+        params.put("pw", pw);
+
+
+        client.put(context, SIGN_UP_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                String json = gson.toJson(responseString);
+                listener.onSuccess(json);
+            }
+
+        });
+    }
+    //end of Sign Up
+    /******************************************* END OF MEMBER PARTS *************************************************/
 
     /******************************************* BABIES PARTS *************************************************/
     // Get Babies
@@ -192,7 +221,7 @@ public class NetworkManager {
     public void getSickReport(Context context, String email, final OnResultListener<AbuSickReports> listener) {
         final RequestParams params = new RequestParams();
         Log.e("qazwsx", "email : " +email);
-        params.put("email", "test02");
+        params.put("email", "test02@naver.com");
 
         client.post(context, SICKREPORT_SEARCH_URL, params, new TextHttpResponseHandler() {
             @Override

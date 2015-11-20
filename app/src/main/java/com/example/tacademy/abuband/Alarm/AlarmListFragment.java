@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ import com.example.tacademy.abuband.R;
  */
 public class AlarmListFragment extends Fragment {
 
+    Dialog d;
     ListView alarmListView;
     AlarmAdapter alarmAdapter;
     View rootView;
@@ -123,9 +125,15 @@ public class AlarmListFragment extends Fragment {
 
     String selectTemp1, selectTemp2;
     public void alarmUpdateDialog()    {
-        final Dialog d = new Dialog(rootView.getContext());
+        d = new Dialog(rootView.getContext());
         d.setTitle("온도알람 수정");
         d.setContentView(R.layout.dialog_alarm_add);
+
+//        WindowManager.LayoutParams params = d.getWindow().getAttributes();
+//        params.width = R.dimen.alarmlist_add_dialog_width;
+//        params.height = R.dimen.alarmlist_add_dialog_height;
+//        d.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+
 
         final NumberPicker npT1, npT2;
 

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,7 @@ import com.example.tacademy.abuband.R;
 
 public class SickReportActivity extends AppCompatActivity {
 
-    TextView sick_date, sick_maxTemp,  sick_title, sick_memo;
+    TextView sick_date, sick_maxTemp,  sick_title, sick_memo, sick_babyName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,16 @@ public class SickReportActivity extends AppCompatActivity {
 
         sick_date = (TextView) findViewById(R.id.sickreport_date);
         sick_maxTemp = (TextView) findViewById(R.id.sickreport_maxTemp);
+        sick_babyName = (TextView) findViewById(R.id.sickreport_babyName);
         sick_title = (TextView) findViewById(R.id.text_sickTitle);
         sick_memo = (TextView) findViewById(R.id.text_sickMemo);
 
-
         Intent intent = getIntent();
+        sick_date.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_DATE).substring(0,10));
+        sick_maxTemp.setText("40");
+        sick_babyName.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_NAME));
+        sick_title.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_TITLE));
+        sick_memo.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MEMO));
 
 //        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
 //        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
@@ -83,6 +89,10 @@ public class SickReportActivity extends AppCompatActivity {
             case R.id.menu_sickreport_update:
                 Toast.makeText(this, "수정 코드 작성", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SickReportActivity.this, SickReportAddActivity.class);
+                intent.putExtra(SickReportListFragment.TAG_SR_DATE,sick_date.getText().toString());
+                intent.putExtra(SickReportListFragment.TAG_SR_NAME,sick_babyName.getText().toString());
+                intent.putExtra(SickReportListFragment.TAG_SR_TITLE,sick_title.getText().toString());
+                intent.putExtra(SickReportListFragment.TAG_SR_MEMO, sick_memo.getText().toString());
                 startActivity(intent);
                 return true;
         }

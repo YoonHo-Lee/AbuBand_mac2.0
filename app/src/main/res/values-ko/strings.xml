@@ -5,9 +5,10 @@
     <string name="title_alarm">알람</string>
     <string name="title_baby_list">아이목록</string>
     <string name="title_baby_add">아이등록</string>
+    <string name="title_baby_updelete">아이수정</string>
     <string name="title_band_serial">밴드 시리얼</string>
     <string name="title_login">로그인</string>
-    <string name="title_sign_in">회원가입</string>
+    <string name="title_sign_up">회원가입</string>
     <string name="title_menual">사용방법</string>
     <string name="title_setting">설정</string>
     <string name="title_sick_repork">아픔일지</string>
@@ -49,6 +50,7 @@
 
     <string name="btn_ok">확인</string>
     <string name="btn_cancle">취소</string>
+    <string name="btn_update">수정</string>
     <string name="alarm_temp">미열알람</string>
     <string name="alarm_high_temp">고열알람</string>
 

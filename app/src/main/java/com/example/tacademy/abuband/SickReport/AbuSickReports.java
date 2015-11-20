@@ -7,5 +7,5 @@ import java.util.ArrayList;
  */
 public class AbuSickReports {
     int code;
-    ArrayList<SickReportItemData> result;
+    ArrayList<SickReportResult> result;
 }

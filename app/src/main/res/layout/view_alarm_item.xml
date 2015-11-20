@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/selector_list_item">
+    android:background="@drawable/selector_list_item"
+    android:focusable="false">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="10dp"
             android:text="50.0"
-            android:textSize="40dp" />
+            android:textSize="30dp" />
 
         <ToggleButton
             android:id="@+id/alarm_toggle"
@@ -33,7 +34,8 @@
             android:background="@drawable/selector_alarm_toggle"
             android:text="New ToggleButton"
             android:textOff=""
-            android:textOn="" />
+            android:textOn=""
+            android:focusable="false" />
     </RelativeLayout>
 
 </RelativeLayout>

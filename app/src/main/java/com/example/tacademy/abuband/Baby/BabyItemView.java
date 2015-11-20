@@ -1,10 +1,12 @@
 package com.example.tacademy.abuband.Baby;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tacademy.abuband.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -16,8 +18,11 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
  * Created by Tacademy on 2015-11-05.
  */
 public class BabyItemView extends RelativeLayout {
+    private final Context mContext;
+
     public BabyItemView(Context context) {
         super(context);
+        mContext = context;
         init();
     }
 
@@ -66,6 +71,7 @@ public class BabyItemView extends RelativeLayout {
         babyList_Update.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (mListener != null) {
                     mListener.onImageClick(BabyItemView.this, mData);
                 }
@@ -75,7 +81,7 @@ public class BabyItemView extends RelativeLayout {
     }
 
     public void setItemData(BabyItemData data)  {
-
+        mData = data;
         babyList_nameView.setText(data.name);
         babyList_birthView.setText(data.birth+"");
 
