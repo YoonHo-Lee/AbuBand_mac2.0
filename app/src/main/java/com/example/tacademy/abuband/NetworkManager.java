@@ -145,19 +145,16 @@ public class NetworkManager {
     }
     //End of Get Babies
 
+
     //  Add Babies
-    public void setNetworkBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<String> listener) {
+    //TODO : 아이 추가
+    public void setBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<String> listener) {
         final RequestParams params = new RequestParams();
         params.put("email", "test02@naver.com");
         params.put("name", name);
         params.put("birth", Integer.parseInt(birth));
         params.put("gender", Integer.parseInt(gender));
 
-/*        params.put("email", "test02@naver.com");
-        params.put("name", "하이");
-        params.put("birth", 20151116);
-        params.put("gender", 0);*/
-//        params.put("image", "test02");
 
         client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
             @Override
@@ -180,8 +177,65 @@ public class NetworkManager {
         });
     }
     //end of Set Babies
-    /*******************************************END OF BABIES PARTS *************************************************/
 
+    //TODO : 아이 수정
+    /*******************************************END OF BABIES PARTS *************************************************/
+    public void setBabyUpdate(Context context, String _id, String name, String birth, String gender, final OnResultListener<String> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("_id", _id);
+        params.put("email", "test02@naver.com");
+        params.put("name", name);
+        params.put("birth", Integer.parseInt(birth));
+        params.put("gender", Integer.parseInt(gender));
+
+
+        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+//                Log.e("qazwsx", responseString);
+
+                /*************이부분 오류 인듯**************/
+//                AbuBabies babies = gson.toJson(responseString, AbuBabies.class);
+                String json = gson.toJson(responseString);
+                listener.onSuccess(json);
+            }
+
+        });
+    }
+
+    //TODO : 아이 삭제
+    /*******************************************END OF BABIES PARTS *************************************************/
+    public void setBabyDelete(Context context, String _id, final OnResultListener<String> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("_id", _id);
+
+        client.put(context, BABY_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+//                Log.e("qazwsx", responseString);
+
+                /*************이부분 오류 인듯**************/
+//                AbuBabies babies = gson.toJson(responseString, AbuBabies.class);
+                String json = gson.toJson(responseString);
+                listener.onSuccess(json);
+            }
+
+        });
+    }
 
 
     /******************************************* BAND PARTS *************************************************/

@@ -78,6 +78,4 @@ public class BabyAdapter extends BaseAdapter implements BabyItemView.OnImageClic
         babyItems.clear();
         notifyDataSetChanged();
     }
-
-
 }

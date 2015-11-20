@@ -27,10 +27,10 @@ public class BabyListFragment extends Fragment {
     View rootView;
     ImageView babyUpdate;
 
+    public static final String TAG__ID = "_id";
     public static final String TAG_BABYNAME = "babyName";
     public static final String TAG_BABYBIRTH = "babyBirth";
     public static final String TAG_BABYGENDER = "babyGender";
-    public static final String TAG_BABY_FLAG = "baby_flag";
 
     public static final String TAG_BABYLIST_FRAGMENT = "BabyListFragment";
 
@@ -79,16 +79,16 @@ public class BabyListFragment extends Fragment {
             @Override
             public void onAdapterImageClick(BabyAdapter adapter, BabyItemView view, BabyItemData data) {
                 Intent intent = new Intent(view.getContext(), BabyUpdeleteActivity.class);
+                intent.putExtra(TAG__ID,data._id);
                 intent.putExtra(TAG_BABYNAME, data.name);
-                intent.putExtra(TAG_BABYBIRTH,data.birth);
-                intent.putExtra(TAG_BABYGENDER,data.gender);
-                intent.putExtra(TAG_BABY_FLAG, 777);
+                intent.putExtra(TAG_BABYBIRTH,data.birth+"");
+                intent.putExtra(TAG_BABYGENDER,data.gender+"");
                 startActivity(intent);
 
 
 
 
-                Toast.makeText(view.getContext(), "눌림 : " + data.name + data.birth + data.gender, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "눌림 : " + data._id + data.name + data.birth + data.gender, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -129,7 +129,16 @@ public class BabyListFragment extends Fragment {
             babyAdapter.setEmail(email);
         }
     }
+
+
     /************* End of Network **************************/
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(rootView.getContext(), "RESUME...!!!!", Toast.LENGTH_SHORT).show();
+    }
 
 
     @Override

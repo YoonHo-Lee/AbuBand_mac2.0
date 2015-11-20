@@ -4,13 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,7 +95,7 @@ public class BabyAddActivity extends AppCompatActivity {
      * 아이추가 네트워크 불러오기
      *******************/
     private void addBaby(final String name, final String birth, final String gender) {
-        NetworkManager.getInstance().setNetworkBabyAdd(BabyAddActivity.this, name, birth, gender, new NetworkManager.OnResultListener<String>() {
+        NetworkManager.getInstance().setBabyAdd(BabyAddActivity.this, name, birth, gender, new NetworkManager.OnResultListener<String>() {
             @Override
             public void onSuccess(String result) {
                 Toast.makeText(BabyAddActivity.this, name + birth + gender + "등록", Toast.LENGTH_SHORT).show();
