@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.tacademy.abuband.Band.BandAddActivity"
+    tools:context="com.dnabuba.tacademy.abuband.Band.BandAddActivity"
     android:background="@drawable/band_add_bg">
 
 
@@ -17,7 +17,7 @@
         android:id="@+id/image_serialCheck"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/check_true"
         android:visibility="invisible"
         android:layout_above="@+id/bandTIL"
@@ -30,7 +30,7 @@
         android:layout_above="@+id/btn_serialSend"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="45dp">
+        android:layout_marginBottom="30dp">
 
         <EditText
             android:id="@+id/edit_bandSerial"
@@ -50,7 +50,7 @@
         android:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp" />
+        android:layout_marginBottom="100dp" />
 
     <Button
         android:id="@+id/btn_serialAdd"

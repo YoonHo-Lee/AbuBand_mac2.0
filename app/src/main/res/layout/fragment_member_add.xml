@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.tacademy.abuband.Member.MemberAddFragment">
+    tools:context="com.dnabuba.tacademy.abuband.Member.MemberAddFragment">
 
 
     <RelativeLayout
@@ -24,7 +24,6 @@
         android:paddingLeft="5dp"
         android:paddingRight="10dp"
         android:paddingTop="130dp">
-        <!-- TODO: Update blank fragment layout -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/memberAdd_view1"
             android:layout_width="match_parent"

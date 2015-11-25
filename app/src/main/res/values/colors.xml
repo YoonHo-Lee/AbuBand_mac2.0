@@ -2,8 +2,8 @@
 <resources>
 <!--    <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>-->
-    <color name="colorPrimary">#4b5158</color>
-    <color name="colorPrimaryDark">#313538</color>
+    <color name="titlebar">#44c57b</color>
+    <color name="statusbar">#313538</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="base_item_select">#FAE100</color>
@@ -11,4 +11,15 @@
     
     <color name="gender_boy">#94D1DF</color>
     <color name="gender_girl">#DE7A52</color>
+
+    <color name="divider">#00000000</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="select">#4b5158</color>
+
+    <color name="temp_normal">#44c57b</color>
+    <color name="temp_high">#f2542f</color>
+    <color name="temp_mild">#1ac6e2</color>
+    <color name="temp_low">#ffb600</color>
 </resources>

@@ -21,4 +21,7 @@
 
     <dimen name="alarmlist_add_dialog_width">50dp</dimen>
     <dimen name="alarmlist_add_dialog_height">50dp</dimen>
+
+    <dimen name="dividerHeight">5dp</dimen>
+    <dimen name="cardCornerRadius">10dp</dimen>
 </resources>

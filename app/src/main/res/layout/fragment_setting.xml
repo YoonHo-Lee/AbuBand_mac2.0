@@ -5,78 +5,149 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context="com.example.tacademy.abuband.Setting.SettingFragment"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    tools:context="com.dnabuba.tacademy.abuband.Setting.SettingFragment">
 
 
-    <Button
-        android:id="@+id/btn_Setting_version"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingAppVersion" />
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
 
-    <Button
-        android:id="@+id/btn_Setting_Band"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingBandChange" />
+        <Button
+            android:id="@+id/btn_Setting_version"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingAppVersion"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
 
-    <Button
-        android:id="@+id/btn_Setting_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingAccount" />
 
-    <Button
-        android:id="@+id/btn_Setting_terms"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingTerms" />
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
 
-    <Button
-        android:id="@+id/btn_Setting_tempUnit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingTempUnit" />
+        <Button
+            android:id="@+id/btn_Setting_Band"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingBandChange"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
 
-<!--    <Button
-        android:id="@+id/btn_Setting_sickReportBackUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settinfSickReportBackUp" />-->
 
-    <Button
-        android:id="@+id/btn_Setting_menual"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingMenual" />
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
 
-    <Button
-        android:id="@+id/btn_Setting_help"
+        <Button
+            android:id="@+id/btn_Setting_account"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingAccount"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="left"
-        android:textSize="20sp"
-        android:text="@string/settingHelp" />
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
+
+        <Button
+            android:id="@+id/btn_Setting_terms"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingTerms"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
+
+        <Button
+            android:id="@+id/btn_Setting_tempUnit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingTempUnit"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
+
+    <!--    <Button
+            android:id="@+id/btn_Setting_sickReportBackUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="left"
+            android:textSize="20sp"
+            android:text="@string/settinfSickReportBackUp" />-->
+
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
+
+        <Button
+            android:id="@+id/btn_Setting_menual"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingMenual"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
+
+        <Button
+            android:id="@+id/btn_Setting_help"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/settingHelp"
+            android:textSize="@dimen/base_text_size" />
+    </android.support.v7.widget.CardView>
 </LinearLayout>

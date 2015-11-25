@@ -54,5 +54,6 @@
     <string name="alarm_temp">미열알람</string>
     <string name="alarm_high_temp">고열알람</string>
 
+    <string name="account_logout">로그아웃</string>
 
 </resources>

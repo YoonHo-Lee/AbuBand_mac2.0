@@ -1,4 +1,4 @@
-package com.example.tacademy.abuband;
+package com.dnabuba.tacademy.abuband;
 
 import org.junit.Test;
 

@@ -4,67 +4,78 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/babyList_itemView"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/selector_babylist_item_unselect"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp">
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
 
-        <ImageView
-            android:id="@+id/babyList_icon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+        <RelativeLayout
+            android:id="@+id/babyList_itemView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginRight="10dp" />
+            android:background="@drawable/selector_babylist_item_unselect"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
-        <TextView
-            android:id="@+id/babyList_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/babyList_icon"
-            android:layout_toRightOf="@+id/babyList_icon"
-            android:text="안드로"
-            android:textSize="30sp" />
+            <ImageView
+                android:id="@+id/babyList_icon"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/babyList_birth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/babyList_icon"
-            android:layout_toEndOf="@+id/babyList_icon"
-            android:layout_toRightOf="@+id/babyList_icon"
-            android:text="2015년 11월 5일생"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/babyList_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/babyList_icon"
+                android:layout_toRightOf="@+id/babyList_icon"
+                android:text="안드로"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/babyList_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="남아"
-            android:textSize="20sp"
-            android:layout_marginLeft="15dp"
-            android:layout_alignTop="@+id/babyList_birth"
-            android:layout_toRightOf="@+id/babyList_birth"
-            android:layout_toEndOf="@+id/babyList_birth" />
+            <TextView
+                android:id="@+id/babyList_birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/babyList_icon"
+                android:layout_toEndOf="@+id/babyList_icon"
+                android:layout_toRightOf="@+id/babyList_icon"
+                android:text="2015년 11월 5일생"
+                android:textSize="20sp" />
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="75dp"
-            android:id="@+id/babyList_update_btn"
-            android:background="@color/gender_boy"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/babyList_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/babyList_birth"
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@+id/babyList_birth"
+                android:layout_toRightOf="@+id/babyList_birth"
+                android:text="남아"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/babyList_update_btn"
+                android:layout_width="40dp"
+                android:layout_height="75dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/gender_boy" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>

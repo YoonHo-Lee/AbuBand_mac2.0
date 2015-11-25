@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tacademy.abuband.Baby.BabyListFragment"
+    tools:context="com.dnabuba.tacademy.abuband.Baby.BabyListFragment"
     android:background="#eeeeee">
 
-    <!-- TODO: Update blank fragment layout -->
 
 
 
@@ -17,6 +16,9 @@
         android:layout_above="@+id/btn_alarmAdd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:dividerHeight="@dimen/dividerHeight"
+        android:divider="@color/divider"/>
 
 </LinearLayout>

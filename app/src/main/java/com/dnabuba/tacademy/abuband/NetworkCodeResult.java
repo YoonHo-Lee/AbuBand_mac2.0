@@ -6,4 +6,5 @@ package com.dnabuba.tacademy.abuband;
 public class NetworkCodeResult {
     public int code;
     public String result;
+    public String selected;
 }

@@ -545,7 +545,7 @@ public class LineView extends View {
         Dot setTargetData(int targetX,int targetY,float data,int linenumber){
             this.targetX = targetX;
             this.targetY = targetY;
-            this.data = (data / 10f) + 35f;
+            this.data = (data / 10f) + 35f; //팝업에 원래 수치 만들기
             this.linenumber = linenumber;
             return this;
         }

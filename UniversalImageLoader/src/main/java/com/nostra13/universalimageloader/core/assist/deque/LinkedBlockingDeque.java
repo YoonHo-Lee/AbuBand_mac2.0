@@ -803,7 +803,7 @@ public class LinkedBlockingDeque<E>
     }
 
     /*
-     * TODO: Add support for more efficient bulk operations.
+     *  Add support for more efficient bulk operations.
      *
      * We don't want to acquire the lock for every iteration, but we
      * also want other threads a chance to interact with the

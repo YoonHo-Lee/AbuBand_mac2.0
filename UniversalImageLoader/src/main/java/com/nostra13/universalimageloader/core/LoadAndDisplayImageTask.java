@@ -297,7 +297,7 @@ final class LoadAndDisplayImageTask implements Runnable, IoUtils.CopyListener {
 				int height = configuration.maxImageHeightForDiscCache;
 				if (width > 0 || height > 0) {
 					log(LOG_RESIZE_CACHED_IMAGE_FILE);
-					loaded = resizeAndSaveImage(targetFile, width, height); // TODO : process boolean result
+					loaded = resizeAndSaveImage(targetFile, width, height); //  process boolean result
 				}
 
 				configuration.discCache.put(uri, targetFile);
