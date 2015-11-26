@@ -57,7 +57,7 @@ public class MemberAddFragment extends Fragment {
         NetworkManager.getInstance().setSignUp(getContext(), email, password, new NetworkManager.OnResultListener<NetworkCodeResult>() {
             @Override
             public void onSuccess(NetworkCodeResult result) {
-                Log.e("qazwsx","sighUp OK: " + result.code +" / "+result.result);
+                Log.e("MemberAddFragment","sighUp OK: " + result.code +" / "+result.result);
                 switch (result.code)    {
                     case 1: // 성공
                         Intent intent = new Intent(getContext(), MemberActivity.class);
@@ -72,7 +72,7 @@ public class MemberAddFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Log.e("qazwsx","sighUp fail: " + code);
+                Log.e("MemberAddFragment","sighUp fail: " + code);
             }
         });
     }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
@@ -70,7 +71,10 @@ public class BabyListFragment extends Fragment {
                 Object object = babyListView.getItemAtPosition(position);
                 BabyItemData data = (BabyItemData) object;
 
-                Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
+                setBaby(data._id);
+
+                Toast.makeText(view.getContext(), data._id, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -127,7 +131,26 @@ public class BabyListFragment extends Fragment {
                 Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+
+    //아이선택
+    private void setBaby(final String baby_id) {
+        NetworkManager.getInstance().setBabySelete(getContext(), baby_id, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+            @Override
+            public void onSuccess(NetworkCodeResult result) {
+                Log.e("BabyListFragment", "setBaby Success"+result.code);
+                if(result.code == 1) {
+                    PropertyManager.getInstance().setPrefBaby(baby_id);
+                    searchBabies();
+                }
+            }
+
+            @Override
+            public void onFail(int code) {
+                Log.e("BabyListFragment", "setBaby Fail");
+            }
+        });
     }
 
 
@@ -149,4 +172,6 @@ public class BabyListFragment extends Fragment {
         super.onDestroy();
         NetworkManager.getInstance().cancelAll(getContext());
     }
+
+
 }

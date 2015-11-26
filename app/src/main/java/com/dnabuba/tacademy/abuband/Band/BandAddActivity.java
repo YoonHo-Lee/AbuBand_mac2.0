@@ -79,17 +79,17 @@ public class BandAddActivity extends AppCompatActivity {
             public void onSuccess(NetworkCodeResult result) {
                 switch (result.code)    {
                     case 1:
-                        Log.e("qazwsx","시리얼 등록 성공!");
+                        Log.e("BandAddActivity","시리얼 등록 성공!");
                         break;
                     case 3:
-                        Log.e("qazwsx","시리얼 등록 성공?" + result.result);
+                        Log.e("BandAddActivity","시리얼 등록 성공?" + result.result);
                         break;
                 }
             }
 
             @Override
             public void onFail(int code) {
-                Log.e("qazwsx","시리얼 등록 실패" + code);
+                Log.e("BandAddActivity","시리얼 등록 실패" + code);
             }
         });
     }

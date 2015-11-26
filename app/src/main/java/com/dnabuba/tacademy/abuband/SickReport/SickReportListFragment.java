@@ -26,6 +26,7 @@ public class SickReportListFragment extends Fragment {
     ListView sickListView;
     SickReportAdapter sickAdapter;
 
+    public static final String TAG_SR__ID = "_id";
     public static final String TAG_SR_DATE = "date";
     public static final String TAG_SR_NAME = "name";
     public static final String TAG_SR_TITLE = "title";
@@ -62,6 +63,7 @@ public class SickReportListFragment extends Fragment {
                 intent.putExtra(TAG_SR_NAME, data.name);
                 intent.putExtra(TAG_SR_TITLE, data.title);
                 intent.putExtra(TAG_SR_MEMO, data.memo);
+                intent.putExtra(TAG_SR__ID, data._id);
 //                intent.putExtra("arr", data.tempGraph);
 
                 startActivity(intent);
@@ -82,6 +84,7 @@ public class SickReportListFragment extends Fragment {
 
             @Override
             public void onSuccess(AbuSickReports sickRoports) {
+                Log.e("sickReport", "onSuccess");
                 sickAdapter.clear();
                 for (SickReportItemData item : sickRoports.result) {
                     sickAdapter.add(item);

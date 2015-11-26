@@ -67,7 +67,7 @@
 
             <ImageView
                 android:id="@+id/babyList_update_btn"
-                android:layout_width="40dp"
+                android:layout_width="30dp"
                 android:layout_height="75dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"

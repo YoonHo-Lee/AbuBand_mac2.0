@@ -6,11 +6,11 @@
     <color name="statusbar">#313538</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="base_item_select">#FAE100</color>
+    <color name="base_item_select">#44c57b</color>
     <color name="base_item_unselect">#FFFFFF</color>
     
-    <color name="gender_boy">#94D1DF</color>
-    <color name="gender_girl">#DE7A52</color>
+    <color name="gender_boy">#1ac6e2</color>
+    <color name="gender_girl">#f2542f</color>
 
     <color name="divider">#00000000</color>
 

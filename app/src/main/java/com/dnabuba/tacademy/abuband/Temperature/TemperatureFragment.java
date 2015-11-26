@@ -3,6 +3,7 @@ package com.dnabuba.tacademy.abuband.Temperature;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,35 +123,60 @@ public class TemperatureFragment extends Fragment {
 
             @Override
             public void onSuccess(AbuTemps result) {
-                for (TemperatureItemData item : result.result) {
-                    lastTemp = item.temp;
-                    textMainTempNumber.setText(lastTemp+""); // 최신(마지막)온도를 출력
-                    tempList.add((int) ((item.temp - 35) * 10)); //36.5 => 36.5 - 35 => 1.5 * 10 => 15 거지같은 정수 그래프라 이따구로함.
-                    dateList.add(item.date.substring(11, 19)); // '년월일T시분초밀리'로된 데이터에서 시분초만 추출
-                }
+                switch (result.code)    {
+                    case 1:
+//                        Log.e("qazwsx", "템프성공1번"+ result.code + result.result);
+                        for (TemperatureItemData item : result.result) {
+                            lastTemp = item.temp;
+                            textMainTempNumber.setText(lastTemp+""); // 최신(마지막)온도를 출력
+                            tempList.add((int) ((item.temp - 35) * 10)); //36.5 => 36.5 - 35 => 1.5 * 10 => 15 거지같은 정수 그래프라 이따구로함.
+                            dateList.add(item.date.substring(11, 19)); // '년월일T시분초밀리'로된 데이터에서 시분초만 추출
+                        }
 
-                //온도 데이터 테스트
+                        //온도 데이터 테스트
 //                    for (int i : tempList) {
 //                        sb.append(i + " / ");
 //                    }
 
-                //시간 데이터 테스트
-                for (String s : dateList) {
-                    sb.append(s + " / ");
-                }
+                        //시간 데이터 테스트
+                        for (String s : dateList) {
+                            sb.append(s + " / ");
+                        }
 
 
-                textMainMessage.setText(sb);
+                        textMainMessage.setText(sb);
 //                    Toast.makeText(getContext(), serial + "성공...!!!", Toast.LENGTH_SHORT).show();
 
-                //그래프를 그려주는 dataLists를 생성하고, 온도데이터가 있는 tempList를 넣어준다.
-                dataLists = new ArrayList<ArrayList<Integer>>();
-                dataLists.add(tempList);
+                        //그래프를 그려주는 dataLists를 생성하고, 온도데이터가 있는 tempList를 넣어준다.
+                        dataLists = new ArrayList<ArrayList<Integer>>();
+                        dataLists.add(tempList);
 
-                //x축에 표시될 내용
-                lineView.setBottomTextList(dateList);
-                //그래프 데이터를 그래프에 출력
-                lineView.setDataList(dataLists);
+                        //x축에 표시될 내용
+                        lineView.setBottomTextList(dateList);
+                        //그래프 데이터를 그래프에 출력
+                        lineView.setDataList(dataLists);
+                        break;
+                    case 3:
+//                        Log.e("qazwsx", "템프성공3"+ result.code + result.result);
+                        textMainTempNumber.setText("--");
+
+                        //디자인을 위해 넣는 더미 데이터
+                        for(int i = 0; i<8; i++)    {
+                            tempList.add(15);
+                            dateList.add("-");
+                        }
+
+                        //그래프를 그려주는 dataLists를 생성하고, 온도데이터가 있는 tempList를 넣어준다.
+                        dataLists = new ArrayList<ArrayList<Integer>>();
+                        dataLists.add(tempList);
+                        //x축에 표시될 내용
+                        lineView.setBottomTextList(dateList);
+                        //그래프 데이터를 그래프에 출력
+                        lineView.setDataList(dataLists);
+
+                        break;
+                }
+
 
             }
 

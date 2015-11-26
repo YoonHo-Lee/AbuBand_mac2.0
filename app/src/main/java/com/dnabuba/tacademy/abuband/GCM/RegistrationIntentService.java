@@ -51,7 +51,7 @@ public class RegistrationIntentService extends IntentService {
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             PropertyManager.getInstance().setRegistrationToken(token);
             // Subscribe to topic channels
-            Log.e("qazwsx", token);
+            Log.e("토큰RIService", token);
             subscribeTopics(token);
         } catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);

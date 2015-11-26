@@ -6,17 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dnabuba.tacademy.abuband.NetworkCodeResult;
+import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.R;
 
 public class SickReportActivity extends AppCompatActivity {
 
     TextView sick_date, sick_maxTemp,  sick_title, sick_memo, sick_babyName;
+    String _id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class SickReportActivity extends AppCompatActivity {
         sick_babyName.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_NAME));
         sick_title.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_TITLE));
         sick_memo.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MEMO));
+        _id = intent.getStringExtra(SickReportListFragment.TAG_SR__ID);
+
 
 //        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
 //        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
@@ -72,6 +78,7 @@ public class SickReportActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //아픔일지 삭제
+                                sickReportDelete(_id);
                             }
                         })
                         .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -96,6 +103,24 @@ public class SickReportActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sickReportDelete(String _id) {
+        if (!TextUtils.isEmpty(_id)) {
+            NetworkManager.getInstance().setSickReportDelete(this, _id, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+                @Override
+                public void onSuccess(NetworkCodeResult result) {
+                    finish();
+                }
+
+                @Override
+                public void onFail(int code) {
+
+                }
+            });
+        }else {
+            Toast.makeText(SickReportActivity.this, "네트워크 오류 입니다.\n다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

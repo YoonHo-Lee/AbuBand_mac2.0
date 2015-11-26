@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ff0000"
     tools:context="com.dnabuba.tacademy.abuband.IntroActivity">
 
     <ImageView
@@ -12,12 +13,5 @@
         android:src="@drawable/abuband_intro"
         android:scaleType="fitXY" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/skipbtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

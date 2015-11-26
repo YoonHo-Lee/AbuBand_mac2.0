@@ -267,14 +267,13 @@ public class NetworkManager {
     public void setBabyDelete(Context context, String _id, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
         params.put("_id", _id);// server의 body가 아니라 request param에 들어간다.
-        Log.e("qazwsx", "Log : " + _id);
 
         Header[] header = null;
 
         client.delete(context, BABY_URL, header, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("qazwsx", "삭제 실패" + responseString);
+                Log.e("NetworkManager", "아이 삭제 실패" + responseString);
 
                 listener.onFail(statusCode);
             }
@@ -282,7 +281,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.e("qazwsx", "삭제 성공" + responseString);
+                Log.e("NetworkManager", "아이 삭제 성공" + responseString);
 
                 NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
                 listener.onSuccess(codeResult);
@@ -347,7 +346,7 @@ public class NetworkManager {
     }
 
 
-    //TODO : 시리얼 등록 @@@
+    //TODO : 시리얼 등록
     public void setBandSerial(Context context, String serial, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
 //        Log.e("qazwsx", "serial : " +serial);
@@ -390,7 +389,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.e("qazwsx", "sickreport success : " + responseString);
+                Log.e("NetworkManager", "sickreport success : " + responseString);
 
                 AbuSickReports sickReports = gson.fromJson(responseString, AbuSickReports.class);
                 listener.onSuccess(sickReports);
@@ -403,7 +402,6 @@ public class NetworkManager {
     //TODO : 아픔일지 수정 @@@
     public void setSickReportUpdate(Context context, String title, String memo, String image, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
-        params.put("baby_id", "56497d5d0b00e294262caf48");
         params.put("title", title);
         params.put("memo", memo);
         params.put("image", image);
@@ -433,14 +431,13 @@ public class NetworkManager {
     public void setSickReportDelete(Context context, String _id, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
         params.put("_id", _id);
-        Log.e("qazwsx", "Log : " + _id);
 
         Header[] header = null;
 
-        client.delete(context, BABY_URL, header, params, new TextHttpResponseHandler() {
+        client.delete(context, SICKREPORT_UPDATE_URL, header, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("qazwsx", "삭제 실패" + responseString);
+                Log.e("NetworkManager", "아픔일지 삭제 실패" + responseString);
 
                 listener.onFail(statusCode);
             }
@@ -448,7 +445,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                Log.e("qazwsx", "삭제 성공" + responseString);
+                Log.e("NetworkManager", "아픔일지 삭제 성공" + responseString);
 
                 NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
                 listener.onSuccess(codeResult);
@@ -469,13 +466,13 @@ public class NetworkManager {
         client.post(context, TEMPERATURE_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("qazwsx", "Network Temp FAIL");
+                Log.e("NetworkManager", "Network Temp FAIL");
                 listener.onFail(statusCode);
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.e("qazwsx", responseString);
+                Log.e("NetworkManager", responseString);
 //                Toast.makeText(context, responseString, Toast.LENGTH_SHORT).show();
 
                 AbuTemps abuTemps = gson.fromJson(responseString, AbuTemps.class);

@@ -99,6 +99,8 @@ public class BabyItemView extends RelativeLayout {
             babyList_nameView.setTextColor(Color.WHITE);
             babyList_birthView.setTextColor(Color.WHITE);
             babyList_genderView.setTextColor(Color.WHITE);
+
+
         }else {
             //선택되지 않은 아이
             //배경 : 흰색

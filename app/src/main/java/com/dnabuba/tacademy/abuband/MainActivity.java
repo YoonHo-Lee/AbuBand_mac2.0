@@ -9,8 +9,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dnabuba.tacademy.abuband.Alarm.AlarmListFragment;
 import com.dnabuba.tacademy.abuband.Baby.BabyListFragment;
@@ -20,6 +24,10 @@ import com.dnabuba.tacademy.abuband.Temperature.TemperatureFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    NavigationView navigationView;
+    TextView text_navi_name, text_navi_birthY, text_navi_birthMD;
+    ImageView image_navi;
 
     public void finish() {
         finish();
@@ -53,6 +61,19 @@ public class MainActivity extends AppCompatActivity
             }
         });*/
 
+
+        //네비게이션 헤더를 만들어서 셋팅해줌
+        //선택된아이의 사진, 이름, 생년월일 셋팅
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
+        text_navi_name = (TextView)hView.findViewById(R.id.text_navi_name);
+        text_navi_birthY = (TextView)hView.findViewById(R.id.text_navi_birthY);
+        text_navi_birthMD = (TextView)hView.findViewById(R.id.text_navi_birthMD);
+        text_navi_name.setText("new text");
+        text_navi_birthY.setText("2015");
+        text_navi_birthMD.setText("1126");
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -61,6 +82,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//        getBabyinfo()
 
 
         if (savedInstanceState == null) {

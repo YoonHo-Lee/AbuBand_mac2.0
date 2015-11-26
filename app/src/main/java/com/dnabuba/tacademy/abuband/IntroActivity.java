@@ -41,18 +41,7 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
-        ImageView skip = (ImageView) findViewById(R.id.skipbtn);
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //토큰 확인용
-                String s= PropertyManager.getInstance().getRegistrationToken();
-                Toast.makeText(IntroActivity.this, "토큰 : " + s, Toast.LENGTH_SHORT).show();
-                Log.e("qazwsx","토큰" + s);
-                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {

@@ -29,7 +29,7 @@
             android:layout_width="10dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
-            android:background="#de7a52" />
+            android:background="@color/temp_high" />
 
         <TextView
             android:id="@+id/sickList_date"
