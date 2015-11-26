@@ -67,7 +67,7 @@ public class BabyItemView extends RelativeLayout {
                 .cacheInMemory(true)
                 .cacheOnDisc(true)
                 .considerExifParams(true)
-                .displayer(new RoundedBitmapDisplayer(50))
+                .displayer(new RoundedBitmapDisplayer(100)) //곡률 50:모서리곡선인정사각형, 100원형
                 .build();
 
         babyList_Update.setOnClickListener(new OnClickListener() {

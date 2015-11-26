@@ -30,6 +30,7 @@
     <string name="naviSetting">설정</string>
 
     <string name="memberadd_btn">등록</string>
+    <string name="forgot_password">비밀번호 찾기</string>
 
     <!-- 설정 부분 -->
     <string name="settingAppVersion">버전</string>

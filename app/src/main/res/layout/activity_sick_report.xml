@@ -10,20 +10,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dnabuba.tacademy.abuband.SickReport.SickReportAddActivity">
 
-    <ScrollView
-        android:id="@+id/sick_scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="right">
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        card_view:cardCornerRadius="@dimen/cardCornerRadius">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:id="@+id/sickreport_titleBar"
+                android:background="@color/black"
                 android:orientation="horizontal">
 
                 <TextView
@@ -32,7 +39,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="2015.11.02"
-                    android:textSize="20sp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size" />
 
                 <TextView
                     android:id="@+id/sickreport_dayOfWeek"
@@ -40,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="월요일"
-                    android:textSize="20sp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size" />
 
                 <TextView
                     android:id="@+id/sickreport_maxTemp"
@@ -48,7 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="44.4"
-                    android:textSize="20sp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size" />
 
                 <TextView
                     android:id="@+id/sickreport_babyName"
@@ -56,53 +66,67 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="안드로"
-                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/base_text_size"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/sample_imageView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/sample_graph" />
 
-            <LinearLayout
+
+            <ScrollView
+                android:id="@+id/sick_scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_gravity="right">
 
-                <TextView
-                    android:id="@+id/sick_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sickReportAdd_disease"
-                    android:layout_marginRight="10dp" />
-
-                <TextView
-                    android:id="@+id/text_sickTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="메르스(Title)"
-                    android:singleLine="true"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_sickMemo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="메르스에 걸렸습니다."
-                android:textSize="20sp"/>
+
+                    <ImageView
+                        android:id="@+id/sample_imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/sample_graph" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/sick_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/sickReportAdd_disease" />
+
+                        <TextView
+                            android:id="@+id/text_sickTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="메르스(Title)"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_sickMemo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="메르스에 걸렸습니다."
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
-    </ScrollView>
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_gravity="right" />
+
+    </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

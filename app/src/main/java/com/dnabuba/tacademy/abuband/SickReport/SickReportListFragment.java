@@ -28,6 +28,7 @@ public class SickReportListFragment extends Fragment {
 
     public static final String TAG_SR__ID = "_id";
     public static final String TAG_SR_DATE = "date";
+    public static final String TAG_SR_MAXTEMP = "maxTemp";
     public static final String TAG_SR_NAME = "name";
     public static final String TAG_SR_TITLE = "title";
     public static final String TAG_SR_MEMO = "memo";
@@ -64,6 +65,7 @@ public class SickReportListFragment extends Fragment {
                 intent.putExtra(TAG_SR_TITLE, data.title);
                 intent.putExtra(TAG_SR_MEMO, data.memo);
                 intent.putExtra(TAG_SR__ID, data._id);
+                intent.putExtra(TAG_SR_MAXTEMP, data.maxTemp);
 //                intent.putExtra("arr", data.tempGraph);
 
                 startActivity(intent);

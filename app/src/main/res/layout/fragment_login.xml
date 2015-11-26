@@ -19,7 +19,7 @@
         android:layout_height="@dimen/inner_bg_height"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/member_margin_top"
         android:background="@drawable/inner_bg_login"
         android:paddingBottom="30dp"
         android:paddingLeft="5dp"
@@ -75,7 +75,8 @@
             android:textColor="@color/white"
             android:text="@string/Login_btn"
             android:textSize="@dimen/base_text_size"
-            android:background="@drawable/selector_button" />
+            android:background="@drawable/selector_button"
+            android:layout_marginTop="10dp" />
 
     </RelativeLayout>
 
@@ -85,8 +86,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/base_text_size"
+        android:layout_marginTop="10dp"
         android:text="@string/memberAdd"
+        android:textSize="@dimen/base_text_size" />
+
+    <TextView
+        android:id="@+id/text_forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/forgot_password"
         android:textSize="@dimen/base_text_size" />
 
 </RelativeLayout>

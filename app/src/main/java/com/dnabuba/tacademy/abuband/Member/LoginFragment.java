@@ -79,7 +79,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onSuccess(NetworkCodeResult result) {
                 Log.e("LoginFragment", "onSuccess");
-                int code = result.code;
                 String serial = result.result;
                 //이메일, 비번, 밴드시리얼 저장
                 PropertyManager.getInstance().setPrefEmail(email);

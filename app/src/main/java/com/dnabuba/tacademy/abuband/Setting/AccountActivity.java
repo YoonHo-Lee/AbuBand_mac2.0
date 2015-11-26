@@ -3,6 +3,7 @@ package com.dnabuba.tacademy.abuband.Setting;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,8 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         text_email = (TextView) findViewById(R.id.account_email);
         text_serial = (TextView) findViewById(R.id.account_band_serial);
@@ -86,5 +89,11 @@ public class AccountActivity extends AppCompatActivity {
                 Toast.makeText(AccountActivity.this, "Logout Err"+code, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

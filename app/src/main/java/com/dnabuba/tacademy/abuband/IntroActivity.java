@@ -8,9 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,17 +20,23 @@ import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.GCM.RegistrationIntentService;
 import com.dnabuba.tacademy.abuband.Member.MemberActivity;
+import com.dnabuba.tacademy.abuband.Menual.MenualActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 public class IntroActivity extends AppCompatActivity {
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+
+        if(!TextUtils.isEmpty(PropertyManager.getInstance().getPrefEmail()) && !TextUtils.isEmpty(PropertyManager.getInstance().getPrefPassword()))    {
+//            Log.e("intro - onCreate", PropertyManager.getInstance().getPrefEmail() + " / " + PropertyManager.getInstance().getPrefPassword());
+        }
 
         ImageView intro = (ImageView) findViewById(R.id.image_intro);
 
@@ -90,8 +98,24 @@ public class IntroActivity extends AppCompatActivity {
         // activity start...
         //onCreate에서 코드 작성 하지말고,
         //실제로 로딩 끝나거나 자동로그인등으로 화면을 자동으로 넘길때, 이 곳에서 코드 작성해서 사용한다.
+        mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(!TextUtils.isEmpty(PropertyManager.getInstance().getPrefEmail()) && !TextUtils.isEmpty(PropertyManager.getInstance().getPrefPassword()))    {
+                    Log.e("intro - doRealStart", PropertyManager.getInstance().getPrefEmail() + " / " + PropertyManager.getInstance().getPrefPassword());
+                    setLogin(PropertyManager.getInstance().getPrefEmail(), PropertyManager.getInstance().getPrefPassword(), PropertyManager.getInstance().getRegistrationToken());
+                }else{
+                    Intent intent = new Intent(IntroActivity.this, MemberActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }, 500);
+
 
     }
+
 
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
@@ -113,6 +137,35 @@ public class IntroActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void setLogin(String prefEmail, String prefPassword, String registrationToken) {
+        NetworkManager.getInstance().setLogin(this, prefEmail, prefPassword, registrationToken, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+            @Override
+            public void onSuccess(NetworkCodeResult result) {
+                Intent intent;
+                switch (result.code)    {
+                    case 1: // 등록된 아이가 있는 경우
+                        Log.e("IntroActivity", "onSuccess code1");
+                        intent = new Intent(IntroActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case 3: // 등록된 아이가 없는 경우
+                        Log.e("IntroActivity", "onSuccess code3");
+                        intent = new Intent(IntroActivity.this, MenualActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onFail(int code) {
+                Log.e("Intro-AutoLogin", "onFail"+code);
+            }
+        });
     }
 
 }
