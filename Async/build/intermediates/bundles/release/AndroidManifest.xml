@@ -5,8 +5,8 @@
     android:versionName="1.4.5-SNAPSHOT" >
 
     <uses-sdk
-        android:minSdkVersion="21"
-        android:targetSdkVersion="23" />
+        android:minSdkVersion="3"
+        android:targetSdkVersion="3" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
