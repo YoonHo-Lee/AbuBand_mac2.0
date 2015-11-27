@@ -25,7 +25,7 @@
         android:paddingRight="5dp">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/sickList_tempColor"
             android:layout_width="10dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
@@ -36,8 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/imageView3"
-            android:layout_toRightOf="@+id/imageView3"
+            android:layout_toEndOf="@+id/sickList_tempColor"
+            android:layout_toRightOf="@+id/sickList_tempColor"
             android:text="2015.11.02"
             android:textSize="@dimen/base_tiem_text_size" />
 

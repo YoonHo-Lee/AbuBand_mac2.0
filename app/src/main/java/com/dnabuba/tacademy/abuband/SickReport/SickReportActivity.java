@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -63,14 +64,16 @@ public class SickReportActivity extends AppCompatActivity {
         sick_day.setText(day);
 
         float maxTemp = intent.getFloatExtra(SickReportListFragment.TAG_SR_MAXTEMP, 0.0f);
-        if(maxTemp < 35.9f)    {
-            sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.temp_low));
-        }else if(maxTemp > 35.9f)   {
-            sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.black));
+        Log.e("SickReport","maxTemp: "+maxTemp);
+
+        if(maxTemp > 37.9f)   {
+            sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.temp_high));
         }else if(maxTemp > 37.4f)   {
             sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.temp_mild));
-        }else if(maxTemp > 37.9f)   {
-            sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.temp_high));
+        }else if(maxTemp > 35.9f)   {
+            sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.temp_normal));
+        }else if(maxTemp < 35.9f)    {
+            sickreport_titleBar.setBackgroundColor(getResources().getColor(R.color.temp_low));
         }
 
 
