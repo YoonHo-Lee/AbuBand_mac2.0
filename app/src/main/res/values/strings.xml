@@ -145,6 +145,19 @@
     <string name="setting_terms">Terms</string>
     <string name="setting_policy">Policy</string>
 
+    <!-- 도움 메시지 -->
+    <string name="help_messege_high">so hot</string>
+    <string name="help_messege_mild">soso</string>
+    <string name="help_messege_normal">gooooooood</string>
+    <string name="help_messege_low">cold</string>
+
+    <!-- 상태 메시지 -->
+    <string name="temp_high">고온</string>
+    <string name="temp_mild">미열</string>
+    <string name="temp_normal">정상</string>
+    <string name="temp_low">저온</string>
+
+
 
     <string name="btn_ok">ok</string>
     <string name="btn_cancle">cancle</string>
