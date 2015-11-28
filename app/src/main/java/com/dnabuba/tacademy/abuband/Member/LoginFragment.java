@@ -40,6 +40,10 @@ public class LoginFragment extends Fragment {
     public static final int RESULT_CODE_2 = 2;
     public static final int RESULT_CODE_3 = 3;
 
+    public static final String TAG_BABY_IMAGE = "image";
+    public static final String TAG_BABY_NAME = "name";
+    public static final String TAG_BABY_BIRTH = "birth";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,9 +79,9 @@ public class LoginFragment extends Fragment {
     }
 
     private void setLogin(final String email, final String password, final String token) {
-        NetworkManager.getInstance().setLogin(getContext(), email, password, token, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+        NetworkManager.getInstance().setLogin(getContext(), email, password, token, new NetworkManager.OnResultListener<LoginItemData>() {
             @Override
-            public void onSuccess(NetworkCodeResult result) {
+            public void onSuccess(LoginItemData result) {
                 Log.e("LoginFragment", "onSuccess");
                 String serial = result.result;
                 //이메일, 비번, 밴드시리얼 저장
@@ -89,14 +93,21 @@ public class LoginFragment extends Fragment {
                 switch (result.code)    {
                     case RESULT_CODE_1: // 등록된 아이가 있는 경우
                         Log.e("LoginFragment", "onSuccess code1");
-                        PropertyManager.getInstance().setPrefBaby(result.selected);   // 선택되있는 아이 아이디 저장
+                        PropertyManager.getInstance().setPrefBaby(result.id);   // 선택되있는 아이 아이디 저장
                         intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                        intent.putExtra(TAG_BABY_IMAGE,result.image);
+                        intent.putExtra(TAG_BABY_NAME,result.name);
+                        intent.putExtra(TAG_BABY_BIRTH,result.birth);
                         startActivity(intent);
                         getActivity().finish();
                         break;
                     case RESULT_CODE_3: // 등록된 아이가 없는 경우
                         Log.e("LoginFragment", "onSuccess code3");
                         intent = new Intent(getActivity().getApplicationContext(), MenualActivity.class);
+                        //이거 될지 잘 모르겠다.
+                        intent.putExtra(TAG_BABY_IMAGE,result.image);
+                        intent.putExtra(TAG_BABY_NAME,result.name);
+                        intent.putExtra(TAG_BABY_BIRTH,result.birth);
                         startActivity(intent);
                         getActivity().finish();
                         break;

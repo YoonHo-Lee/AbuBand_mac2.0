@@ -46,13 +46,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/line_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Random"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -61,7 +54,7 @@
         android:id="@+id/text_mainMessage"
         android:textSize="20sp"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

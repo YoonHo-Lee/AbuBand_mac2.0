@@ -122,6 +122,7 @@ public class SickReportActivity extends AppCompatActivity {
                 Toast.makeText(this, "수정 코드 작성", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SickReportActivity.this, SickReportAddActivity.class);
                 intent.putExtra(SickReportListFragment.TAG_SR_DATE,sick_date.getText().toString());
+                intent.putExtra(SickReportListFragment.TAG_SR_MAXTEMP, sick_maxTemp.getText().toString());
                 intent.putExtra(SickReportListFragment.TAG_SR_NAME,sick_babyName.getText().toString());
                 intent.putExtra(SickReportListFragment.TAG_SR_TITLE,sick_title.getText().toString());
                 intent.putExtra(SickReportListFragment.TAG_SR_MEMO, sick_memo.getText().toString());

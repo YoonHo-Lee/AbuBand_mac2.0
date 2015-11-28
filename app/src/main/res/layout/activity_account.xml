@@ -29,12 +29,13 @@
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:text="@string/account_logout"
         android:id="@+id/btn_logout"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
         android:background="@drawable/selector_button" />
 
     <TextView

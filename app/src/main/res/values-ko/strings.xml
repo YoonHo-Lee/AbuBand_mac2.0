@@ -35,7 +35,7 @@
     <!-- 설정 부분 -->
     <string name="settingAppVersion">버전</string>
     <string name="settingAccount">계정관리</string>
-    <string name="settingBandChange">밴드 관리</string>
+    <string name="settingBandChange">밴드 변경</string>
     <string name="settingTerms">이용약관</string>
     <string name="settingTempUnit">온도 단위</string>
     <string name="settinfSickReportBackUp">아픔일지 백업</string>

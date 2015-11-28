@@ -25,11 +25,11 @@ public class SickReportAddActivity extends AppCompatActivity {
 
     레이아웃 맨 윗줄 비율 주는거 모르게썽 ㅠ
 
-    똘미가 요일 안한대서, 내가 해야할듯...ㅠㅠ
+    똘미가 요일 안한대서, 내가 해야할듯...ㅠㅠ V
 
-    업페이지 버튼
+    업페이지 버튼 V
 
-    저장하기 버튼 만들기
+    저장하기 버튼 만들기 V
 
   ================================================= */
 
@@ -55,6 +55,7 @@ public class SickReportAddActivity extends AppCompatActivity {
 
 
         sickAdd_date.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_DATE));
+        sickAdd_maxTemp.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MAXTEMP));
         sickAdd_babyName.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_NAME));
         edit_sickTitle.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_TITLE));
         edit_sickMemo.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MEMO));
@@ -64,7 +65,7 @@ public class SickReportAddActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_sickreport_add,menu);
+        inflater.inflate(R.menu.menu_sickreport_add, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -72,32 +73,30 @@ public class SickReportAddActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_sickreport_add:
-                sickReportUpdate(edit_sickTitle.getText().toString(), edit_sickMemo.getText().toString(), image);
-                Toast.makeText(SickReportAddActivity.this, "저장 완료", Toast.LENGTH_SHORT).show();
-                finish();
+                if (!TextUtils.isEmpty(edit_sickTitle.getText()) && !TextUtils.isEmpty(edit_sickMemo.getText())) {
+                    sickReportUpdate(edit_sickTitle.getText().toString(), edit_sickMemo.getText().toString(), image);
+                } else {
+                    Toast.makeText(SickReportAddActivity.this, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void sickReportUpdate(String title, String memo, String image) {
-        if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(memo)) {
-            NetworkManager.getInstance().setSickReportUpdate(this, title, memo, image, new NetworkManager.OnResultListener<NetworkCodeResult>() {
 
+        NetworkManager.getInstance().setSickReportUpdate(this, title, memo, image, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+            @Override
+            public void onSuccess(NetworkCodeResult result) {
+                Toast.makeText(SickReportAddActivity.this, "저장 완료", Toast.LENGTH_SHORT).show();
+                finish();
+            }
 
-                @Override
-                public void onSuccess(NetworkCodeResult result) {
+            @Override
+            public void onFail(int code) {
 
-                }
-
-                @Override
-                public void onFail(int code) {
-
-                }
-            });
-        } else {
-            Toast.makeText(SickReportAddActivity.this, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show();
-        }
+            }
+        });
     }
 
 
@@ -119,7 +118,7 @@ public class SickReportAddActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void onUpBack()  {
+    public void onUpBack() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("삭제")
                 .setMessage("저장하지 않고\n이전 화면으로 이동하시겠습니까?\n저장하지 않은 데이터는 반영되지 않습니다.")

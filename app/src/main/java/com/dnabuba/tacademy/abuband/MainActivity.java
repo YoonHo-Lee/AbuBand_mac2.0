@@ -1,33 +1,45 @@
 package com.dnabuba.tacademy.abuband;
 
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.Alarm.AlarmListFragment;
 import com.dnabuba.tacademy.abuband.Baby.BabyListFragment;
+import com.dnabuba.tacademy.abuband.Member.LoginFragment;
 import com.dnabuba.tacademy.abuband.Setting.SettingFragment;
 import com.dnabuba.tacademy.abuband.SickReport.SickReportListFragment;
 import com.dnabuba.tacademy.abuband.Temperature.TemperatureFragment;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.LoadedFrom;
+import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     NavigationView navigationView;
-    TextView text_navi_name, text_navi_birthY, text_navi_birthMD;
+    TextView text_navi_name, text_navi_birth;
     ImageView image_navi;
+    DisplayImageOptions options;
 
     public void finish() {
         finish();
@@ -43,6 +55,18 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG_ALARM = "alarm";
     private static final String TAG_BABYADD = "babyadd";
     private static final String TAG_SETTING = "setting";
+
+    public static final int TAG_NAVI_CODE = 777;
+
+
+    //아이리스트 클릭시 네비의 정보 변경
+    public void setNeviText(String image, String name, String birth)   {
+//        Log.e("MainActivity", "LogTest");
+        birth = birth.substring(0,4)+"."+birth.substring(4,6)+"."+birth.substring(6,8);
+        ImageLoader.getInstance().displayImage(image, image_navi, options);
+        text_navi_name.setText(name);
+        text_navi_birth.setText(birth);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +85,72 @@ public class MainActivity extends AppCompatActivity
             }
         });*/
 
+        Intent intent = getIntent();
+        String birth = intent.getStringExtra(LoginFragment.TAG_BABY_BIRTH);
+        if(birth==null) {
+            birth = "12345678";
+        }
+        birth = birth.substring(0,4)+"."+birth.substring(4,6)+"."+birth.substring(6,8);
+        String name = intent.getStringExtra(LoginFragment.TAG_BABY_NAME);
+        String image = intent.getStringExtra(LoginFragment.TAG_BABY_IMAGE);
+
+        Log.e("MainActivity", birth + name + image);
 
         //네비게이션 헤더를 만들어서 셋팅해줌
         //선택된아이의 사진, 이름, 생년월일 셋팅
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
-        text_navi_name = (TextView)hView.findViewById(R.id.text_navi_name);
-        text_navi_birthY = (TextView)hView.findViewById(R.id.text_navi_birthY);
-        text_navi_birthMD = (TextView)hView.findViewById(R.id.text_navi_birthMD);
-        text_navi_name.setText("new text");
-        text_navi_birthY.setText("2015");
-        text_navi_birthMD.setText("1126");
+        View hView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        text_navi_name = (TextView) hView.findViewById(R.id.text_navi_name);
+        text_navi_birth = (TextView) hView.findViewById(R.id.text_navi_birth);
+        image_navi = (ImageView) hView.findViewById(R.id.image_navi);
+
+        text_navi_name.setText(name);
+        text_navi_birth.setText(birth);
+
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_stub)
+                .showImageForEmptyUri(R.drawable.ic_empty)
+                .showImageOnFail(R.drawable.ic_error)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .considerExifParams(true)
+//                .displayer(new RoundedBitmapDisplayer(100)) //곡률 50:모서리곡선인정사각형, 100원형
+                //위 소스의 이미지 늘어나는 버그를 잡고, 정 가운데를 크롭
+                .displayer(new BitmapDisplayer() {
+                    @Override
+                    public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
+                        Bitmap centerCroppedBitmap;
+                        if (bitmap.getWidth() >= bitmap.getHeight()) { //in case of width larger than height
+                            centerCroppedBitmap = Bitmap.createBitmap(
+                                    bitmap,
+                                    bitmap.getWidth() / 2 - bitmap.getHeight() / 2,
+                                    0,
+                                    bitmap.getHeight(),
+                                    bitmap.getHeight()
+                            );
+                        } else { //in case of height larger than width
+                            centerCroppedBitmap = Bitmap.createBitmap(
+                                    bitmap,
+                                    0,
+                                    bitmap.getHeight() / 2 - bitmap.getWidth() / 2,
+                                    bitmap.getWidth(),
+                                    bitmap.getWidth()
+                            );
+                        }
+                        //** then apply bitmap rounded **//
+                        RoundedBitmapDrawable circledDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), centerCroppedBitmap);
+//                        circledDrawable.setCircular(true);
+                        circledDrawable.setCornerRadius(50);
+                        circledDrawable.setAntiAlias(true);
+                        imageAware.setImageDrawable(circledDrawable);
+                    }
+                }).build();
+
+
+
+        ImageLoader.getInstance().displayImage(image, image_navi, options);
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,6 +1,7 @@
 package com.dnabuba.tacademy.abuband.Temperature;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dacer.androidcharts.LineView;
+import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
@@ -81,21 +83,23 @@ public class TemperatureFragment extends Fragment {
         //누르면 수치 표시되는거같음
         lineView.setShowPopup(LineView.SHOW_POPUPS_NONE);
 
-        Button lineButton = (Button) rootView.findViewById(R.id.line_button);
-        lineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-                mProgressBar.setProgress((int) (Math.random() * 1000 % 61));
-
-            }
-        });
+        //랜덤 생성 버튼
+//        Button lineButton = (Button) rootView.findViewById(R.id.line_button);
+//        lineButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ProgressBar mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+//                mProgressBar.setProgress((int) (Math.random() * 1000 % 61));
+//
+//            }
+//        });
 
         Button btnT = (Button) rootView.findViewById(R.id.btn_test);
         btnT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), graph_mainTemp.getWidth() + "width", Toast.LENGTH_SHORT).show();
+//                ((MainActivity)getActivity()).setNeviText();
+//                Toast.makeText(v.getContext(), graph_mainTemp.getWidth() + "width", Toast.LENGTH_SHORT).show();
                 hsv.post(new Runnable() {
                     @Override
                     public void run() {
@@ -182,7 +186,8 @@ public class TemperatureFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+                Log.e("TemperatureFragment", "Temp Data Load Fail" + code);
             }
         });
 

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.dnabuba.tacademy.abuband.Baby.AbuBabies;
 import com.dnabuba.tacademy.abuband.Band.BandItemData;
+import com.dnabuba.tacademy.abuband.Member.LoginItemData;
 import com.dnabuba.tacademy.abuband.SickReport.AbuSickReports;
 import com.dnabuba.tacademy.abuband.Temperature.AbuTemps;
 import com.google.gson.Gson;
@@ -105,7 +106,7 @@ public class NetworkManager {
 
 
     //TODO : 로그인
-    public void setLogin(Context context, String email,String password, String token, final OnResultListener<NetworkCodeResult> listener) {
+    public void setLogin(Context context, String email,String password, String token, final OnResultListener<LoginItemData> listener) {
         final RequestParams params = new RequestParams();
         params.put("email", email);
         params.put("password", password);
@@ -123,8 +124,8 @@ public class NetworkManager {
 
 //                Log.e("qazwsx", responseString);
 
-                NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
-                listener.onSuccess(codeResult);
+                LoginItemData loginItemData = gson.fromJson(responseString, LoginItemData.class);
+                listener.onSuccess(loginItemData);
             }
 
         });

@@ -32,6 +32,7 @@ public class SickReportListFragment extends Fragment {
     public static final String TAG_SR_NAME = "name";
     public static final String TAG_SR_TITLE = "title";
     public static final String TAG_SR_MEMO = "memo";
+    String name;
 
 
     public SickReportListFragment() {
@@ -56,12 +57,12 @@ public class SickReportListFragment extends Fragment {
                 Object object = sickListView.getItemAtPosition(position);
                 SickReportItemData data = (SickReportItemData) object;
 //                Toast.makeText(view.getContext(),"병명 : " + data.title, Toast.LENGTH_SHORT).show();
-                Toast.makeText(view.getContext(), "_id : " + data.name + data._id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "_id : " + data._id, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), SickReportActivity.class);
 
                 //상세 페이지로 전달
                 intent.putExtra(TAG_SR_DATE, data.date);
-                intent.putExtra(TAG_SR_NAME, data.name);
+                intent.putExtra(TAG_SR_NAME, name);
                 intent.putExtra(TAG_SR_TITLE, data.title);
                 intent.putExtra(TAG_SR_MEMO, data.memo);
                 intent.putExtra(TAG_SR__ID, data._id);
@@ -81,6 +82,8 @@ public class SickReportListFragment extends Fragment {
         return rootView;
     }
 
+
+
     private void searchSickReport() {
         NetworkManager.getInstance().getSickReport(getContext(), new NetworkManager.OnResultListener<AbuSickReports>() {
 
@@ -88,14 +91,18 @@ public class SickReportListFragment extends Fragment {
             public void onSuccess(AbuSickReports sickRoports) {
                 Log.e("sickReport", "onSuccess");
                 sickAdapter.clear();
-                for (SickReportItemData item : sickRoports.result) {
-                    sickAdapter.add(item);
+                if(sickRoports.result != null) {
+                    name = sickRoports.name;
+                    for (SickReportItemData item : sickRoports.result) {
+                        sickAdapter.add(item);
+                    }
                 }
             }
 
             @Override
             public void onFail(int code) {
-                Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+                Log.e("SickReportListFragment", "search Fail" + code);
             }
         });
     }
@@ -115,4 +122,9 @@ public class SickReportListFragment extends Fragment {
 //    }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchSickReport();
+    }
 }

@@ -75,6 +75,7 @@ public class BabyItemView extends RelativeLayout {
                 .cacheOnDisc(true)
                 .considerExifParams(true)
 //                .displayer(new RoundedBitmapDisplayer(100)) //곡률 50:모서리곡선인정사각형, 100원형
+                //위 소스의 이미지 늘어나는 버그를 잡고, 정 가운데를 크롭
                 .displayer(new BitmapDisplayer() {
                     @Override
                     public void display(Bitmap bitmap, ImageAware imageAware, LoadedFrom loadedFrom) {
@@ -128,7 +129,7 @@ public class BabyItemView extends RelativeLayout {
         //선택된 아이인지 아닌지 판별
         if(data._id.equals(PropertyManager.getInstance().getPrefBaby()))    {
             //선택된아이
-            //배경 : 검정, 녹색?
+            //배경 : 녹색
             //글씨 : 흰색
             babyList_itemView.setBackgroundResource(R.drawable.selector_babylist_item_select);
             babyList_nameView.setTextColor(Color.WHITE);

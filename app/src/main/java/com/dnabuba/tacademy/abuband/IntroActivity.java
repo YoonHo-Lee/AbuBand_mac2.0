@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.GCM.RegistrationIntentService;
+import com.dnabuba.tacademy.abuband.Member.LoginFragment;
+import com.dnabuba.tacademy.abuband.Member.LoginItemData;
 import com.dnabuba.tacademy.abuband.Member.MemberActivity;
 import com.dnabuba.tacademy.abuband.Menual.MenualActivity;
 import com.google.android.gms.common.ConnectionResult;
@@ -111,7 +113,7 @@ public class IntroActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, 500);
+        }, 100);
 
 
     }
@@ -140,20 +142,27 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void setLogin(String prefEmail, String prefPassword, String registrationToken) {
-        NetworkManager.getInstance().setLogin(this, prefEmail, prefPassword, registrationToken, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+        NetworkManager.getInstance().setLogin(this, prefEmail, prefPassword, registrationToken, new NetworkManager.OnResultListener<LoginItemData>() {
             @Override
-            public void onSuccess(NetworkCodeResult result) {
+            public void onSuccess(LoginItemData result) {
                 Intent intent;
                 switch (result.code)    {
                     case 1: // 등록된 아이가 있는 경우
                         Log.e("IntroActivity", "onSuccess code1");
                         intent = new Intent(IntroActivity.this, MainActivity.class);
+                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
+                        intent.putExtra(LoginFragment.TAG_BABY_NAME,result.name);
+                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH,result.birth);
                         startActivity(intent);
                         finish();
                         break;
                     case 3: // 등록된 아이가 없는 경우
                         Log.e("IntroActivity", "onSuccess code3");
                         intent = new Intent(IntroActivity.this, MenualActivity.class);
+                        //잘될지 모르겠다.
+                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
+                        intent.putExtra(LoginFragment.TAG_BABY_NAME,result.name);
+                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH,result.birth);
                         startActivity(intent);
                         finish();
                         break;

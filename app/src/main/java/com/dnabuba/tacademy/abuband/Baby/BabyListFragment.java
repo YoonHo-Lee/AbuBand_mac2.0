@@ -3,6 +3,7 @@ package com.dnabuba.tacademy.abuband.Baby;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,12 +14,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +33,7 @@ public class BabyListFragment extends Fragment {
     BabyAdapter babyAdapter;
     View rootView;
     ImageView babyUpdate;
+
 
     public static final String TAG__ID = "_id";
     public static final String TAG_BABYNAME = "babyName";
@@ -59,12 +64,14 @@ public class BabyListFragment extends Fragment {
         babyListView.setAdapter(babyAdapter);
 
 
+
+
         /***************** 로그인시 sharedpreferences로 저장한 이메일주소 넣어주기 *******************/
         //네트워크
         searchBabies();
 //        initData();
 
-        //아이 선택!!!!!!!!!!
+        //아이 리스트 클릭!!!!
         babyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,6 +79,9 @@ public class BabyListFragment extends Fragment {
                 BabyItemData data = (BabyItemData) object;
 
                 setBaby(data._id);
+
+                ((MainActivity)getActivity()).setNeviText(data.image, data.name, data.birth+"");
+
 
                 Toast.makeText(view.getContext(), data._id, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
@@ -128,7 +138,8 @@ public class BabyListFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "error : " + code, Toast.LENGTH_SHORT).show();
+                Log.e("BabyAddActivity", "searchBaby Fail" + code);
             }
         });
     }

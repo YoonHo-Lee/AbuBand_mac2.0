@@ -13,5 +13,4 @@ public class SickReportItemData {
     public String date;
     public String memo;
     public float maxTemp;
-    public String name;
 }
