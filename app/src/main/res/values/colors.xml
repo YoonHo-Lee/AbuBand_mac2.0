@@ -20,6 +20,6 @@
 
     <color name="temp_normal">#44c57b</color>
     <color name="temp_high">#f2542f</color>
-    <color name="temp_mild">#1ac6e2</color>
-    <color name="temp_low">#ffb600</color>
+    <color name="temp_mild">#ffb600</color>
+    <color name="temp_low">#1ac6e2</color>
 </resources>

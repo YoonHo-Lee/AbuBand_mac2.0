@@ -95,7 +95,7 @@ public class BabyAddActivity extends AppCompatActivity {
                     //editText의 내용을 네트워크 쪽으로 보내기
                     addBaby(babyName.getText().toString(), babyBirth_num, babyGender_num);
                 } else {
-                    Toast.makeText(BabyAddActivity.this, babyName.getText().toString() + babyBirth.getText().toString() + babyGender.getText().toString() + "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BabyAddActivity.this, "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -105,13 +105,15 @@ public class BabyAddActivity extends AppCompatActivity {
      * 아이추가 네트워크 불러오기
      *******************/
     private void addBaby(final String name, final String birth, final String gender) {
-        NetworkManager.getInstance().setBabyAdd(BabyAddActivity.this, name, birth, gender, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+        NetworkManager.getInstance().setBabyAdd(BabyAddActivity.this, name, birth, gender, new NetworkManager.OnResultListener<BabyaddCodeResult>() {
             @Override
-            public void onSuccess(NetworkCodeResult result) {
+            public void onSuccess(BabyaddCodeResult result) {
                 switch (result.code)    {
                     case 1:
-                        PropertyManager.getInstance().setPrefBaby(result.selected); // 선택된 아이 아이디 저장
+                        PropertyManager.getInstance().setPrefBaby(result.id); // 선택된 아이 아이디 저장
                         Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
+                        intent.putExtra("name", result.name);
+                        intent.putExtra("birth", result.birth);
                         startActivity(intent);
                         finish();
                         break;

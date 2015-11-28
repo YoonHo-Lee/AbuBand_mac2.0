@@ -35,7 +35,9 @@ public class SickReportAddActivity extends AppCompatActivity {
 
     EditText edit_sickTitle, edit_sickMemo;
     TextView sickAdd_date, sickAdd_maxTemp, sickAdd_babyName;
-    String image;
+    String image, _id;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class SickReportAddActivity extends AppCompatActivity {
         sickAdd_babyName.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_NAME));
         edit_sickTitle.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_TITLE));
         edit_sickMemo.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MEMO));
+        _id = intent.getStringExtra(SickReportListFragment.TAG_SR__ID);
 
     }
 
@@ -74,7 +77,7 @@ public class SickReportAddActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_sickreport_add:
                 if (!TextUtils.isEmpty(edit_sickTitle.getText()) && !TextUtils.isEmpty(edit_sickMemo.getText())) {
-                    sickReportUpdate(edit_sickTitle.getText().toString(), edit_sickMemo.getText().toString(), image);
+                    sickReportUpdate(_id, edit_sickTitle.getText().toString(), edit_sickMemo.getText().toString(), image);
                 } else {
                     Toast.makeText(SickReportAddActivity.this, "빈칸을 모두 채워주세요.", Toast.LENGTH_SHORT).show();
                 }
@@ -83,9 +86,9 @@ public class SickReportAddActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void sickReportUpdate(String title, String memo, String image) {
+    private void sickReportUpdate(String _id, String title, String memo, String image) {
 
-        NetworkManager.getInstance().setSickReportUpdate(this, title, memo, image, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+        NetworkManager.getInstance().setSickReportUpdate(this, _id, title, memo, image, new NetworkManager.OnResultListener<NetworkCodeResult>() {
             @Override
             public void onSuccess(NetworkCodeResult result) {
                 Toast.makeText(SickReportAddActivity.this, "저장 완료", Toast.LENGTH_SHORT).show();
@@ -118,14 +121,17 @@ public class SickReportAddActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+
+    //백키 업키의 뒤로가기 제어
     public void onUpBack() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("삭제")
+        builder.setTitle("뒤로가기")
                 .setMessage("저장하지 않고\n이전 화면으로 이동하시겠습니까?\n저장하지 않은 데이터는 반영되지 않습니다.")
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //아픔일지 수정화면 닫기
+
                         finish();
                     }
                 })

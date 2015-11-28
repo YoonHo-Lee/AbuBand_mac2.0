@@ -57,7 +57,7 @@ public class SickReportListFragment extends Fragment {
                 Object object = sickListView.getItemAtPosition(position);
                 SickReportItemData data = (SickReportItemData) object;
 //                Toast.makeText(view.getContext(),"병명 : " + data.title, Toast.LENGTH_SHORT).show();
-                Toast.makeText(view.getContext(), "_id : " + data._id, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), "_id : " + data._id, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), SickReportActivity.class);
 
                 //상세 페이지로 전달
@@ -68,7 +68,6 @@ public class SickReportListFragment extends Fragment {
                 intent.putExtra(TAG_SR__ID, data._id);
                 intent.putExtra(TAG_SR_MAXTEMP, data.maxTemp);
 //                intent.putExtra("arr", data.tempGraph);
-
                 startActivity(intent);
             }
         });

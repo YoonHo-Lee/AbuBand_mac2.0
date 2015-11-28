@@ -83,7 +83,7 @@ public class BabyListFragment extends Fragment {
                 ((MainActivity)getActivity()).setNeviText(data.image, data.name, data.birth+"");
 
 
-                Toast.makeText(view.getContext(), data._id, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), data._id, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(view.getContext(), data.birth + "년생 " + data.name + "(" + data.gender + ")", Toast.LENGTH_SHORT).show();
             }
         });

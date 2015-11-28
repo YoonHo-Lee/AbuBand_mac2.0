@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.dnabuba.tacademy.abuband.Baby.AbuBabies;
+import com.dnabuba.tacademy.abuband.Baby.BabyaddCodeResult;
 import com.dnabuba.tacademy.abuband.Band.BandItemData;
 import com.dnabuba.tacademy.abuband.Member.LoginItemData;
 import com.dnabuba.tacademy.abuband.SickReport.AbuSickReports;
@@ -208,7 +209,7 @@ public class NetworkManager {
 
 
     //TODO : 아이 추가
-    public void setBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<NetworkCodeResult> listener) {
+    public void setBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<BabyaddCodeResult> listener) {
         final RequestParams params = new RequestParams();
         params.put("name", name);
         params.put("birth", Integer.parseInt(birth));
@@ -227,7 +228,7 @@ public class NetworkManager {
 
 //                Log.e("qazwsx", responseString);
 
-                NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
+                BabyaddCodeResult codeResult = gson.fromJson(responseString, BabyaddCodeResult.class);
                 listener.onSuccess(codeResult);
             }
 
@@ -401,8 +402,9 @@ public class NetworkManager {
     }
 
     //TODO : 아픔일지 수정 @@@
-    public void setSickReportUpdate(Context context, String title, String memo, String image, final OnResultListener<NetworkCodeResult> listener) {
+    public void setSickReportUpdate(Context context, String _id, String title, String memo, String image, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
+        params.put("_id", _id);
         params.put("title", title);
         params.put("memo", memo);
         params.put("image", image);
@@ -428,7 +430,7 @@ public class NetworkManager {
     }
 
 
-    //TODO : 아픔일지 삭제 @@@
+    //TODO : 아픔일지 삭제
     public void setSickReportDelete(Context context, String _id, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
         params.put("_id", _id);
@@ -467,13 +469,13 @@ public class NetworkManager {
         client.post(context, TEMPERATURE_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("NetworkManager", "Network Temp FAIL");
+                Log.e("NetworkManager", "Network Temp FAIL"+responseString);
                 listener.onFail(statusCode);
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.e("NetworkManager", responseString);
+                Log.e("NetworkManager", "Network Temp Success"+responseString);
 //                Toast.makeText(context, responseString, Toast.LENGTH_SHORT).show();
 
                 AbuTemps abuTemps = gson.fromJson(responseString, AbuTemps.class);

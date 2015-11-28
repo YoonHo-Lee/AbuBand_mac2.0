@@ -126,6 +126,8 @@ public class SickReportActivity extends AppCompatActivity {
                 intent.putExtra(SickReportListFragment.TAG_SR_NAME,sick_babyName.getText().toString());
                 intent.putExtra(SickReportListFragment.TAG_SR_TITLE,sick_title.getText().toString());
                 intent.putExtra(SickReportListFragment.TAG_SR_MEMO, sick_memo.getText().toString());
+                intent.putExtra(SickReportListFragment.TAG_SR__ID, _id);
+                finish();
                 startActivity(intent);
                 return true;
         }
@@ -193,5 +195,9 @@ public class SickReportActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    public void onFinish(){
+        finish();
     }
 }

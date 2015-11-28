@@ -43,7 +43,7 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
         babyBirth_num = intent.getStringExtra(BabyListFragment.TAG_BABYBIRTH);
         babyGender_num = intent.getStringExtra(BabyListFragment.TAG_BABYGENDER);
 
-        Toast.makeText(BabyUpdeleteActivity.this, "_id : " + _id, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(BabyUpdeleteActivity.this, "_id : " + _id, Toast.LENGTH_SHORT).show();
 
         StringBuffer sb = new StringBuffer();
         sb.append(babyBirth_num.substring(0, 4) + " / ");
