@@ -1,5 +1,7 @@
 package com.dnabuba.tacademy.abuband.SickReport;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
 
 /**
@@ -13,4 +15,7 @@ public class SickReportItemData {
     public String date;
     public String memo;
     public float maxTemp;
+
+    public float temp;
+    public String temp_date;
 }

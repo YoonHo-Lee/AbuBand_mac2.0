@@ -18,6 +18,8 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.CoderResult;
 import java.security.KeyManagementException;
@@ -95,6 +97,7 @@ public class NetworkManager {
     private static final String BABY_URL = "http://54.65.97.166/babies";
     private static final String BABY_SEARCH_URL = "http://54.65.97.166/getBabies";
     private static final String BABY_SELECT_URL = "http://54.65.97.166/users/babyState";
+    private static final String BABY_IMAGE_URL = "http://54.65.97.166/babies/uploadImg";
 
     private static final String BAND_URL = "http://54.65.97.166/users/band";
 
@@ -319,6 +322,32 @@ public class NetworkManager {
     }
 
 
+    //TODO : 아이 사진 전송
+    public void setBabyImage(Context context, File image, final OnResultListener<NetworkCodeResult> listener) throws FileNotFoundException {
+        final RequestParams params = new RequestParams();
+        params.put("image", image);
+        Log.e("NetworkManager", "이미지경로"+image.getAbsolutePath() +" / " + image);
+
+
+        client.post(context, BABY_IMAGE_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.e("NetworkManager", "이미지실패"+responseString);
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                Log.e("NetworkManager", "이미지성공"+responseString);
+                NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
+                listener.onSuccess(codeResult);
+            }
+
+        });
+    }
+
+
 
 
     //TODO : 시리얼 체크
@@ -401,7 +430,7 @@ public class NetworkManager {
 
     }
 
-    //TODO : 아픔일지 수정 @@@
+    //TODO : 아픔일지 수정
     public void setSickReportUpdate(Context context, String _id, String title, String memo, String image, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
         params.put("_id", _id);

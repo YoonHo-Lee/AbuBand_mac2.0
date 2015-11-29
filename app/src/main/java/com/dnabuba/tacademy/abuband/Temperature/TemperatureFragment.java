@@ -42,7 +42,6 @@ public class TemperatureFragment extends Fragment {
 
     ArrayList<Integer> tempList;
     ArrayList<String> dateList;
-    ArrayList<String> x_axis;
     ArrayList<ArrayList<Integer>> dataLists;
     TextView textMainMessage, textMainTempState, textMainTempNumber;
 
@@ -112,7 +111,6 @@ public class TemperatureFragment extends Fragment {
         //초기화
         tempList = new ArrayList<Integer>();    //온도 데이터
         dateList = new ArrayList<String>();     //시간 데이터
-        x_axis = new ArrayList<String>();       //x축에 표시
 
         //그래프 내의 x축을 도트로 표시
         lineView.setDrawDotLine(false);
@@ -187,6 +185,7 @@ public class TemperatureFragment extends Fragment {
                             tempList.add((int) ((item.temp - 35f) * 10)); //36.5 => 36.5 - 35 => 1.5 * 10 => 15 거지같은 정수 그래프라 이따구로함.
                             int kor_hour = Integer.parseInt(item.date.substring(11, 13)) + 9;
                             dateList.add(kor_hour + item.date.substring(13, 19)); // '년월일T시분초밀리'로된 데이터에서 시분초만 추출
+
 
                             tempLevel();
                         }

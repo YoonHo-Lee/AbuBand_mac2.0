@@ -43,6 +43,7 @@ public class SickReportAdapter extends BaseAdapter {
 
     public void add(SickReportItemData item) {
         sickItems.add(item);
+
         notifyDataSetChanged();
     }
 

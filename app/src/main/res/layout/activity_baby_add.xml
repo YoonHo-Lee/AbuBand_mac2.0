@@ -24,13 +24,14 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-        <Button
+        <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/btn_babyImage"
             android:layout_marginTop="30dp"
             android:layout_gravity="top|center_horizontal"
             android:background="@drawable/selector_add_btn" />
+
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/babyNameTIL"

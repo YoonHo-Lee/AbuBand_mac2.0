@@ -2,8 +2,14 @@ package com.dnabuba.tacademy.abuband.Baby;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,21 +18,36 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.MainActivity;
-import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class BabyAddActivity extends AppCompatActivity {
+
+    private static final String TEMP_PHOTO_FILE = "temporary_holder.jpg";
+    private static final String TEMP_CAMERA_FILE = "temporary_camera.jpg";
+
+    private static final int REQUEST_GALLERY = 0;
+    private static final int REQUEST_CAMERA = 1;
+    private static final int REQUEST_CROP = 2;
+
+    ImageView baby_image;
 
     EditText babyName, babyBirth, babyGender;
     String babyBirth_num;
     String babyGender_num;
     BabyAdapter babyAdapter;
+
+    File baby_image_file;
 
     int flag;
 
@@ -47,6 +68,14 @@ public class BabyAddActivity extends AppCompatActivity {
         babyName = (EditText) findViewById(R.id.edit_babyName);
         babyBirth = (EditText) findViewById(R.id.edit_babyBirth);
         babyGender = (EditText) findViewById(R.id.edit_babyGender);
+
+        baby_image = (ImageView) findViewById(R.id.btn_babyImage);
+        baby_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onImageDialog();
+            }
+        });
 
 
 
@@ -110,6 +139,9 @@ public class BabyAddActivity extends AppCompatActivity {
             public void onSuccess(BabyaddCodeResult result) {
                 switch (result.code)    {
                     case 1:
+                        if(baby_image_file != null) {
+                            setBabyImage();
+                        }
                         PropertyManager.getInstance().setPrefBaby(result.id); // 선택된 아이 아이디 저장
                         Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
                         intent.putExtra("name", result.name);
@@ -127,6 +159,10 @@ public class BabyAddActivity extends AppCompatActivity {
                 Log.e("BabyAddActivity", "addBaby Fail" + code);
             }
         });
+    }
+
+    private void setBabyImage() {
+//        NetworkManager.getInstance().setBabyImage();
     }
 
     /*****************
@@ -187,6 +223,145 @@ public class BabyAddActivity extends AppCompatActivity {
 
         d.show();
     }
+
+    private void onImageDialog() {
+        //out of memory로 인해 카메라 잠시 주석....ㅠㅠ
+//        String[] items = {"갤러리","카메라"};
+        String[] items = {"갤러리"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(android.R.drawable.ic_menu_camera);
+        builder.setTitle("사진등록");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which)  {
+                    case 0: // 캘러리
+                        Intent photoPickerIntent = new Intent(
+                                Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        photoPickerIntent.setType("image/*");
+                        photoPickerIntent.putExtra("crop", "true");
+                        photoPickerIntent.putExtra(MediaStore.EXTRA_OUTPUT, getTempUri());
+                        photoPickerIntent.putExtra("outputFormat",
+                                Bitmap.CompressFormat.JPEG.toString());
+                        startActivityForResult(photoPickerIntent, REQUEST_GALLERY);
+
+                        break;
+
+                    case 1: //카메라
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    Uri fileUri = getTempCameraUri();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(intent,REQUEST_CAMERA);
+                    break;
+
+                }
+            }
+        });
+        builder.create().show();
+    }
+
+    private void cropImage(Uri uri) {
+        if (uri != null) {
+            Intent photoPickerIntent = new Intent(
+                    "com.android.camera.action.CROP", uri);
+            photoPickerIntent.putExtra("aspectX", 1);
+            photoPickerIntent.putExtra("aspectY", 1);
+            photoPickerIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    getTempUri());
+            photoPickerIntent.putExtra("outputFormat",
+                    Bitmap.CompressFormat.JPEG.toString());
+            startActivityForResult(photoPickerIntent, REQUEST_CROP);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return;
+        switch (requestCode) {
+            case REQUEST_CAMERA:
+                String imagePath = Environment.getExternalStorageDirectory() + "/"
+                        + TEMP_CAMERA_FILE;
+                try {
+                    String url = MediaStore.Images.Media.insertImage(getContentResolver(), imagePath, "camera image", "original image");
+                    Uri photouri = Uri.parse(url);
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.ORIENTATION, 90);
+                    getContentResolver().update(photouri, values, null, null);
+                    cropImage(photouri);
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case REQUEST_GALLERY:
+            case REQUEST_CROP:
+                String filePath = Environment.getExternalStorageDirectory() + "/"
+                        + TEMP_PHOTO_FILE;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 4;
+                Bitmap selectedImage = BitmapFactory.decodeFile(filePath, options);
+                baby_image.setImageBitmap(selectedImage);
+                baby_image.setBackgroundColor(getResources().getColor(R.color.transparent));
+                baby_image_file = new File(Environment.getExternalStorageDirectory() + "/" + TEMP_PHOTO_FILE);
+                Log.e("BabyAddActivity", "앱솔루트패스"+baby_image_file.getAbsolutePath());
+                break;
+        }
+    }
+
+
+    /*************************start of camera**********************************/
+
+    private Uri getTempCameraUri() {
+        return Uri.fromFile(getCameraFile());
+    }
+
+    private File getCameraFile() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    TEMP_CAMERA_FILE);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+            }
+
+            return file;
+        } else {
+
+            return null;
+        }
+    }
+    /*******************************end of camera****************************************/
+
+
+
+    /******************************start of gallery*****************************************/
+    private Uri getTempUri() {
+        return Uri.fromFile(getTempFile());
+    }
+
+    private File getTempFile() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    TEMP_PHOTO_FILE);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+            }
+
+            return file;
+        } else {
+
+            return null;
+        }
+    }
+    /******************************end of gallery*****************************************/
+
 
     @Override
     public boolean onSupportNavigateUp() {

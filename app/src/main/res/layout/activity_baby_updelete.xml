@@ -24,7 +24,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="10dp">
 
-        <Button
+        <ImageView
             android:id="@+id/btn_babyImage2"
             android:layout_width="100dp"
             android:layout_height="100dp"

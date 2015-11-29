@@ -2,18 +2,26 @@ package com.dnabuba.tacademy.abuband.Baby;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -21,10 +29,23 @@ import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.R;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class BabyUpdeleteActivity extends AppCompatActivity {
 
     EditText babyName, babyBirth, babyGender;
     String babyBirth_num, babyGender_num, _id;
+
+
+    private static final String TEMP_PHOTO_FILE = "temporary_holder.jpg";
+    private static final String TEMP_CAMERA_FILE = "temporary_camera.jpg";
+    private static final int REQUEST_GALLERY = 0;
+    private static final int REQUEST_CAMERA = 1;
+    private static final int REQUEST_CROP = 2;
+    File baby_image_file;
+    ImageView baby_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +119,16 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
             }
         });
 
+        baby_image = (ImageView) findViewById(R.id.btn_babyImage2);
+        baby_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onImageDialog();
+            }
+        });
 
-        /***************** 아이 수정 *******************/
+
+        /***************** 아이 수정 완료 *******************/
         Button btn = (Button) findViewById(R.id.btn_babyUpdate);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +136,6 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(babyName.getText().toString()) && !TextUtils.isEmpty(babyBirth.getText().toString()) && !TextUtils.isEmpty(babyGender.getText().toString())) {
                     //editText의 내용을 네트워크 쪽으로 보내기
                     updateBaby(_id, babyName.getText().toString(), babyBirth_num, babyGender_num);
-                    finish();
                 } else {
                     Toast.makeText(BabyUpdeleteActivity.this, "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
@@ -122,7 +150,15 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
         NetworkManager.getInstance().setBabyUpdate(BabyUpdeleteActivity.this, _id, name, birth, gender, new NetworkManager.OnResultListener<String>() {
             @Override
             public void onSuccess(String result) {
+                if(baby_image_file != null) {
+                    try {
+                        setBabyImage(baby_image_file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 Toast.makeText(BabyUpdeleteActivity.this, name + "의 정보가 수정 되었습니다.", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
@@ -148,6 +184,25 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*****************
+     * 아이사진 등록 네트워크 불러오기
+     *******************/
+    private void setBabyImage(File baby_image_file) throws FileNotFoundException {
+        NetworkManager.getInstance().setBabyImage(BabyUpdeleteActivity.this, baby_image_file, new NetworkManager.OnResultListener<NetworkCodeResult>() {
+            @Override
+            public void onSuccess(NetworkCodeResult result) {
+                Log.e("BabyUpdeleteActivity", "성공");
+            }
+
+            @Override
+            public void onFail(int code) {
+
+            }
+        });
+    }
+
+
 
     /******************
      * 생년월일 다이얼로그
@@ -220,6 +275,145 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
 
         d.show();
     }
+
+    private void onImageDialog() {
+        //out of memory로 인해 카메라 잠시 주석....ㅠㅠ
+//        String[] items = {"갤러리","카메라"};
+        String[] items = {"갤러리"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(android.R.drawable.ic_menu_camera);
+        builder.setTitle("사진등록");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which)  {
+                    case 0: // 캘러리
+                        Intent photoPickerIntent = new Intent(
+                                Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        photoPickerIntent.setType("image/*");
+                        photoPickerIntent.putExtra("crop", "true");
+                        photoPickerIntent.putExtra(MediaStore.EXTRA_OUTPUT, getTempUri());
+                        photoPickerIntent.putExtra("outputFormat",
+                                Bitmap.CompressFormat.JPEG.toString());
+                        startActivityForResult(photoPickerIntent, REQUEST_GALLERY);
+
+                        break;
+
+                    case 1: //카메라
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        Uri fileUri = getTempCameraUri();
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent,REQUEST_CAMERA);
+                        break;
+
+                }
+            }
+        });
+        builder.create().show();
+    }
+
+    private void cropImage(Uri uri) {
+        if (uri != null) {
+            Intent photoPickerIntent = new Intent(
+                    "com.android.camera.action.CROP", uri);
+            photoPickerIntent.putExtra("aspectX", 1);
+            photoPickerIntent.putExtra("aspectY", 1);
+            photoPickerIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    getTempUri());
+            photoPickerIntent.putExtra("outputFormat",
+                    Bitmap.CompressFormat.JPEG.toString());
+            startActivityForResult(photoPickerIntent, REQUEST_CROP);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return;
+        switch (requestCode) {
+            case REQUEST_CAMERA:
+                String imagePath = Environment.getExternalStorageDirectory() + "/"
+                        + TEMP_CAMERA_FILE;
+                try {
+                    String url = MediaStore.Images.Media.insertImage(getContentResolver(), imagePath, "camera image", "original image");
+                    Uri photouri = Uri.parse(url);
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.ORIENTATION, 90);
+                    getContentResolver().update(photouri, values, null, null);
+                    cropImage(photouri);
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+            case REQUEST_GALLERY:
+            case REQUEST_CROP:
+                String filePath = Environment.getExternalStorageDirectory() + "/"
+                        + TEMP_PHOTO_FILE;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 4;
+                Bitmap selectedImage = BitmapFactory.decodeFile(filePath, options);
+                baby_image.setImageBitmap(selectedImage);
+                baby_image.setBackgroundColor(getResources().getColor(R.color.transparent));
+                baby_image_file = new File(Environment.getExternalStorageDirectory() + "/" + TEMP_PHOTO_FILE);
+                Log.e("BabyAddActivity", "앱솔루트패스"+baby_image_file.getAbsolutePath());
+                break;
+        }
+    }
+
+
+    /*************************start of camera**********************************/
+
+    private Uri getTempCameraUri() {
+        return Uri.fromFile(getCameraFile());
+    }
+
+    private File getCameraFile() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    TEMP_CAMERA_FILE);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+            }
+
+            return file;
+        } else {
+
+            return null;
+        }
+    }
+    /*******************************end of camera****************************************/
+
+
+
+    /******************************start of gallery*****************************************/
+    private Uri getTempUri() {
+        return Uri.fromFile(getTempFile());
+    }
+
+    private File getTempFile() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+
+            File file = new File(Environment.getExternalStorageDirectory(),
+                    TEMP_PHOTO_FILE);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+            }
+
+            return file;
+        } else {
+
+            return null;
+        }
+    }
+    /******************************end of gallery*****************************************/
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

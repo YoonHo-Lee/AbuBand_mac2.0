@@ -15,12 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dacer.androidcharts.LineView;
 import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,6 +31,13 @@ public class SickReportActivity extends AppCompatActivity {
     TextView sick_date, sick_day, sick_maxTemp,  sick_title, sick_memo, sick_babyName;
     String _id, day;
     LinearLayout sickreport_titleBar;
+
+    ArrayList<Integer> tempList;
+    ArrayList<String> dateList;
+    ArrayList<ArrayList<Integer>> dataLists;
+    LineView lineView;
+    LinearLayout mainTemp_bg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,13 @@ public class SickReportActivity extends AppCompatActivity {
                 리스트의 값을 통해 서버에서 데이터 받아오고,
                     그 데이터를 SickReportAddActivity로 intent.putExtras로 보내줘야 할 것 같다.
 */
+
+
+        tempList = new ArrayList<Integer>();
+        dateList = new ArrayList<String>();
+
+        lineView = (LineView) findViewById(R.id.graph_mainTemp2);
+        mainTemp_bg = (LinearLayout) findViewById(R.id.mainTemp_background2);
 
 
         sick_date = (TextView) findViewById(R.id.sickreport_date);
@@ -77,6 +93,8 @@ public class SickReportActivity extends AppCompatActivity {
         }
 
 
+        makeGraph();
+
 //        float f = intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP,5.5f);
 //        Toast.makeText(SickReportAddActivity.this, "플로트"+f, Toast.LENGTH_SHORT).show();
 
@@ -84,6 +102,30 @@ public class SickReportActivity extends AppCompatActivity {
 //        sick_maxTemp.setText(intent.getExtras().getFloat(SickReportListFragment.TAG_SICKMAXTEMP) + "");
 //        sick_title.setText(intent.getExtras().getString(SickReportListFragment.TAG_SICKTITLE));
 //        sick_memo.setText();
+    }
+
+    private void makeGraph() {
+        //그래프 내의 x축을 도트로 표시
+        lineView.setDrawDotLine(false);
+
+        //누르면 수치 표시되는거같음
+        lineView.setShowPopup(LineView.SHOW_POPUPS_NONE);
+
+        for(int i = 0; i<8; i++)    {
+            tempList.add(15);
+            dateList.add("-");
+        }
+
+        //그래프를 그려주는 dataLists를 생성하고, 온도데이터가 있는 tempList를 넣어준다.
+        dataLists = new ArrayList<ArrayList<Integer>>();
+        dataLists.add(tempList);
+
+        Log.e("SickReportActivity", "tempList:"+tempList);
+
+        //x축에 표시될 내용
+        lineView.setBottomTextList(dateList);
+        //그래프 데이터를 그래프에 출력
+        lineView.setDataList(dataLists);
     }
 
     @Override

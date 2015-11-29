@@ -16,6 +16,7 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="transparent">#ffffffff</color>
     <color name="select">#4b5158</color>
 
     <color name="temp_normal">#44c57b</color>

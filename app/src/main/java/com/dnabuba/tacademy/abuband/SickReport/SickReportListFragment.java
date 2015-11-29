@@ -1,22 +1,20 @@
 package com.dnabuba.tacademy.abuband.SickReport;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +23,9 @@ public class SickReportListFragment extends Fragment {
 
     ListView sickListView;
     SickReportAdapter sickAdapter;
+
+    ArrayList<Integer> tempList;
+    ArrayList<String> dateList;
 
     public static final String TAG_SR__ID = "_id";
     public static final String TAG_SR_DATE = "date";
@@ -50,6 +51,9 @@ public class SickReportListFragment extends Fragment {
         sickAdapter = new SickReportAdapter();
         sickListView.setAdapter(sickAdapter);
 
+        tempList = new ArrayList<Integer>();
+        dateList = new ArrayList<String>();
+
         //리스트 클릭!!!!!!!
         sickListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,7 +71,7 @@ public class SickReportListFragment extends Fragment {
                 intent.putExtra(TAG_SR_MEMO, data.memo);
                 intent.putExtra(TAG_SR__ID, data._id);
                 intent.putExtra(TAG_SR_MAXTEMP, data.maxTemp);
-//                intent.putExtra("arr", data.tempGraph);
+
                 startActivity(intent);
             }
         });
@@ -94,6 +98,14 @@ public class SickReportListFragment extends Fragment {
                     name = sickRoports.name;
                     for (SickReportItemData item : sickRoports.result) {
                         sickAdapter.add(item);
+
+
+
+//                        for(SickReportTemp sickReportTemp : item.tempGraph) {
+//                            tempList.add((int) ((sickReportTemp.temp - 35f) * 10)); //36.5 => 36.5 - 35 => 1.5 * 10 => 15 거지같은 정수 그래프라 이따구로함.
+//                            int kor_hour = Integer.parseInt(sickReportTemp.date.substring(11, 13)) + 9;
+//                            dateList.add(kor_hour + sickReportTemp.date.substring(13, 19)); // '년월일T시분초밀리'로된 데이터에서 시분초만 추출
+//                        }
                     }
                 }
             }
