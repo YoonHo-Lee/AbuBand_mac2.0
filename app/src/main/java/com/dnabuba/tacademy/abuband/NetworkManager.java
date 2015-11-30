@@ -93,6 +93,7 @@ public class NetworkManager {
 
     private static final String LOG_IN_URL = "http://54.65.97.166/users/login";
     private static final String SIGN_UP_URL = "http://54.65.97.166/users/join";
+    private static final String FORGOT_PASSWORD_URL = "http://54.65.97.166/users/newPw";
 
     private static final String BABY_URL = "http://54.65.97.166/babies";
     private static final String BABY_SEARCH_URL = "http://54.65.97.166/getBabies";
@@ -139,6 +140,7 @@ public class NetworkManager {
     public void setLogout(Context context, final OnResultListener<NetworkCodeResult> listener) {
         final RequestParams params = new RequestParams();
 
+
         client.get(context, LOG_IN_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -152,6 +154,31 @@ public class NetworkManager {
 //                Log.e("qazwsx", responseString);
 
                 NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
+                listener.onSuccess(codeResult);
+            }
+
+        });
+    }
+
+
+    //TODO : 비밀번호 변경
+    public void setNewPassword(Context context, String email, final OnResultListener<String> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("email", email);
+
+        client.post(context, FORGOT_PASSWORD_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.e("NetworkManager", "비밀번호 변경 실패");
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.e("NetworkManager", "비밀번호 변경 성공");
+
+                String codeResult = gson.toJson(responseString);
                 listener.onSuccess(codeResult);
             }
 
@@ -212,8 +239,9 @@ public class NetworkManager {
 
 
     //TODO : 아이 추가
-    public void setBabyAdd(Context context, String name, String birth, String gender, final OnResultListener<BabyaddCodeResult> listener) {
+    public void setBabyAdd(Context context, File file, String name, String birth, String gender, final OnResultListener<BabyaddCodeResult> listener) throws FileNotFoundException {
         final RequestParams params = new RequestParams();
+        params.put("file", file);
         params.put("name", name);
         params.put("birth", Integer.parseInt(birth));
         params.put("gender", Integer.parseInt(gender));
@@ -325,7 +353,7 @@ public class NetworkManager {
     //TODO : 아이 사진 전송
     public void setBabyImage(Context context, File image, final OnResultListener<NetworkCodeResult> listener) throws FileNotFoundException {
         final RequestParams params = new RequestParams();
-        params.put("image", image);
+        params.put("file", image);
         Log.e("NetworkManager", "이미지경로"+image.getAbsolutePath() +" / " + image);
 
 
@@ -386,6 +414,8 @@ public class NetworkManager {
         client.put(context, BAND_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                Log.e("NetworkManager", "serial add fail : " + responseString);
                 listener.onFail(statusCode);
 
             }
@@ -394,6 +424,7 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
 //                Log.e("qazwsx", responseString);
+                Log.e("NetworkManager", "serial add success : " + responseString);
 
                 NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
                 listener.onSuccess(codeResult);

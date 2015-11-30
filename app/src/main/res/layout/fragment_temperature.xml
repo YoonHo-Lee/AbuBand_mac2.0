@@ -85,7 +85,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dp"
-            android:text="38.2"
+            android:text="--"
             android:textColor="@color/temp_normal"
             android:textSize="50sp" />
 

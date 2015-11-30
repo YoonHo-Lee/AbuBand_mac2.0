@@ -26,6 +26,10 @@ public class PropertyManager {
 	private static final String PREF_PASSWORD = "pref_password";
 	private static final String PREF_BABY = "pref_baby";
 
+	private static final String PREF_BABY_IMAGE = "pref_baby_image";
+	private static final String PREF_BABY_NAME = "pref_baby_name";
+	private static final String PREF_BABY_BIRTH = "pref_baby_birth";
+
 
 	//토큰 저장
 	public void setRegistrationToken(String prefToken) {
@@ -78,6 +82,39 @@ public class PropertyManager {
 	}
 	public String getPrefBaby()	{
 		return mPrefs.getString(PREF_BABY,"");
+	}
+
+
+
+	//선택된 아이 이미지 주소 저장
+	public void setPrefBaby_Image(String baby)	{
+		mEditor.putString(PREF_BABY_IMAGE, baby);
+		mEditor.commit();
+	}
+	public String getPrefBaby_Image()	{
+		return mPrefs.getString(PREF_BABY_IMAGE,"");
+	}
+
+
+
+	//선택된 아이 이름 저장
+	public void setPrefBaby_Name(String baby)	{
+		mEditor.putString(PREF_BABY_NAME, baby);
+		mEditor.commit();
+	}
+	public String getPrefBaby_Name()	{
+		return mPrefs.getString(PREF_BABY_NAME,"");
+	}
+
+
+
+	//선택된 아이 생일 저장
+	public void setPrefBaby_Birth(String baby)	{
+		mEditor.putString(PREF_BABY_BIRTH, baby);
+		mEditor.commit();
+	}
+	public String getPrefBaby_Birth()	{
+		return mPrefs.getString(PREF_BABY_BIRTH,"");
 	}
 
 

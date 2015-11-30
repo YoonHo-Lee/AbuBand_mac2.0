@@ -16,16 +16,19 @@
 
 package com.dnabuba.tacademy.abuband.GCM;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.dnabuba.tacademy.abuband.IntroActivity;
 import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.R;
 import com.google.android.gms.gcm.GcmListenerService;
@@ -45,8 +48,10 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+        Log.e(TAG, "From: " + from);
+        Log.e(TAG, "Message: " + message);
+
+        Log.e("GCMreceiver", "push받음");
 
         if (from.startsWith("/topics/")) {
             // message received from some topic.
@@ -77,18 +82,22 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message GCM message received.
      */
     private void sendNotification(String message) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, IntroActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+//        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        Uri defaultSoundUri= RingtoneManager.getDefaultUri(R.raw.alert_sound);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("GCM Message")
+                .setSmallIcon(R.mipmap.icon)
+                .setContentTitle("아부밴드")
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
+//                .setVibrate(new long[]{1000, 1000, 1000})
+//                .setSound(defaultSoundUri)
+                .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =

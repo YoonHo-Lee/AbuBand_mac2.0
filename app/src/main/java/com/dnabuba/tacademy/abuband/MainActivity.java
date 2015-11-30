@@ -1,5 +1,6 @@
 package com.dnabuba.tacademy.abuband;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -35,6 +36,8 @@ import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static Context mContext;
 
     NavigationView navigationView;
     TextView text_navi_name, text_navi_birth;
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mContext = this;
 
         setMainTitle(getString(R.string.title_temperature));
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

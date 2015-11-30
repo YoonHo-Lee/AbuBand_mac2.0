@@ -21,6 +21,7 @@ import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
+import com.dnabuba.tacademy.abuband.Setting.ForgotPasswordActivity;
 import com.dnabuba.tacademy.abuband.Temperature.TemperatureFragment;
 
 /**
@@ -72,6 +73,16 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.memberContainer, new MemberAddFragment(), null).addToBackStack(null).commit();
 
+            }
+        });
+
+        //비밀번호 찾기 버튼
+        TextView tv2 = (TextView) rootView.findViewById(R.id.text_forgotPassword);
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
 

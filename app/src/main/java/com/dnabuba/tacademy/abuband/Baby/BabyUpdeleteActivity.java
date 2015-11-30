@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.R;
@@ -152,7 +153,7 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 if(baby_image_file != null) {
                     try {
-                        setBabyImage(baby_image_file);
+                        setBabyImage(baby_image_file, name,birth);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -186,13 +187,14 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
     }
 
     /*****************
-     * 아이사진 등록 네트워크 불러오기
+     * 아이사진 수정 네트워크 불러오기
      *******************/
-    private void setBabyImage(File baby_image_file) throws FileNotFoundException {
+    private void setBabyImage(File baby_image_file, final String name, final String birth) throws FileNotFoundException {
         NetworkManager.getInstance().setBabyImage(BabyUpdeleteActivity.this, baby_image_file, new NetworkManager.OnResultListener<NetworkCodeResult>() {
             @Override
             public void onSuccess(NetworkCodeResult result) {
                 Log.e("BabyUpdeleteActivity", "성공");
+                ((MainActivity)MainActivity.mContext).setNeviText(result.result, name, birth);
             }
 
             @Override
@@ -356,7 +358,7 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
                 Bitmap selectedImage = BitmapFactory.decodeFile(filePath, options);
                 baby_image.setImageBitmap(selectedImage);
                 baby_image.setBackgroundColor(getResources().getColor(R.color.transparent));
-                baby_image_file = new File(Environment.getExternalStorageDirectory() + "/" + TEMP_PHOTO_FILE);
+                baby_image_file = new File(filePath);
                 Log.e("BabyAddActivity", "앱솔루트패스"+baby_image_file.getAbsolutePath());
                 break;
         }

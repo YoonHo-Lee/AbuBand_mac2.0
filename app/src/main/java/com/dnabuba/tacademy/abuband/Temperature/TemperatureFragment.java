@@ -23,7 +23,11 @@ import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,12 +58,14 @@ public class TemperatureFragment extends Fragment {
     String startTime, endTime;
 
     //온도별 구간 구별 플래그 선언
+    public static final int TAG_TEMP_FLAG_INIT = 0;
     public static final int TAG_TEMP_FLAG_LOW = 1;
     public static final int TAG_TEMP_FLAG_NORMAL = 2;
     public static final int TAG_TEMP_FLAG_MILD = 3;
     public static final int TAG_TEMP_FLAG_HIGH = 4;
 
-    int tempLevelFlag =0;
+    int tempLevelFlag =TAG_TEMP_FLAG_INIT;
+    int tempSectionFlag =TAG_TEMP_FLAG_INIT;
 
     float currentTemp;
 
@@ -184,8 +190,12 @@ public class TemperatureFragment extends Fragment {
                             textMainTempNumber.setText(currentTemp + ""); // 최신(마지막)온도를 출력
                             tempList.add((int) ((item.temp - 35f) * 10)); //36.5 => 36.5 - 35 => 1.5 * 10 => 15 거지같은 정수 그래프라 이따구로함.
                             int kor_hour = Integer.parseInt(item.date.substring(11, 13)) + 9;
-                            dateList.add(kor_hour + item.date.substring(13, 19)); // '년월일T시분초밀리'로된 데이터에서 시분초만 추출
+                            dateList.add(kor_hour + item.date.substring(13, 19)); // '년-월-일T시:분:초밀리'로된 데이터에서 시분초만 추출
+                            endTime = kor_hour + item.date.substring(13,19);
 
+//                            SimpleDateFormat change_time = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
+//                            String kor_time = change_time.format(item.date.substring(11,19));
+//                            dateList.add(kor_time);
 
                             tempLevel();
                         }
@@ -255,7 +265,7 @@ public class TemperatureFragment extends Fragment {
             mProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_high));
         }else if(currentTemp > 37.4f)   {
             tempLevelFlag = TAG_TEMP_FLAG_MILD;
-            mainTemp_bg.setBackgroundResource(R.drawable.temp_bg_mild);
+//            mainTemp_bg.setBackgroundResource(R.drawable.temp_bg_mild);
             mainTemp_bg.setBackground(new BitmapDrawable(getActivity().getResources(), mild_bg));
 //            mainTemp_bg.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(),R.drawable.temp_bg_mild)));
             textMainMessage.setText(R.string.help_messege_mild);
@@ -266,7 +276,7 @@ public class TemperatureFragment extends Fragment {
             mProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_mild));
         }else if(currentTemp > 35.9f)   {
             tempLevelFlag = TAG_TEMP_FLAG_NORMAL;
-            mainTemp_bg.setBackgroundResource(R.drawable.temp_bg_normal);
+//            mainTemp_bg.setBackgroundResource(R.drawable.temp_bg_normal);
             mainTemp_bg.setBackground(new BitmapDrawable(getActivity().getResources(), normal_bg));
 //            mainTemp_bg.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(),R.drawable.temp_bg_normal)));
             textMainMessage.setText(R.string.help_messege_normal);
@@ -277,7 +287,7 @@ public class TemperatureFragment extends Fragment {
             mProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_normal));
         }else if(currentTemp < 35.9f)    {
             tempLevelFlag = TAG_TEMP_FLAG_LOW;
-            mainTemp_bg.setBackgroundResource(R.drawable.temp_bg_low);
+//            mainTemp_bg.setBackgroundResource(R.drawable.temp_bg_low);
             mainTemp_bg.setBackground(new BitmapDrawable(getActivity().getResources(), low_bg));
 //            mainTemp_bg.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(),R.drawable.temp_bg_low)));
             textMainMessage.setText(R.string.help_messege_low);
@@ -287,6 +297,46 @@ public class TemperatureFragment extends Fragment {
             textMainTempNumber.setTextColor(getResources().getColor(R.color.temp_low));
             mProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_drawable_low));
         }
+
+        //tempSectionFlag가 비어있으면 현재 상태의 tempLevelFlag를 넣어준다.
+        if(tempSectionFlag == TAG_TEMP_FLAG_INIT)    {
+            tempSectionFlag = tempLevelFlag;
+            startTime = endTime;
+        }
+
+        //tempSectionFlag와 tempLevelFlag를 비교해서 같으면
+        //같은 구간이므로 시간차를 계산한다.
+        if(tempSectionFlag == tempLevelFlag)    {
+//            Log.e("TemperatureFragment", "startTime" + startTime);
+//            Log.e("TemperatureFragment", "endTime" + endTime);
+
+            SimpleDateFormat dataFormat = new SimpleDateFormat("kk:mm:ss", Locale.KOREA);
+            Date startDate = null;
+            Date endDate = null;
+            try {
+                startDate = dataFormat.parse(startTime);
+                endDate = dataFormat.parse(endTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long duration = endDate.getTime() - startDate.getTime();
+            int progressTime = (int) (duration / 1000);
+            if(progressTime >= 60)  {
+                progressTime = progressTime - 60;
+            }
+            mProgressBar.setProgress(progressTime);
+
+        }
+
+        //tempSectionFlag와 tempLevelFlag를 비교해서 다르면
+        //다른 구간이므로 tempSectionFlag를 재설정하고, startTime도 재설정해준다.
+        if(tempSectionFlag !=tempLevelFlag) {
+            tempSectionFlag = tempLevelFlag;
+            startTime = endTime;
+        }
+
+
     }
 
 

@@ -21,7 +21,7 @@ import com.dnabuba.tacademy.abuband.R;
 
 public class AccountActivity extends AppCompatActivity {
 
-    TextView text_email, text_serial, text_baby;
+    TextView text_email, text_serial, text_baby, text_newPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class AccountActivity extends AppCompatActivity {
         text_email = (TextView) findViewById(R.id.account_email);
         text_serial = (TextView) findViewById(R.id.account_band_serial);
         text_baby = (TextView) findViewById(R.id.account_baby);
+        text_newPassword = (TextView) findViewById(R.id.account_password);
 
         text_email.setText(PropertyManager.getInstance().getPrefEmail().toString());
         text_serial.setText(PropertyManager.getInstance().getPrefSerial().toString());
@@ -62,6 +63,14 @@ public class AccountActivity extends AppCompatActivity {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+
+        text_newPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
     }

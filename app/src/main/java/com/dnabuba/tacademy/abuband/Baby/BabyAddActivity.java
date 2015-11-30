@@ -23,6 +23,7 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.MainActivity;
+import com.dnabuba.tacademy.abuband.Member.LoginFragment;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
@@ -122,7 +123,11 @@ public class BabyAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(babyName.getText().toString()) && !TextUtils.isEmpty(babyBirth.getText().toString()) && !TextUtils.isEmpty(babyGender.getText().toString())) {
                     //editText의 내용을 네트워크 쪽으로 보내기
-                    addBaby(babyName.getText().toString(), babyBirth_num, babyGender_num);
+                    try {
+                        addBaby(baby_image_file, babyName.getText().toString(), babyBirth_num, babyGender_num);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(BabyAddActivity.this, "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
@@ -133,8 +138,8 @@ public class BabyAddActivity extends AppCompatActivity {
     /*****************
      * 아이추가 네트워크 불러오기
      *******************/
-    private void addBaby(final String name, final String birth, final String gender) {
-        NetworkManager.getInstance().setBabyAdd(BabyAddActivity.this, name, birth, gender, new NetworkManager.OnResultListener<BabyaddCodeResult>() {
+    private void addBaby(final File image, final String name, final String birth, final String gender) throws FileNotFoundException {
+        NetworkManager.getInstance().setBabyAdd(BabyAddActivity.this,image, name, birth, gender, new NetworkManager.OnResultListener<BabyaddCodeResult>() {
             @Override
             public void onSuccess(BabyaddCodeResult result) {
                 switch (result.code)    {
@@ -144,8 +149,9 @@ public class BabyAddActivity extends AppCompatActivity {
                         }
                         PropertyManager.getInstance().setPrefBaby(result.id); // 선택된 아이 아이디 저장
                         Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
-                        intent.putExtra("name", result.name);
-                        intent.putExtra("birth", result.birth);
+                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
+                        intent.putExtra(LoginFragment.TAG_BABY_NAME, result.name);
+                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH, result.birth);
                         startActivity(intent);
                         finish();
                         break;

@@ -118,7 +118,6 @@
     <string name="babyAdd_btn">Add</string>
 
 
-
     <!-- 네비게이션 드로워 메뉴 부분 -->
     <string name="naviTemperature">Temperature</string>
     <string name="naviSickReport">SickReport</string>
@@ -158,7 +157,6 @@
     <string name="temp_low">저온</string>
 
 
-
     <string name="btn_ok">ok</string>
     <string name="btn_cancle">cancle</string>
     <string name="btn_update">update</string>
@@ -166,6 +164,7 @@
     <string name="alarm_high_temp">High Fever</string>
 
     <string name="account_logout">Logout</string>
-
+    <string name="forgot_password_btn">Send</string>
+    <string name="forgot_password_Message">eMail adress</string>
 
 </resources>

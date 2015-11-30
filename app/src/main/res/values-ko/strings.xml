@@ -17,7 +17,7 @@
 
 
     <string name="Login_btn">로그인</string>
-    <string name="memberAdd">아이디가 없으신가요?</string>
+    <string name="memberAdd">회원가입</string>
     <string name="bandSerialSend_btn">전송</string>
     <string name="bandSerialAdd_btn">등록</string>
     <string name="babyAdd_btn">등록</string>
@@ -53,7 +53,7 @@
     <string name="help_messege_high">고열입니다!\n아이가 덥지 않게 해주시고 충분한 수분을 공급해 주세요.\n열이 지속될 경우, 병원 및 의사에게 문의하셔서 적절한 대응을 해주세요.</string>
     <string name="help_messege_mild">미열입니다!\n아이가 편안하게 쉬게 해주세요.\n고열로 오를 수도 있으니 계속 관찰해 주세요.</string>
     <string name="help_messege_normal">정상입니다!\n현재 온도가 유지될 수 있도록 아이의 환경을 보살펴 주시고,\n열이 다시 오를 수 있으니 주의해 주세요.</string>
-    <string name="help_messege_low">저체온입니다!\n아이의 체온이 오르도록 따뜻한 환경을 만들어 주세요!/n정상 체온이 될 때까지 계속 관심을 기울여 주세요.</string>
+    <string name="help_messege_low">저체온입니다!\n아이의 체온이 오르도록 따뜻한 환경을 만들어 주세요!\n정상 체온이 될 때까지 계속 관심을 기울여 주세요.</string>
 
     <!-- 상태 메시지 -->
     <string name="temp_high">고온</string>
@@ -69,5 +69,7 @@
     <string name="alarm_high_temp">고열알람</string>
 
     <string name="account_logout">로그아웃</string>
+    <string name="forgot_password_btn">전송</string>
+    <string name="forgot_password_Message">가입하신 이메일 주소로 \n비밀번호를 바꿀 수 있는 링크를 보내드립니다.</string>
 
 </resources>

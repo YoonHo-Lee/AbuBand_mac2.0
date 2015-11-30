@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.dnabuba.tacademy.abuband.Baby.BabyAddActivity;
 import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
+import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
 import com.dnabuba.tacademy.abuband.Setting.SettingFragment;
 
@@ -64,6 +65,7 @@ public class BandAddActivity extends AppCompatActivity {
                     BandSerialAdd(edit_bandSerial.getText().toString());
                     finish();
                 } else {   // 처음 왔을때는 아이 등록화면으로
+                    BandSerialAdd(edit_bandSerial.getText().toString());
                     Intent intent = new Intent(BandAddActivity.this, BabyAddActivity.class);
                     startActivity(intent);
                     finish();
@@ -73,7 +75,7 @@ public class BandAddActivity extends AppCompatActivity {
     }
 
     //시리얼 등록
-    private void BandSerialAdd(String serial) {
+    private void BandSerialAdd(final String serial) {
         NetworkManager.getInstance().setBandSerial(this, serial, new NetworkManager.OnResultListener<NetworkCodeResult>() {
             @Override
             public void onSuccess(NetworkCodeResult result) {
@@ -85,6 +87,7 @@ public class BandAddActivity extends AppCompatActivity {
                         Log.e("BandAddActivity","시리얼 등록 성공?" + result.result);
                         break;
                 }
+                PropertyManager.getInstance().setPrefSerial(serial);
             }
 
             @Override

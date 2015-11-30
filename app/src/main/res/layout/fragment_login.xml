@@ -81,25 +81,37 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/text_memberAdd"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/memberAdd"
-        android:textSize="@dimen/base_text_size" />
+        android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/text_forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="@string/forgot_password"
-        android:textSize="@dimen/base_text_size" />
+        <TextView
+            android:id="@+id/text_memberAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/memberAdd"
+            android:textSize="@dimen/base_text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:id="@+id/textView10"
+            android:textSize="30sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp" />
+
+        <TextView
+            android:id="@+id/text_forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:textSize="@dimen/base_text_size" />
+
+    </LinearLayout>
 
 </RelativeLayout>
 
