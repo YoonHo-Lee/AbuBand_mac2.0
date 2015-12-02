@@ -76,6 +76,12 @@ public class SickReportActivity extends AppCompatActivity {
         sick_memo.setText(intent.getStringExtra(SickReportListFragment.TAG_SR_MEMO));
         _id = intent.getStringExtra(SickReportListFragment.TAG_SR__ID);
 
+        tempList = intent.getIntegerArrayListExtra(SickReportListFragment.TAG_SR_TEMPLIST);
+        dateList = intent.getStringArrayListExtra(SickReportListFragment.TAG_SR_DATELIST);
+
+        Log.e("SickReportActivity", "tempList : "+tempList);
+        Log.e("SickReportActivity", "dateList : "+dateList);
+
         getDateDay(sick_date.getText().toString(), "yyyy-MM-dd");
         sick_day.setText(day);
 
@@ -111,10 +117,10 @@ public class SickReportActivity extends AppCompatActivity {
         //누르면 수치 표시되는거같음
         lineView.setShowPopup(LineView.SHOW_POPUPS_NONE);
 
-        for(int i = 0; i<8; i++)    {
-            tempList.add(15);
-            dateList.add("-");
-        }
+//        for(int i = 0; i<8; i++)    {
+//            tempList.add(15);
+//            dateList.add("-");
+//        }
 
         //그래프를 그려주는 dataLists를 생성하고, 온도데이터가 있는 tempList를 넣어준다.
         dataLists = new ArrayList<ArrayList<Integer>>();

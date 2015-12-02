@@ -23,6 +23,7 @@ public class SickReportListFragment extends Fragment {
 
     ListView sickListView;
     SickReportAdapter sickAdapter;
+    Intent listIntent;
 
     ArrayList<Integer> tempList;
     ArrayList<String> dateList;
@@ -33,6 +34,8 @@ public class SickReportListFragment extends Fragment {
     public static final String TAG_SR_NAME = "name";
     public static final String TAG_SR_TITLE = "title";
     public static final String TAG_SR_MEMO = "memo";
+    public static final String TAG_SR_TEMPLIST = "templist";
+    public static final String TAG_SR_DATELIST = "datelist";
     String name;
 
 
@@ -53,6 +56,7 @@ public class SickReportListFragment extends Fragment {
 
         tempList = new ArrayList<Integer>();
         dateList = new ArrayList<String>();
+        listIntent = new Intent(getContext(), SickReportActivity.class);
 
         //리스트 클릭!!!!!!!
         sickListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,17 +66,20 @@ public class SickReportListFragment extends Fragment {
                 SickReportItemData data = (SickReportItemData) object;
 //                Toast.makeText(view.getContext(),"병명 : " + data.title, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(view.getContext(), "_id : " + data._id, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(), SickReportActivity.class);
+
+                selectSickReport(data._id);
 
                 //상세 페이지로 전달
-                intent.putExtra(TAG_SR_DATE, data.date);
-                intent.putExtra(TAG_SR_NAME, name);
-                intent.putExtra(TAG_SR_TITLE, data.title);
-                intent.putExtra(TAG_SR_MEMO, data.memo);
-                intent.putExtra(TAG_SR__ID, data._id);
-                intent.putExtra(TAG_SR_MAXTEMP, data.maxTemp);
-
-                startActivity(intent);
+                listIntent.putExtra(TAG_SR_DATE, data.date);
+                listIntent.putExtra(TAG_SR_NAME, name);
+                listIntent.putExtra(TAG_SR_TITLE, data.title);
+                listIntent.putExtra(TAG_SR_MEMO, data.memo);
+                listIntent.putExtra(TAG_SR__ID, data._id);
+                listIntent.putExtra(TAG_SR_MAXTEMP, data.maxTemp);
+//                intent.putExtra(TAG_SR_TEMPLIST, tempList);
+//                intent.putExtra(TAG_SR_DATELIST, dateList);
+                Log.e("SickReportListFragment", "tempList : "+tempList);
+                Log.e("SickReportListFragment", "dateList : "+dateList);
             }
         });
 
@@ -85,6 +92,32 @@ public class SickReportListFragment extends Fragment {
         return rootView;
     }
 
+    private void selectSickReport(String _id) {
+        NetworkManager.getInstance().getSickReport_item(getContext(), _id, new NetworkManager.OnResultListener<AbuSickReports>() {
+            @Override
+            public void onSuccess(AbuSickReports sickRoports) {
+                Log.e("sickReport_item", "onSuccess");
+                name = sickRoports.name;
+                for(SickReportItemData item : sickRoports.result)   {
+
+                    for(SickReportTemp sickReportTemp : item.tempGraph) {
+                        tempList.add((int) ((sickReportTemp.temp - 35f) * 10)); //36.5 => 36.5 - 35 => 1.5 * 10 => 15 거지같은 정수 그래프라 이따구로함.
+                        int kor_hour = Integer.parseInt(sickReportTemp.date.substring(11, 13)) + 9;
+                        dateList.add(kor_hour + sickReportTemp.date.substring(13, 19)); // '년월일T시분초밀리'로된 데이터에서 시분초만 추출
+                    }
+                }
+                listIntent.putExtra(TAG_SR_TEMPLIST, tempList);
+                listIntent.putExtra(TAG_SR_DATELIST, dateList);
+
+                startActivity(listIntent);
+            }
+
+            @Override
+            public void onFail(int code) {
+                Log.e("sickReport_item", "onfail");
+            }
+        });
+    }
 
 
     private void searchSickReport() {

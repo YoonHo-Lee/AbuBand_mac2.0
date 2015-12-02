@@ -79,12 +79,12 @@ public class AlarmListFragment extends Fragment {
 
     //데이터 입력!!!!!!
     private void initData() {
-        float temp = 20.0f;
+        float temp = 40.0f;
 
-        for(int i = 0; i<10; i++)   {
+        for(int i = 1; i<4; i++)   {
             AlarmItemData d = new AlarmItemData();
             d.alarm_temp = temp;
-            temp = temp + 0.7f * i;
+            temp = temp + 0.5f * i;
             alarmAdapter.add(d);
         }
     }

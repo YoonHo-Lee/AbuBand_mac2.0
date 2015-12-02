@@ -21,17 +21,6 @@ import com.dnabuba.tacademy.abuband.R;
 
 public class SickReportAddActivity extends AppCompatActivity {
 
-/*  =================================================
-
-    레이아웃 맨 윗줄 비율 주는거 모르게썽 ㅠ
-
-    똘미가 요일 안한대서, 내가 해야할듯...ㅠㅠ V
-
-    업페이지 버튼 V
-
-    저장하기 버튼 만들기 V
-
-  ================================================= */
 
     EditText edit_sickTitle, edit_sickMemo;
     TextView sickAdd_date, sickAdd_maxTemp, sickAdd_babyName;

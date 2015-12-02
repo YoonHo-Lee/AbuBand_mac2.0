@@ -98,12 +98,12 @@ public class NetworkManager {
     private static final String BABY_URL = "http://54.65.97.166/babies";
     private static final String BABY_SEARCH_URL = "http://54.65.97.166/getBabies";
     private static final String BABY_SELECT_URL = "http://54.65.97.166/users/babyState";
-    private static final String BABY_IMAGE_URL = "http://54.65.97.166/babies/uploadImg";
 
     private static final String BAND_URL = "http://54.65.97.166/users/band";
 
     private static final String SICKREPORT_SEARCH_URL = "http://54.65.97.166/getRecords";
     private static final String SICKREPORT_UPDATE_URL = "http://54.65.97.166/records";
+    private static final String SICKREPORT_SHOW_URL = "http://54.65.97.166/getRecord";
 
     private static final String TEMPERATURE_URL = "http://54.65.97.166/getTemperature";
     /************* End of U R L ****************/
@@ -268,8 +268,9 @@ public class NetworkManager {
 
 
     //TODO : 아이 수정
-    public void setBabyUpdate(Context context, String _id, String name, String birth, String gender, final OnResultListener<String> listener) {
+    public void setBabyUpdate(Context context,File image, String _id, String name, String birth, String gender, final OnResultListener<String> listener) throws FileNotFoundException {
         final RequestParams params = new RequestParams();
+        params.put("file", image);
         params.put("_id", _id);
         params.put("name", name);
         params.put("birth", Integer.parseInt(birth));
@@ -350,31 +351,6 @@ public class NetworkManager {
     }
 
 
-    //TODO : 아이 사진 전송
-    public void setBabyImage(Context context, File image, final OnResultListener<NetworkCodeResult> listener) throws FileNotFoundException {
-        final RequestParams params = new RequestParams();
-        params.put("file", image);
-        Log.e("NetworkManager", "이미지경로"+image.getAbsolutePath() +" / " + image);
-
-
-        client.post(context, BABY_IMAGE_URL, params, new TextHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e("NetworkManager", "이미지실패"+responseString);
-                listener.onFail(statusCode);
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-
-                Log.e("NetworkManager", "이미지성공"+responseString);
-                NetworkCodeResult codeResult = gson.fromJson(responseString, NetworkCodeResult.class);
-                listener.onSuccess(codeResult);
-            }
-
-        });
-    }
-
 
 
 
@@ -452,6 +428,31 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
                 Log.e("NetworkManager", "sickreport success : " + responseString);
+
+                AbuSickReports sickReports = gson.fromJson(responseString, AbuSickReports.class);
+                listener.onSuccess(sickReports);
+            }
+
+        });
+
+    }
+
+    //TODO : 아픔일지 보기
+    public void getSickReport_item(Context context, String _id, final OnResultListener<AbuSickReports> listener) {
+        final RequestParams params = new RequestParams();
+        params.put("_id", _id);
+
+        client.post(context, SICKREPORT_SHOW_URL, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                Log.e("NetworkManager", "sickreport_item success : " + responseString);
 
                 AbuSickReports sickReports = gson.fromJson(responseString, AbuSickReports.class);
                 listener.onSuccess(sickReports);

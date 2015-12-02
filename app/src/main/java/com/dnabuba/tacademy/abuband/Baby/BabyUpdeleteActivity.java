@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
+import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
 
 import java.io.File;
@@ -38,6 +39,8 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
 
     EditText babyName, babyBirth, babyGender;
     String babyBirth_num, babyGender_num, _id;
+
+    public static final int TAG_RESULT_BABY_UPDATE = 1;
 
 
     private static final String TEMP_PHOTO_FILE = "temporary_holder.jpg";
@@ -136,7 +139,11 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(babyName.getText().toString()) && !TextUtils.isEmpty(babyBirth.getText().toString()) && !TextUtils.isEmpty(babyGender.getText().toString())) {
                     //editText의 내용을 네트워크 쪽으로 보내기
-                    updateBaby(_id, babyName.getText().toString(), babyBirth_num, babyGender_num);
+                    try {
+                        updateBaby(baby_image_file, _id, babyName.getText().toString(), babyBirth_num, babyGender_num);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(BabyUpdeleteActivity.this, "빈칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
@@ -147,18 +154,14 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
     /*****************
      * 아이수정 네트워크 불러오기
      *******************/
-    private void updateBaby(final String _id, final String name, final String birth, final String gender) {
-        NetworkManager.getInstance().setBabyUpdate(BabyUpdeleteActivity.this, _id, name, birth, gender, new NetworkManager.OnResultListener<String>() {
+    private void updateBaby(final File baby_image_file, final String _id, final String name, final String birth, final String gender) throws FileNotFoundException {
+        NetworkManager.getInstance().setBabyUpdate(BabyUpdeleteActivity.this, baby_image_file,  _id, name, birth, gender, new NetworkManager.OnResultListener<String>() {
             @Override
             public void onSuccess(String result) {
-                if(baby_image_file != null) {
-                    try {
-                        setBabyImage(baby_image_file, name,birth);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
                 Toast.makeText(BabyUpdeleteActivity.this, name + "의 정보가 수정 되었습니다.", Toast.LENGTH_SHORT).show();
+//                PropertyManager.getInstance().setPrefBaby_Name(name);
+//                PropertyManager.getInstance().setPrefBaby_Birth(birth);
+//                setResult(TAG_RESULT_BABY_UPDATE);
                 finish();
             }
 
@@ -186,23 +189,6 @@ public class BabyUpdeleteActivity extends AppCompatActivity {
         });
     }
 
-    /*****************
-     * 아이사진 수정 네트워크 불러오기
-     *******************/
-    private void setBabyImage(File baby_image_file, final String name, final String birth) throws FileNotFoundException {
-        NetworkManager.getInstance().setBabyImage(BabyUpdeleteActivity.this, baby_image_file, new NetworkManager.OnResultListener<NetworkCodeResult>() {
-            @Override
-            public void onSuccess(NetworkCodeResult result) {
-                Log.e("BabyUpdeleteActivity", "성공");
-                ((MainActivity)MainActivity.mContext).setNeviText(result.result, name, birth);
-            }
-
-            @Override
-            public void onFail(int code) {
-
-            }
-        });
-    }
 
 
 

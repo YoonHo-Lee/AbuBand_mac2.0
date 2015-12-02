@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment {
         NetworkManager.getInstance().setLogin(getContext(), email, password, token, new NetworkManager.OnResultListener<LoginItemData>() {
             @Override
             public void onSuccess(LoginItemData result) {
-                Log.e("LoginFragment", "onSuccess");
+                Log.e("LoginFragment", "onSuccess, token : "+token);
                 String serial = result.result;
                 //이메일, 비번, 밴드시리얼 저장
                 PropertyManager.getInstance().setPrefEmail(email);
@@ -115,10 +115,6 @@ public class LoginFragment extends Fragment {
                     case RESULT_CODE_3: // 등록된 아이가 없는 경우
                         Log.e("LoginFragment", "onSuccess code3");
                         intent = new Intent(getActivity().getApplicationContext(), MenualActivity.class);
-                        //이거 될지 잘 모르겠다.
-                        intent.putExtra(TAG_BABY_IMAGE,result.image);
-                        intent.putExtra(TAG_BABY_NAME,result.name);
-                        intent.putExtra(TAG_BABY_BIRTH,result.birth);
                         startActivity(intent);
                         getActivity().finish();
                         break;

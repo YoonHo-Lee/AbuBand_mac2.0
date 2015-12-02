@@ -95,7 +95,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="-60dp"
                         android:layout_weight="0.19"
-                        android:background="@color/select"
+                        android:background="#b2b2b2"
                         android:orientation="vertical">
 
 

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
     //아이리스트 클릭시 네비의 정보 변경
     public void setNeviText(String image, String name, String birth)   {
 //        Log.e("MainActivity", "LogTest");
-        birth = birth.substring(0,4)+"."+birth.substring(4,6)+"."+birth.substring(6,8);
+//        birth = birth.substring(0,4)+"."+birth.substring(4,6)+"."+birth.substring(6,8);
         ImageLoader.getInstance().displayImage(image, image_navi, options);
         text_navi_name.setText(name);
         text_navi_birth.setText(birth);
@@ -90,16 +90,16 @@ public class MainActivity extends AppCompatActivity
             }
         });*/
 
-        Intent intent = getIntent();
-        String birth = intent.getStringExtra(LoginFragment.TAG_BABY_BIRTH);
-        if(birth==null) {
-            birth = "12345678";
-        }
-        birth = birth.substring(0,4)+"."+birth.substring(4,6)+"."+birth.substring(6,8);
-        String name = intent.getStringExtra(LoginFragment.TAG_BABY_NAME);
-        String image = intent.getStringExtra(LoginFragment.TAG_BABY_IMAGE);
+//        Intent intent = getIntent();
+//        String birth = intent.getStringExtra(LoginFragment.TAG_BABY_BIRTH);
+//        if(birth==null) {
+//            birth = "12345678";
+//        }
+//        birth = birth.substring(0,4)+"."+birth.substring(4,6)+"."+birth.substring(6,8);
+//        String name = intent.getStringExtra(LoginFragment.TAG_BABY_NAME);
+//        String image = intent.getStringExtra(LoginFragment.TAG_BABY_IMAGE);
 
-        Log.e("MainActivity", birth + name + image);
+//        Log.e("MainActivity", birth + name + image);
 
         //네비게이션 헤더를 만들어서 셋팅해줌
         //선택된아이의 사진, 이름, 생년월일 셋팅
@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity
         text_navi_birth = (TextView) hView.findViewById(R.id.text_navi_birth);
         image_navi = (ImageView) hView.findViewById(R.id.image_navi);
 
-        text_navi_name.setText(name);
-        text_navi_birth.setText(birth);
+//        text_navi_name.setText(name);
+//        text_navi_birth.setText(birth);
 
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
@@ -153,10 +153,10 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        ImageLoader.getInstance().displayImage(image, image_navi, options);
+//        ImageLoader.getInstance().displayImage(image, image_navi, options);
 
 
-
+        setNeviText(PropertyManager.getInstance().getPrefBaby_Image(),PropertyManager.getInstance().getPrefBaby_Name(),PropertyManager.getInstance().getPrefBaby_Birth());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -174,6 +174,13 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().add(R.id.mainContainer, new TemperatureFragment(), TAG_TEMP).commit();
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("MainActivity","onActivityResult 메인"+PropertyManager.getInstance().getPrefBaby_Image() + " / " + PropertyManager.getInstance().getPrefBaby_Name()+ " / " + PropertyManager.getInstance().getPrefBaby_Birth());
+        setNeviText(PropertyManager.getInstance().getPrefBaby_Image(), PropertyManager.getInstance().getPrefBaby_Name(), PropertyManager.getInstance().getPrefBaby_Birth());
     }
 
     @Override

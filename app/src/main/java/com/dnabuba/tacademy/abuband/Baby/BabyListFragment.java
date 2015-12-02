@@ -41,6 +41,9 @@ public class BabyListFragment extends Fragment {
     public static final String TAG_BABYGENDER = "babyGender";
     public static final String TAG_BABYFLAG = "baby_flag";
 
+    public static final int TAG_INTENT_BABY_ADD = 1;
+    public static final int TAG_INTENT_BABY_UPDATE = 2;
+
     public static final String TAG_BABYLIST_FRAGMENT = "BabyListFragment";
 
 
@@ -48,6 +51,12 @@ public class BabyListFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        ((MainActivity)getActivity()).setNeviText(PropertyManager.getInstance().getPrefBaby_Image(), PropertyManager.getInstance().getPrefBaby_Name(), PropertyManager.getInstance().getPrefBaby_Birth());
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,8 +107,8 @@ public class BabyListFragment extends Fragment {
                 intent.putExtra(TAG_BABYNAME, data.name);
                 intent.putExtra(TAG_BABYBIRTH, data.birth + "");
                 intent.putExtra(TAG_BABYGENDER, data.gender + "");
+//                startActivityForResult(intent, TAG_INTENT_BABY_UPDATE);
                 startActivity(intent);
-
 
 //                Toast.makeText(view.getContext(), "눌림 : " + data._id + data.name + data.birth + data.gender, Toast.LENGTH_SHORT).show();
             }
@@ -112,7 +121,7 @@ public class BabyListFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(rootView.getContext(), BabyAddActivity.class);
                 intent.putExtra(TAG_BABYFLAG, 777);
-                startActivity(intent);
+                startActivityForResult(intent, TAG_INTENT_BABY_ADD);
             }
         });
 
@@ -120,6 +129,11 @@ public class BabyListFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("MainActivity", "onActivityResult 리스트");
+    }
 
     /********************
      * 네 트 워 크
@@ -175,6 +189,8 @@ public class BabyListFragment extends Fragment {
         super.onResume();
 //        Toast.makeText(rootView.getContext(), "RESUME...!!!!", Toast.LENGTH_SHORT).show();
         searchBabies();
+        //이건 좀 편법인듯?
+//        ((MainActivity)getActivity()).setNeviText(PropertyManager.getInstance().getPrefBaby_Image(), PropertyManager.getInstance().getPrefBaby_Name(), PropertyManager.getInstance().getPrefBaby_Birth());
     }
 
 

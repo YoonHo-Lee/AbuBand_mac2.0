@@ -150,19 +150,19 @@ public class IntroActivity extends AppCompatActivity {
                     case 1: // 등록된 아이가 있는 경우
                         Log.e("IntroActivity", "onSuccess code1");
                         intent = new Intent(IntroActivity.this, MainActivity.class);
-                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
-                        intent.putExtra(LoginFragment.TAG_BABY_NAME,result.name);
-                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH,result.birth);
-                        startActivity(intent);
+//                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
+//                        intent.putExtra(LoginFragment.TAG_BABY_NAME,result.name);
+//                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH,result.birth);
+                        PropertyManager.getInstance().setPrefBaby_Image(result.image);
+                        PropertyManager.getInstance().setPrefBaby_Name(result.name);
+                        PropertyManager.getInstance().setPrefBaby_Birth(result.birth);
+//                        startActivity(intent);
+                        startActivityForResult(intent,0);
                         finish();
                         break;
                     case 3: // 등록된 아이가 없는 경우
                         Log.e("IntroActivity", "onSuccess code3");
                         intent = new Intent(IntroActivity.this, MenualActivity.class);
-                        //잘될지 모르겠다.
-                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
-                        intent.putExtra(LoginFragment.TAG_BABY_NAME,result.name);
-                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH,result.birth);
                         startActivity(intent);
                         finish();
                         break;

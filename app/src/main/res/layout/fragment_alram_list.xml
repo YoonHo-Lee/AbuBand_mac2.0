@@ -63,7 +63,8 @@
             android:background="@drawable/selector_alarm_toggle"
             android:text="New ToggleButton"
             android:textOff=""
-            android:textOn="" />
+            android:textOn=""
+            android:checked="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,7 +111,8 @@
             android:background="@drawable/selector_alarm_toggle"
             android:text="New ToggleButton"
             android:textOff=""
-            android:textOn="" />
+            android:textOn=""
+            android:checked="true" />
 
         <TextView
             android:layout_width="wrap_content"

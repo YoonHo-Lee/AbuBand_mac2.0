@@ -164,7 +164,7 @@ public class TemperatureFragment extends Fragment {
         };
 
         mTimer = new Timer();
-        mTimer.schedule(mTask, 0, 5000);
+        mTimer.schedule(mTask, 0, 4000);
 
     }
 

@@ -41,6 +41,8 @@ public class BabyAddActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA = 1;
     private static final int REQUEST_CROP = 2;
 
+    private static final int TAG_RESULT_BABY_ADD = 1;
+
     ImageView baby_image;
 
     EditText babyName, babyBirth, babyGender;
@@ -148,12 +150,22 @@ public class BabyAddActivity extends AppCompatActivity {
                             setBabyImage();
                         }
                         PropertyManager.getInstance().setPrefBaby(result.id); // 선택된 아이 아이디 저장
-                        Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
-                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
-                        intent.putExtra(LoginFragment.TAG_BABY_NAME, result.name);
-                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH, result.birth);
-                        startActivity(intent);
-                        finish();
+//                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
+//                        intent.putExtra(LoginFragment.TAG_BABY_NAME, result.name);
+//                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH, result.birth);
+                        PropertyManager.getInstance().setPrefBaby_Image(result.image);
+                        PropertyManager.getInstance().setPrefBaby_Name(result.name);
+                        PropertyManager.getInstance().setPrefBaby_Birth(result.birth);
+                        Log.e("BabyAddActivity",result.image + result.name + result.birth);
+                        setResult(TAG_RESULT_BABY_ADD);
+
+                        if(flag == 777)  {
+                            finish();
+                        } else if(flag == 999)  {
+                            Intent intent = new Intent(BabyAddActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                         break;
                 }
                 Toast.makeText(BabyAddActivity.this, name + birth + gender + "등록", Toast.LENGTH_SHORT).show();
