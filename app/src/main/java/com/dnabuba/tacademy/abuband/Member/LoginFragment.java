@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,12 +16,10 @@ import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.Menual.MenualActivity;
-import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
 import com.dnabuba.tacademy.abuband.Setting.ForgotPasswordActivity;
-import com.dnabuba.tacademy.abuband.Temperature.TemperatureFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,7 +101,7 @@ public class LoginFragment extends Fragment {
                 switch (result.code)    {
                     case RESULT_CODE_1: // 등록된 아이가 있는 경우
                         Log.e("LoginFragment", "onSuccess code1");
-                        PropertyManager.getInstance().setPrefBaby(result.id);   // 선택되있는 아이 아이디 저장
+                        PropertyManager.getInstance().setPrefBaby_id(result.id);   // 선택되있는 아이 아이디 저장
                         intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
                         intent.putExtra(TAG_BABY_IMAGE,result.image);
                         intent.putExtra(TAG_BABY_NAME,result.name);

@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +15,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.GCM.RegistrationIntentService;
-import com.dnabuba.tacademy.abuband.Member.LoginFragment;
 import com.dnabuba.tacademy.abuband.Member.LoginItemData;
 import com.dnabuba.tacademy.abuband.Member.MemberActivity;
 import com.dnabuba.tacademy.abuband.Menual.MenualActivity;
@@ -156,8 +153,9 @@ public class IntroActivity extends AppCompatActivity {
                         PropertyManager.getInstance().setPrefBaby_Image(result.image);
                         PropertyManager.getInstance().setPrefBaby_Name(result.name);
                         PropertyManager.getInstance().setPrefBaby_Birth(result.birth);
+                        PropertyManager.getInstance().setPrefBaby_id(result.id);
 //                        startActivity(intent);
-                        startActivityForResult(intent,0);
+                        startActivityForResult(intent, 0);
                         finish();
                         break;
                     case 3: // 등록된 아이가 없는 경우

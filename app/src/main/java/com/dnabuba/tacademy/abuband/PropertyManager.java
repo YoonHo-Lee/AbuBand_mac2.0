@@ -76,7 +76,7 @@ public class PropertyManager {
 	}
 
 	//선택된 아이 아이디 저장
-	public void setPrefBaby(String baby)	{
+	public void setPrefBaby_id(String baby)	{
 		mEditor.putString(PREF_BABY, baby);
 		mEditor.commit();
 	}

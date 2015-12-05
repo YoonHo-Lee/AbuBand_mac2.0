@@ -72,4 +72,6 @@
     <string name="forgot_password_btn">전송</string>
     <string name="forgot_password_Message">가입하신 이메일 주소로 \n비밀번호를 바꿀 수 있는 링크를 보내드립니다.</string>
 
+    <string name="menu_refresh">새로고침</string>
+
 </resources>

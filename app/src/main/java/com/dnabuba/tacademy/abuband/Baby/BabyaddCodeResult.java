@@ -5,9 +5,8 @@ package com.dnabuba.tacademy.abuband.Baby;
  */
 public class BabyaddCodeResult {
     public int code;
-    public String image;
-    public String result;
-    public String id;
+    public String result;   //이미지
+    public String selected; //아이디
     public String name;
     public String birth;
 }

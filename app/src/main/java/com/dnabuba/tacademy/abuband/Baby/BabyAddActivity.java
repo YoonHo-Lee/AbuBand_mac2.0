@@ -23,7 +23,6 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.MainActivity;
-import com.dnabuba.tacademy.abuband.Member.LoginFragment;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
@@ -149,14 +148,14 @@ public class BabyAddActivity extends AppCompatActivity {
                         if(baby_image_file != null) {
                             setBabyImage();
                         }
-                        PropertyManager.getInstance().setPrefBaby(result.id); // 선택된 아이 아이디 저장
+                        PropertyManager.getInstance().setPrefBaby_id(result.selected); // 선택된 아이 아이디 저장
 //                        intent.putExtra(LoginFragment.TAG_BABY_IMAGE,result.image);
 //                        intent.putExtra(LoginFragment.TAG_BABY_NAME, result.name);
 //                        intent.putExtra(LoginFragment.TAG_BABY_BIRTH, result.birth);
-                        PropertyManager.getInstance().setPrefBaby_Image(result.image);
+                        PropertyManager.getInstance().setPrefBaby_Image(result.result);
                         PropertyManager.getInstance().setPrefBaby_Name(result.name);
                         PropertyManager.getInstance().setPrefBaby_Birth(result.birth);
-                        Log.e("BabyAddActivity",result.image + result.name + result.birth);
+                        Log.e("BabyAddActivity",result.result + result.name + result.birth);
                         setResult(TAG_RESULT_BABY_ADD);
 
                         if(flag == 777)  {

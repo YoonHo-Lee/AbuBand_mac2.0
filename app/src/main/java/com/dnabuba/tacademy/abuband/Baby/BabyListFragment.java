@@ -3,9 +3,7 @@ package com.dnabuba.tacademy.abuband.Baby;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +12,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dnabuba.tacademy.abuband.MainActivity;
 import com.dnabuba.tacademy.abuband.NetworkCodeResult;
 import com.dnabuba.tacademy.abuband.NetworkManager;
 import com.dnabuba.tacademy.abuband.PropertyManager;
 import com.dnabuba.tacademy.abuband.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -166,7 +161,7 @@ public class BabyListFragment extends Fragment {
             public void onSuccess(NetworkCodeResult result) {
                 Log.e("BabyListFragment", "setBaby Success"+result.code);
                 if(result.code == 1) {
-                    PropertyManager.getInstance().setPrefBaby(baby_id);
+                    PropertyManager.getInstance().setPrefBaby_id(baby_id);
                     searchBabies();
                 }
             }

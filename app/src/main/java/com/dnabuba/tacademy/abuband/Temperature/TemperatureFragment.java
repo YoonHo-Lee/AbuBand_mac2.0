@@ -10,6 +10,9 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dacer.androidcharts.LineView;
 import com.dnabuba.tacademy.abuband.NetworkManager;
@@ -338,6 +342,4 @@ public class TemperatureFragment extends Fragment {
 
 
     }
-
-
 }
